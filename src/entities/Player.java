@@ -138,10 +138,10 @@ public class Player extends Entity {
         (int) (hitbox.y - yDrawOffset),
         (int) (width * flipW * 1.5), (int) (height * 1.5), null);
         drawUI(g);
-        // g.setColor(Color.red);
-        // g.drawRect((int) (hitbox.x - lvlOffset), (int) (hitbox.y), (int) (width * 1.5), (int) (height * 1.5));
-        // drawHitbox(g, lvlOffset);
-        // drawAttackBox(g, lvlOffset);
+        g.setColor(Color.red);
+        g.drawRect((int) (hitbox.x - lvlOffset), (int) (hitbox.y), (int) (width * 1.5), (int) (height * 1.5));
+        drawHitbox(g, lvlOffset);
+        drawAttackBox(g, lvlOffset);
     }
 
     private void drawAttackBox(Graphics g, int lvlOffset) {
