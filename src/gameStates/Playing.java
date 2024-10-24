@@ -35,6 +35,7 @@ public class Playing extends State implements StateMethods {
     private boolean pause = false;
     private boolean gameOver = false;
     private boolean lvlComplete = false;
+    private boolean playerDying = false;
 
     private int xLvlOffset;
     private int leftBorderOffset = (int) (0.35 * Game.GAME_WIDTH);
@@ -98,6 +99,10 @@ public class Playing extends State implements StateMethods {
             pauseOverlay.update();
         } else if (lvlComplete) {
             levelCompleteOverlay.update();
+        } else if (gameOver) {
+            gameOverOverlay.update();
+        } else if (playerDying) {
+            player.update();
         } else if (!gameOver) {
             levelsManager.update();
             enemyManager.update(levelsManager.getCurrLevels().getLevelData(), player);
@@ -157,6 +162,7 @@ public class Playing extends State implements StateMethods {
         gameOver = false;
         pause = false;
         lvlComplete = false;
+        playerDying = false;
         player.resetAll();
         objectManager.resetAllObjects();
         enemyManager.resetAllEnemies();
@@ -195,6 +201,8 @@ public class Playing extends State implements StateMethods {
             } else if (lvlComplete) {
                 levelCompleteOverlay.mousePressed(e);
             }
+        } else {
+            gameOverOverlay.mousePressed(e);
         }
     }
 
@@ -204,6 +212,8 @@ public class Playing extends State implements StateMethods {
             pauseOverlay.mouseReleased(e);
         } else if (lvlComplete) {
             levelCompleteOverlay.mouseReleased(e);
+        } else {
+            gameOverOverlay.mouseReleased(e);
         }
     }
     
@@ -215,6 +225,8 @@ public class Playing extends State implements StateMethods {
             } else if (lvlComplete) {
                 levelCompleteOverlay.mouseMoved(e);
             }
+        } else {
+            gameOverOverlay.mouseMoved(e);
         }
     }
     
@@ -314,5 +326,9 @@ public class Playing extends State implements StateMethods {
 
     public void setLevelComplete(boolean lvlComplete) {
         this.lvlComplete = lvlComplete;
+    }
+
+    public void setPlayerDying(boolean playerDying) {
+        this.playerDying = playerDying;
     }
 }

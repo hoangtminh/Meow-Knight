@@ -21,6 +21,8 @@ public class Player extends Entity {
     private boolean moving = false;
     private int playerSpeed = 2;
     private boolean attacking = false;
+    private boolean hit = false;
+    
     public int[][] lvlData;
     private float xDrawOffset = 20 * SCALE * 1.5f;
     private float yDrawOffset = 16 * SCALE * 1.5f;
@@ -78,7 +80,17 @@ public class Player extends Entity {
     public void update() {
         updateHealthBar();
         if (currHealth <= 0) {
-            playing.setGameOver(true);
+            if (state != DEAD) {
+                state = DEAD;
+                aniIndex = 0;
+                aniTick = 0;
+                playing.setPlayerDying(true);
+            } else if (aniIndex == GetSpriteAmount(DEAD) -1 && aniTick >= ANI_SPEED - 1) {
+                playing.setGameOver(true);
+            } else {
+                updateAnimationTick();
+            }
+
             return;
         }
         updateAttackBox();
@@ -95,8 +107,6 @@ public class Player extends Entity {
             checkSpikesTouched();
             tileY = (int) (hitbox.y / Game.TILES_SIZE);
         }
-        
-        
 
         setAnimation();
         updateAnimationTick();
@@ -163,6 +173,7 @@ public class Player extends Entity {
                 aniIndex = 0;
                 attacking = false;
                 attackChecked = false;
+                hit = false;
             }
             aniTick = 0;
         }
@@ -187,6 +198,10 @@ public class Player extends Entity {
             } else {
                 state = FALLING;
             }
+        }
+
+        if (hit) {
+            state = HIT;
         }
 
         if (startAnimation != state) {
@@ -274,6 +289,10 @@ public class Player extends Entity {
     public void changeHealth(int value) {
         currHealth += value;
 
+        if (value < 0) {
+            hit = true;
+        }
+
         if (currHealth <= 0) {
             currHealth = 0;
         }
@@ -328,8 +347,10 @@ public class Player extends Entity {
         inAir = false;
         attacking = false;
         moving = false;
-        state = IDLE;
+        hit = false;
         currHealth = maxHealth;
+
+        state = IDLE;
 
         hitbox.x = x;
         hitbox.y = y;

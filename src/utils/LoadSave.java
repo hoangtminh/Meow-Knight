@@ -10,9 +10,7 @@ import javax.imageio.ImageIO;
 
 public class LoadSave {
 
-    // public static final String PLAYER_ATLAS = "player_sprites.png";
     public static final String PLAYER_ATLAS = "Meow_Knight.png";
-    // public static final String LEVEL_ATLAS = "outside_sprites.png";
     public static final String LEVEL_ATLAS = "tileset.png";
     public static final String LEVEL_ONE_DATA = "level_one_data_long.png";
     public static final String MENU_BUTTONS = "button_atlas.png";
@@ -22,7 +20,7 @@ public class LoadSave {
     public static final String SOUND_BUTTON = "sound_button.png";
     public static final String URM_BUTTONS = "urm_buttons.png";
     public static final String VOLUME_BUTTONS = "volume_buttons.png";
-    public static final String PLAYING_BG_IMG = "playing_bg_img.png";
+    public static final String PLAYING_BG_IMG = "background.png";
     public static final String BIG_CLOUD = "big_clouds.png";
     public static final String SMALL_CLOUD = "small_clouds.png";
     public static final String CRABBY_SPRITE = "crabby_sprite.png";
@@ -33,6 +31,7 @@ public class LoadSave {
     public static final String TRAP_SPRITE = "trap_atlas.png";
     public static final String CANNON_SPRITE = "cannon_atlas.png";
     public static final String CANNON_BALL = "ball.png";
+    public static final String DEATH_SCREEN = "death_screen.png";
 
     public static BufferedImage GetSpriteAtLas(String fileName) {
         BufferedImage img = null;
