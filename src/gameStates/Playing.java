@@ -238,7 +238,6 @@ public class Playing extends State implements StateMethods {
         }
     }
     
-    
     @Override
     public void keyPressed(KeyEvent e) {
         if (gameOver) {

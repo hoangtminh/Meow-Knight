@@ -15,7 +15,7 @@ public class LoadSave {
     public static final String LEVEL_ONE_DATA = "level_one_data_long.png";
     public static final String MENU_BUTTONS = "button_atlas.png";
     public static final String MENU_BACKGROUND = "menu_background.png";
-    public static final String BACKGROUND_MENu = "background_menu.png";
+    public static final String BACKGROUND_MENU = "background_menu.png";
     public static final String PAUSE_BACKGROUND = "pause_menu.png";
     public static final String SOUND_BUTTON = "sound_button.png";
     public static final String URM_BUTTONS = "urm_buttons.png";
@@ -32,15 +32,14 @@ public class LoadSave {
     public static final String CANNON_SPRITE = "cannon_atlas.png";
     public static final String CANNON_BALL = "ball.png";
     public static final String DEATH_SCREEN = "death_screen.png";
+    public static final String OPTIONS_BACKGROUND = "options_background.png";
 
     public static BufferedImage GetSpriteAtLas(String fileName) {
         BufferedImage img = null;
         InputStream is = LoadSave.class.getResourceAsStream("/" + fileName);
         
         try {
-
             img = ImageIO.read(is);
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -50,7 +49,6 @@ public class LoadSave {
                 e.printStackTrace();
             }
         }    
-
         return img;
     }    
 
@@ -84,7 +82,6 @@ public class LoadSave {
                 e.printStackTrace();
             }
         }
-
         return imgs;
     }
 }

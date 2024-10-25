@@ -19,7 +19,7 @@ public class Player extends Entity {
     private BufferedImage animations[][];
     private boolean left,right, jump;
     private boolean moving = false;
-    private int playerSpeed = 2;
+    private float playerSpeed = 1.5f;
     private boolean attacking = false;
     private boolean hit = false;
     

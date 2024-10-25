@@ -30,7 +30,7 @@ public class Menu extends State implements StateMethods{
         menuX = Game.GAME_WIDTH / 2 - menuWidth / 2;
         menuY = (int) (35 * Game.SCALE);
 
-        background_menu = LoadSave.GetSpriteAtLas(LoadSave.BACKGROUND_MENu);
+        background_menu = LoadSave.GetSpriteAtLas(LoadSave.BACKGROUND_MENU);
     }
 
     private void loadButtons() {

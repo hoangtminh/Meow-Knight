@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Graphics;
 import gameStates.GameState;
+import ui.AudioOptions;
 import gameStates.*;
 
 
@@ -15,6 +16,8 @@ public class Game implements Runnable {
 
     private Playing playing;
     private Menu menu;
+    private AudioOptions audioOptions;
+    private GameOption gameOption;
 
     public static final int TILES_DEFAULT_SIZE = 32;
     public static final float SCALE = 1.5f;
@@ -23,8 +26,6 @@ public class Game implements Runnable {
     public static final int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
     public static final int GAME_WIDTH = (int) (TILES_IN_WIDTH * TILES_SIZE);
     public static final int GAME_HEIGHT = (int) (TILES_IN_HEIGHT * TILES_SIZE);
-
-
 
     public Game() {
         initClasses();
@@ -38,6 +39,8 @@ public class Game implements Runnable {
     }
 
     private void initClasses() {
+        audioOptions = new AudioOptions();
+        gameOption = new GameOption(this);
         menu = new Menu(this);
         playing = new Playing(this);
     }
@@ -50,11 +53,12 @@ public class Game implements Runnable {
             case PLAYING:
                 playing.update();
                 break;
-
+            case OPTIONS:
+                gameOption.update();
+                break;
             default:
                 break;
         }
-
     }
 
     public void render(Graphics g) {
@@ -65,7 +69,9 @@ public class Game implements Runnable {
             case PLAYING:
                 playing.draw(g);
                 break;
-
+            case OPTIONS:
+                gameOption.draw(g);
+                break;
             default:
                 break;
         }
@@ -86,13 +92,11 @@ public class Game implements Runnable {
 
         long previusTime = System.nanoTime();
 
-
         int frames = 0;
         int updates = 0;
         long lastCheck = System.currentTimeMillis();
 
         double deltaU = 0;
-
         while (true) {
 
             now = System.nanoTime();
@@ -118,7 +122,6 @@ public class Game implements Runnable {
                 frames = 0;
                 updates = 0;
             }
-
         }
     }
 
@@ -134,5 +137,13 @@ public class Game implements Runnable {
 
     public Menu getMenu() {
         return menu;
+    }
+
+    public AudioOptions getAudioOptions() {
+        return audioOptions;
+    }
+
+    public GameOption getGameOption() {
+        return gameOption;
     }
 }
