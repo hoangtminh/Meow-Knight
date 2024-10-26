@@ -66,9 +66,9 @@ public class Playing extends State implements StateMethods {
     }
 
     public void loadNextLevel() {
-        resetAllPlaying();
         levelsManager.nextLevel();
         player.setSpawn(levelsManager.getCurrLevels().getPlayerSpawn());
+        resetAllPlaying();
     }
 
     private void loadStartLevel() {
@@ -192,6 +192,8 @@ public class Playing extends State implements StateMethods {
         if (!gameOver) {
             if (e.getButton() == MouseEvent.BUTTON1) {
                 player.setAttacking(true);
+            } else if (e.getButton() == MouseEvent.BUTTON3) {
+                player.powerAttack();
             }
         }
     }

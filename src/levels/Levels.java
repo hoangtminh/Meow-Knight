@@ -1,5 +1,6 @@
 package levels;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -7,20 +8,19 @@ import java.util.ArrayList;
 import entities.Crabby;
 import main.Game;
 import objects.*;
-import utils.HelpMethod;
 
-import static utils.HelpMethod.GetLevelData;
-import static utils.HelpMethod.GetCrabs;
-import static utils.HelpMethod.GetPlayerSpawn;
+import static utils.Constants.EnemyConstant.CRABBY;
+import static utils.Constants.ObjectsConstants.*;
+import static utils.Constants.PlayerConstants.SPAWN;
 
 public class Levels {
     private int[][] lvlData;
     private BufferedImage img;
-    private ArrayList<Crabby> crabs;
-    private ArrayList<Potion> potions;
-    private ArrayList<GameContainer> gameContainers;
-    private ArrayList<Spike> spikes;
-    private ArrayList<Cannon> cannons;
+    private ArrayList<Crabby> crabs = new ArrayList<Crabby>();
+    private ArrayList<Potion> potions = new ArrayList<Potion>();
+    private ArrayList<GameContainer> gameContainers = new ArrayList<GameContainer>();
+    private ArrayList<Spike> spikes = new ArrayList<Spike>();
+    private ArrayList<Cannon> cannons = new ArrayList<Cannon>();
 
     private int lvlTileWide;
     private int maxTileOffset;
@@ -30,42 +30,61 @@ public class Levels {
 
     public Levels(BufferedImage img) {
         this.img = img;
-        createLevelData();
-        createEnemy();
-        createPotions();
-        createGameContainers();
-        createSpikes();
-        createCannons();
+        lvlData = new int[img.getHeight()][img.getWidth()];
+        loadLevel();
         calculateLevelOffset();
-        calculatePlayerSpawn();
     }
 
-    private void createCannons() {
-        cannons = HelpMethod.GetCannons(img);     
+    private void loadLevel() {
+        for (int i = 0; i < img.getHeight(); i++) {
+            for (int j = 0; j < img.getWidth(); j++) {
+                Color color = new Color(img.getRGB(j, i));
+                int red = color.getRed();
+                int green = color.getGreen();
+                int blue = color.getBlue();
+                
+                loadLevelData(red, i, j);
+                loadEntities(green, j, i);
+                loadObject(blue, j, i);
+            }
+        }
     }
 
-    private void createSpikes() {
-        spikes = HelpMethod.GetSpikes(img);    
+    private void loadLevelData(int value, int x, int y) {
+        if (value >= 48) {
+            value = 0;
+        }
+        lvlData[x][y] = value;
     }
 
-    private void createGameContainers() {
-        gameContainers = HelpMethod.GetContainer(img);
+    private void loadEntities(int value, int x, int y) {
+        switch (value) {
+            case CRABBY:
+                crabs.add(new Crabby(x * Game.TILES_SIZE, y * Game.TILES_SIZE));
+                break;
+            case SPAWN:
+                playerSpawn = new Point(x * Game.TILES_SIZE, y * Game.TILES_SIZE);
+            default:
+                break;
+        }
     }
 
-    private void createPotions() {
-        potions = HelpMethod.GetPotion(img);
-    }
-    
-    private void createEnemy() {
-        crabs = GetCrabs(img);
-    }
-
-    private void createLevelData() {
-        lvlData = GetLevelData(img);
-    }
-
-    private void calculatePlayerSpawn() {
-        playerSpawn = GetPlayerSpawn(img);    
+    private void loadObject(int value, int x, int y) {
+        switch (value) {
+            case CANNON_LEFT, CANNON_RIGHT:
+                cannons.add(new Cannon(x * Game.TILES_SIZE, y * Game.TILES_SIZE, value));
+                break;
+            case RED_POTION, BLUE_POTION:
+                potions.add(new Potion(x * Game.TILES_SIZE, y * Game.TILES_SIZE, value));
+                break;
+            case BOX, BARREL:
+                gameContainers.add(new GameContainer(x * Game.TILES_SIZE, y * Game.TILES_SIZE, value));
+                break;
+            case SPIKE:
+                spikes.add(new Spike(x * Game.TILES_SIZE, y * Game.TILES_SIZE, SPIKE));
+            default:
+                break;
+        }
     }
 
     private void calculateLevelOffset() {
