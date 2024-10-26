@@ -87,7 +87,6 @@ public class GameOption extends State implements StateMethods {
     @Override
     public void mouseMoved(MouseEvent e) {
         menuB.setMouseHover(false);
-        System.out.println("move");
         if (isIn(e, menuB)) {
             menuB.setMouseHover(true);
         } else {

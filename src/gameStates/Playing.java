@@ -18,6 +18,9 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
+
+import audio.AudioPlayer;
+
 import java.awt.event.KeyEvent;
 
 public class Playing extends State implements StateMethods {
@@ -325,6 +328,9 @@ public class Playing extends State implements StateMethods {
 
     public void setLevelComplete(boolean lvlComplete) {
         this.lvlComplete = lvlComplete;
+        if (lvlComplete) {
+            game.getAudioPlayer().playEffect(AudioPlayer.LVL_COMPLETED);
+        }
     }
 
     public void setPlayerDying(boolean playerDying) {

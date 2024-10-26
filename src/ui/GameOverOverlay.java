@@ -60,11 +60,7 @@ public class GameOverOverlay {
 
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_SPACE:
-                playing.resetAllPlaying();
-                GameState.state = GameState.MENU;
-                break;
-        
+            
             default:
                 break;
         }
@@ -89,12 +85,13 @@ public class GameOverOverlay {
         if (isIn(menu, e)) {
             if (menu.isMousePressed()) {
                 playing.resetAllPlaying();
-                GameState.state = GameState.MENU;
+                playing.setGameState(GameState.MENU);
             }
         }
         if (isIn(play, e)) {
             if (play.isMousePressed()) {
                 playing.resetAllPlaying();
+                playing.getGame().getAudioPlayer().setLevelSong(playing.getLevelManager().getLvlIndex());
             }
         }
 

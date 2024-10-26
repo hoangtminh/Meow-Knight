@@ -81,4 +81,8 @@ public class MenuButton {
         mouseHover = false;
         mousePress = false;
     }
+
+    public GameState getState() {
+        return state;
+    }
 }
