@@ -80,6 +80,7 @@ public class Constants {
         public static final int HIT = 7;
         public static final int DEAD = 8;
         
+        public static final int SPAWN = 100;
 
         public static int GetSpriteAmount(int playerAction) {
             switch (playerAction) {
