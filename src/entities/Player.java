@@ -42,7 +42,6 @@ public class Player extends Entity {
     private int healthBarXStart = (int) (34 * SCALE);
     private int healthBarYStart = (int) (14 * SCALE);
 
-    
     private int healthWidth = healthBarWidth;
 
     private int flipX = 0;
@@ -52,6 +51,19 @@ public class Player extends Entity {
     private Playing playing;
 
     private int tileY;
+
+    private boolean powerAttackActive;
+    private int powerAttackTick;
+    private int powerGrowSpeed = 15;
+    private int powerGrowTick;
+
+    private int powerBarWidth = (int) (104 * SCALE);
+    private int powerBarHeight = (int) (4 * SCALE);
+    private int powerBarXStart = (int) (44 * SCALE);
+    private int powerBarYStart = (int) (14 * SCALE);
+    private int powerWidth = powerBarWidth;
+    private int powerMaxValue = 200;
+    private int powerValue = powerMaxValue;
 
     public Player(float x, float y, int width, int height, Playing playing) {
         super(x, y, width, height);
@@ -80,6 +92,8 @@ public class Player extends Entity {
     
     public void update() {
         updateHealthBar();
+        updatePowerBar();
+
         if (currHealth <= 0) {
             if (state != DEAD) {
                 state = DEAD;
@@ -93,10 +107,11 @@ public class Player extends Entity {
             } else {
                 updateAnimationTick();
             }
-
             return;
         }
+
         updateAttackBox();
+
         if (inAir) {
             updatePos();
         } else if (attacking) {
@@ -145,6 +160,16 @@ public class Player extends Entity {
     private void updateHealthBar() {
         healthWidth = (int) ((currHealth /  (float) maxHealth) * healthBarWidth);
     }
+
+    private void updatePowerBar() {
+        powerWidth = (int) ((powerValue / (float) powerMaxValue) * powerBarWidth);
+
+        powerGrowTick++;
+        if (powerGrowTick >= powerGrowSpeed) {
+            powerGrowTick = 0;
+            changePower(1);
+        }
+    }
     
     public void render(Graphics g, int lvlOffset) {
         g.drawImage(animations[state][aniIndex],
@@ -158,15 +183,14 @@ public class Player extends Entity {
         // drawAttackBox(g, lvlOffset);
     }
 
-    private void drawAttackBox(Graphics g, int lvlOffset) {
-        g.setColor(Color.red);
-        g.drawRect((int) (attackBox.x - lvlOffset),(int) (attackBox.y), (int) (attackBox.width), (int) (attackBox.height));
-    }
-
     private void drawUI(Graphics g) {
         g.drawImage(statusBar, statusBarX, statusBarY, statusBarWidth, statusBarHeight, null);
+
         g.setColor(Color.red);
         g.fillRect(healthBarXStart + statusBarX, healthBarYStart + statusBarY, healthWidth, healthBarHeight);
+
+        g.setColor(Color.yellow);
+        g.fillRect(powerBarXStart + statusBarX, powerBarYStart + statusBarY, powerWidth, powerBarHeight);
     }
 
     private void updateAnimationTick() {
@@ -240,8 +264,7 @@ public class Player extends Entity {
             xSpeed -= playerSpeed;
             flipX = (int) ((width - 13) * 1.5);
             flipW = -1; 
-        }
-        if (right) {
+        } else if (right) {
             xSpeed += playerSpeed;
             flipX = 0;
             flipW = 1;
@@ -265,7 +288,6 @@ public class Player extends Entity {
         } else {
             updateXPos(xSpeed);
         }
-
         moving = true;
     }
 
@@ -296,6 +318,7 @@ public class Player extends Entity {
 
         if (value < 0) {
             hit = true;
+            playing.getGame().getAudioPlayer().playHit();
         }
 
         if (currHealth <= 0) {
@@ -306,18 +329,17 @@ public class Player extends Entity {
         }
     }
 
-    public void kill() {
-        currHealth = 0;
+    public void changePower(int value) {
+        powerValue += value;
+        if (powerValue >= powerMaxValue) {
+            powerValue = powerMaxValue;
+        } else if (powerValue <= 0) {
+            powerValue = 0;
+        }
     }
 
-    public void changePower(int value) {
-        // currPower += value;
-        // if (currHealth <= 0) {
-        //     currHealth = 0;
-        // }
-        // if (currHealth >= maxHealth) {
-        //     currHealth = maxHealth;
-        // }
+    public void kill() {
+        currHealth = 0;
     }
 
     private void loadAnimation() {

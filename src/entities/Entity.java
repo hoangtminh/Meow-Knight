@@ -18,7 +18,6 @@ public abstract class Entity {
     protected int currHealth;
     protected Rectangle2D.Float attackBox;
 
-
     public Entity(float x, float y, int width, int height) {
         this.x = x;
         this.y = y;
@@ -31,6 +30,11 @@ public abstract class Entity {
         g.drawRect((int) (hitbox.x - lvlOffset), (int) (hitbox.y), (int) hitbox.width, (int) hitbox.height);
     }
     
+    public void drawAttackBox(Graphics g, int lvlOffset) {
+        g.setColor(Color.red);
+        g.drawRect((int) (attackBox.x - lvlOffset),(int) (attackBox.y), (int) (attackBox.width), (int) (attackBox.height));
+    }
+
     protected void initHitbox(float width, float height) {
         hitbox = new Rectangle2D.Float(x, y, (int) (width * Game.SCALE), (int) (height * Game.SCALE));
     }
