@@ -16,9 +16,9 @@ public class AudioOptions {
     private Game game;
 
     public AudioOptions(Game game) {
+        this.game = game;
         createSoundButton();
         createVolumeButton();
-        this.game = game;
     }
 
     private void createVolumeButton() {
@@ -42,8 +42,8 @@ public class AudioOptions {
     }
 
     public void draw(Graphics g) {
-        sfxButton.draw(g);
         musicButton.draw(g);
+        sfxButton.draw(g);
         volumeButton.draw(g);
     }
 

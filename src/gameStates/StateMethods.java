@@ -5,8 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
 
-public interface StateMethods {
-    
+public interface StateMethods {  
     public void update();
     public void draw(Graphics g);
     public void mouseClicked(MouseEvent e);

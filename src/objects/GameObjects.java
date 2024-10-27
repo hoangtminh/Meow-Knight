@@ -101,5 +101,4 @@ public class GameObjects {
     public void setDoAnimation(boolean doAnimation) {
         this.doAnimation = doAnimation;
     }
-
 }

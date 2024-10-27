@@ -26,7 +26,6 @@ public class PauseOverlay {
         createUrmButtons();
     }
 
-    
     private void createUrmButtons() {
         int menuX = (int) (313 * Game.SCALE);
         int replayX = (int) (387 * Game.SCALE);
@@ -37,7 +36,6 @@ public class PauseOverlay {
         replayB = new URMButtons(replayX, bY, URM_SIZE, URM_SIZE, 1);
         unpauseB = new URMButtons(unpauseX, bY, URM_SIZE, URM_SIZE, 0);
     }
-
     
     private void loadBackground() {
         background = LoadSave.GetSpriteAtLas(LoadSave.PAUSE_BACKGROUND);

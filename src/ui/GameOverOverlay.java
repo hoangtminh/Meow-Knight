@@ -6,7 +6,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-
 import gameStates.GameState;
 import gameStates.Playing;
 import main.Game;
@@ -46,9 +45,7 @@ public class GameOverOverlay {
     public void draw(Graphics g) {
         g.setColor(new Color(0, 0, 0, 200));
         g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
-
         g.drawImage(img, imgX, imgY, imgW, imgH, null);
-
         menu.draw(g);
         play.draw(g);
     }
@@ -60,7 +57,9 @@ public class GameOverOverlay {
 
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            
+            case KeyEvent.VK_ESCAPE:
+                playing.setGameState(GameState.MENU);
+                break;
             default:
                 break;
         }

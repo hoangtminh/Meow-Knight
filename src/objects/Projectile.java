@@ -44,5 +44,4 @@ public class Projectile {
     public Rectangle2D.Float getHitbox() {
         return hitbox;
     }
-
 }

@@ -7,7 +7,6 @@ import gameStates.GameState;
 import ui.AudioOptions;
 import gameStates.*;
 
-
 public class Game implements Runnable {
 
     private GameWindow gameWindow;
@@ -93,16 +92,13 @@ public class Game implements Runnable {
         double timePerUpdate = 1000000000.0 / UPS_set;
         long lastFrame = System.nanoTime();
         long now = System.nanoTime();
-
         long previusTime = System.nanoTime();
-
         int frames = 0;
         int updates = 0;
         long lastCheck = System.currentTimeMillis();
-
         double deltaU = 0;
-        while (true) {
 
+        while (true) {
             now = System.nanoTime();
             long currentTime = System.nanoTime();
             deltaU += (currentTime - previusTime) / timePerUpdate;
@@ -113,13 +109,11 @@ public class Game implements Runnable {
                 updates++;
                 deltaU--;
             }
-
             if (now - lastFrame >= timePerFrame) {
                 gamePanel.repaint();
                 lastFrame = now;
                 frames++;
             }
-            
             if (System.currentTimeMillis() - lastCheck >= 1000) {
                 lastCheck = System.currentTimeMillis();
                 System.out.println("FPS: " + frames + "| UPS: " + updates);

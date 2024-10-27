@@ -1,9 +1,6 @@
 package gameStates;
 
 import main.Game;
-import ui.MenuButton;
-
-import java.awt.event.MouseEvent;
 
 import audio.AudioPlayer;
 
@@ -12,13 +9,6 @@ public class State {
     
     public State(Game game) {
         this.game = game;
-    }
-
-    public boolean isIn(MouseEvent e, MenuButton rect) {
-        if (rect.getBounds().contains(e.getX(), e.getY())) {
-            return true;
-        }
-        return false;
     }
 
     public Game getGame() {

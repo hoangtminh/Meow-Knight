@@ -91,7 +91,6 @@ public class ObjectManager {
         for (GameContainer gc: containers) {
             gc.resetObject();
         }
-
         for (Cannon c: cannons) {
             c.resetObject();
         }
@@ -207,7 +206,6 @@ public class ObjectManager {
         } else if (c.getHitbox().x < player.getHitbox().x) {
             return true;
         }
-
         return false;
     }
 

@@ -51,7 +51,7 @@ public class Levels {
     }
 
     private void loadLevelData(int value, int x, int y) {
-        if (value >= 48) {
+        if (value >= 71) {
             value = 0;
         }
         lvlData[x][y] = value;

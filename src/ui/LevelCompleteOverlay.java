@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-import audio.AudioPlayer;
 import gameStates.GameState;
 import gameStates.Playing;
 import main.Game;

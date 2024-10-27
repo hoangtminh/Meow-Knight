@@ -115,5 +115,11 @@ public class Menu extends State implements StateMethods{
     public void keyTyped(KeyEvent e) {
     
     }
-    
+
+    public boolean isIn(MouseEvent e, MenuButton rect) {
+        if (rect.getBounds().contains(e.getX(), e.getY())) {
+            return true;
+        }
+        return false;
+    }
 }

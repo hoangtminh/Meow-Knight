@@ -13,7 +13,6 @@ public class Potion extends GameObjects {
         initHitbox(7, 14);
         xDrawOffset = (int) (3 * Game.SCALE);
         yDrawOffset = (int) (2 * Game.SCALE);
-
         maxHoverOffset = (int) (10 * Game.SCALE);
     }
     
@@ -29,8 +28,6 @@ public class Potion extends GameObjects {
         } else if (hoverOffset <= 0) {
             hoverDir = 1;
         }  
-
         hitbox.y = y + hoverOffset;
-    }
-    
+    }   
 }
