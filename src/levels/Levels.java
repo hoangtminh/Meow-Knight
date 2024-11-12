@@ -5,18 +5,25 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import entities.Crabby;
+import entities.*;
 import main.Game;
 import objects.*;
 
-import static utils.Constants.EnemyConstant.CRABBY;
+import static utils.Constants.EnemyConstant.ARCHER;
+import static utils.Constants.EnemyConstant.SWORD;
+import static utils.Constants.EnemyConstant.BOXING;
+import static utils.Constants.EnemyConstant.AXE;
 import static utils.Constants.ObjectsConstants.*;
 import static utils.Constants.PlayerConstants.SPAWN;
 
 public class Levels {
     private int[][] lvlData;
     private BufferedImage img;
-    private ArrayList<Crabby> crabs = new ArrayList<Crabby>();
+    private ArrayList<ArcherDoggo> archers = new ArrayList<ArcherDoggo>();
+    private ArrayList<SwordDoggo> swords = new ArrayList<SwordDoggo>();
+    private ArrayList<BoxingDoggo> boxings = new ArrayList<BoxingDoggo>();
+    private ArrayList<AxeDoggo> axes = new ArrayList<AxeDoggo>();
+
     private ArrayList<Potion> potions = new ArrayList<Potion>();
     private ArrayList<GameContainer> gameContainers = new ArrayList<GameContainer>();
     private ArrayList<Spike> spikes = new ArrayList<Spike>();
@@ -59,8 +66,17 @@ public class Levels {
 
     private void loadEntities(int value, int x, int y) {
         switch (value) {
-            case CRABBY:
-                crabs.add(new Crabby(x * Game.TILES_SIZE, y * Game.TILES_SIZE));
+            case ARCHER:
+                archers.add(new ArcherDoggo(x * Game.TILES_SIZE, y * Game.TILES_SIZE));
+                break;
+            case SWORD:
+                swords.add(new SwordDoggo(x * Game.TILES_SIZE, y * Game.TILES_SIZE));
+                break;
+            case BOXING:
+                boxings.add(new BoxingDoggo(x * Game.TILES_SIZE, y * Game.TILES_SIZE));
+                break;
+            case AXE:
+                axes.add(new AxeDoggo(x * Game.TILES_SIZE, y * Game.TILES_SIZE));
                 break;
             case SPAWN:
                 playerSpawn = new Point(x * Game.TILES_SIZE, y * Game.TILES_SIZE);
@@ -113,8 +129,8 @@ public class Levels {
         return gameContainers;
     }
 
-    public ArrayList<Crabby> getCrabs() {
-        return crabs;
+    public ArrayList<ArcherDoggo> getArchers() {
+        return archers;
     }
 
     public ArrayList<Spike> getSpikes() {
@@ -124,8 +140,21 @@ public class Levels {
     public ArrayList<Cannon> getCannons() {
         return cannons;
     }
-
+    
+    public ArrayList<SwordDoggo> getSwords() {
+        return swords;
+    }
+    
+    public ArrayList<BoxingDoggo> getBoxings() {
+        return boxings;
+    }
+    
+    public ArrayList<AxeDoggo> getAxes() {
+        return axes;
+    }
+    
     public Point getPlayerSpawn() {
         return playerSpawn;
     }
+
 }

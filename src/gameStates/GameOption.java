@@ -13,7 +13,7 @@ import ui.PauseButton;
 import ui.URMButtons;
 import utils.LoadSave;
 
-public class GameOption extends State implements StateMethods {
+public class GameOption extends State {
 
     private AudioOptions audioOptions;
     private BufferedImage backgroundImg, optionBackgroundImg;
@@ -44,13 +44,11 @@ public class GameOption extends State implements StateMethods {
         bgY = (int) (33 * Game.SCALE);
     }
 
-    @Override
     public void update() {
         menuB.update();
         audioOptions.update();
     }
 
-    @Override
     public void draw(Graphics g) {
         g.drawImage(backgroundImg, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
         g.drawImage(optionBackgroundImg, bgX, bgY, bgW, bgH, null);
@@ -63,7 +61,6 @@ public class GameOption extends State implements StateMethods {
         audioOptions.mouseDragged(e);
     }
 
-    @Override
     public void mousePressed(MouseEvent e) {
         if (isIn(e, menuB)) {
             menuB.setMousePressed(true);
@@ -72,7 +69,6 @@ public class GameOption extends State implements StateMethods {
         }
     }
 
-    @Override
     public void mouseReleased(MouseEvent e) {
         if (isIn(e, menuB)) {
             if (menuB.isMousePressed()) {
@@ -84,7 +80,6 @@ public class GameOption extends State implements StateMethods {
         menuB.resetBooleans();
     }
 
-    @Override
     public void mouseMoved(MouseEvent e) {
         menuB.setMouseHover(false);
         if (isIn(e, menuB)) {
@@ -94,24 +89,20 @@ public class GameOption extends State implements StateMethods {
         }
     }
 
-    @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             GameState.state = GameState.MENU;
         }
     }
 
-    @Override
     public void keyReleased(KeyEvent e) {
     
     }
 
-    @Override
     public void keyTyped(KeyEvent e) {
     
     }
     
-    @Override
     public void mouseClicked(MouseEvent e) {
     
     }

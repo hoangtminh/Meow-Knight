@@ -23,7 +23,7 @@ import audio.AudioPlayer;
 
 import java.awt.event.KeyEvent;
 
-public class Playing extends State implements StateMethods {
+public class Playing extends State {
 
     private Player player;
     
@@ -96,7 +96,6 @@ public class Playing extends State implements StateMethods {
         player.resetDirection();
     }
 
-    @Override
     public void update() {
         if (pause) {
             pauseOverlay.update();
@@ -131,7 +130,6 @@ public class Playing extends State implements StateMethods {
         }
     }
 
-    @Override
     public void draw(Graphics g) {
         g.drawImage(backImage, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
         // drawCloud(g);
@@ -187,7 +185,6 @@ public class Playing extends State implements StateMethods {
         objectManager.checkObjectHit(attackBox);
     }
     
-    @Override
     public void mouseClicked(MouseEvent e) {
         if (!gameOver) {
             if (e.getButton() == MouseEvent.BUTTON1) {
@@ -198,7 +195,6 @@ public class Playing extends State implements StateMethods {
         }
     }
 
-    @Override
     public void mousePressed(MouseEvent e) {
         if (!gameOver) {
             if (pause) {
@@ -211,7 +207,6 @@ public class Playing extends State implements StateMethods {
         }
     }
 
-    @Override
     public void mouseReleased(MouseEvent e) {
         if (pause) {
             pauseOverlay.mouseReleased(e);
@@ -222,7 +217,6 @@ public class Playing extends State implements StateMethods {
         }
     }
     
-    @Override
     public void mouseMoved(MouseEvent e) {
         if (!gameOver) {
             if (pause) {
@@ -243,7 +237,6 @@ public class Playing extends State implements StateMethods {
         }
     }
     
-    @Override
     public void keyPressed(KeyEvent e) {
         if (gameOver) {
             gameOverOverlay.keyPressed(e);
@@ -271,7 +264,6 @@ public class Playing extends State implements StateMethods {
         }
     }
 
-    @Override
     public void keyReleased(KeyEvent e) {
         if (!gameOver) {
             switch (e.getKeyCode()) {
@@ -307,11 +299,6 @@ public class Playing extends State implements StateMethods {
         this.maxLvlOffset = lvlOffset;
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        
-    }
-    
     public EnemyManager getEnemyManager() {
         return enemyManager;
     }

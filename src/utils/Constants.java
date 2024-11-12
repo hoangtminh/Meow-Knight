@@ -102,13 +102,15 @@ public class Constants {
                     return 6;
                 default:
                     return 1;
-                
             }
         }
     }
 
     public static class EnemyConstant {
-        public static final int CRABBY = 0;
+        public static final int BOXING = 0;
+        public static final int SWORD = 1;
+        public static final int ARCHER = 2;
+        public static final int AXE = 3;
         
         public static final int IDLE = 0;
         public static final int RUNNING = 1;
@@ -116,41 +118,60 @@ public class Constants {
         public static final int HIT = 3;
         public static final int DEAD = 4;
 
-        public static final int CRABBY_WIDTH_DEFAULT = 72;
-        public static final int CRABBY_HEIGHT_DEFAULT = 32;
+        public static final int DOGGO_HEIGHT_DEFAULT = 128;
+        public static final int DOGGO_HEIGHT = (int) (DOGGO_HEIGHT_DEFAULT / 4.0f * Game.SCALE);
 
-        public static final int CRABBY_WIDTH = (int) (CRABBY_WIDTH_DEFAULT * Game.SCALE);
-        public static final int CRABBY_HEIGHT = (int) (CRABBY_HEIGHT_DEFAULT * Game.SCALE);
+        public static final int DOGGO_DRAWOFFSET_X = (int) (0 * Game.SCALE);
+        public static final int DOGGO_DRAWOFFSET_Y = (int) (0 * Game.SCALE);
 
-        public static final int CRABBY_DRAWOFFSET_X = (int) (26 * Game.SCALE);
-        public static final int CRABBY_DRAWOFFSET_Y = (int) (10 * Game.SCALE);
+        public static int GetDoggoWidth(int enemyType) {
+            switch (enemyType) {
+                case AXE:
+                    return 184;
+                case ARCHER, SWORD, BOXING:
+                default:
+                    return 128;
+            }
+        }
+
+        public static int CalculateDoggoWidth(int enemyType) {
+            return (int) (GetDoggoWidth(enemyType) / 4.0f * Game.SCALE);
+        }
 
 
         public static int GetSpriteAmount(int enemyType, int enemyState) {
-            switch (enemyType) {
-                case CRABBY:
-                switch (enemyState) {
-                    case IDLE:
-                        return 9;
-                    case RUNNING:
-                        return 6;
-                    case ATTACK:
-                        return 7;
-                    case HIT:
-                        return 4;
-                    case DEAD:
-                    default:
-                        return 5;
-                }
+            switch (enemyState) {
+                case IDLE, RUNNING:
+                    return 8;
+                case HIT:
+                    return 6;
+                case DEAD:
+                    return 10;
+                case ATTACK:
+                    switch (enemyType) {
+                        case ARCHER, AXE:
+                            return 8;
+                        case BOXING:
+                            return 11;
+                        case SWORD:
+                            return 10;
+                        default:
+                            break;
+                    }
+                default:
+                    break;
             }
             return 0;
         }
 
         public static int getMaxHealth(int enemyType) {
             switch (enemyType) {
-                case CRABBY:
+                case ARCHER:
+                    return 10;
+                case BOXING, AXE:
+                    return 30;
+                case SWORD:
                     return 20;
-            
                 default:
                     return 1;
             }
@@ -158,9 +179,12 @@ public class Constants {
 
         public static int getEnemyDamage(int enemyType) {
             switch (enemyType) {
-                case CRABBY:
+                case ARCHER, SWORD:
                     return 15;
-            
+                case BOXING:
+                    return 10;
+                case AXE:
+                    return 25;
                 default:
                     return 0;
             }

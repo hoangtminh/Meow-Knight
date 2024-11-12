@@ -32,7 +32,6 @@ public class HelpMethod {
         float yIndex = y / Game.TILES_SIZE;
         
         return isTileSolid((int) xIndex, (int) yIndex, lvlData);
-
     }
 
     public static float getEntityXPosNextToWall(Rectangle2D.Float hitbox, float xSpeed) {

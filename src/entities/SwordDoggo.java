@@ -6,19 +6,19 @@ import static utils.Constants.EnemyConstant.*;
 
 import java.awt.geom.Rectangle2D;
 
-public class Crabby extends Enemy{
+public class SwordDoggo extends Enemy{
 
     private int attackBoxOffsetX;
 
-    public Crabby(float x, float y) {
-        super(x, y,CRABBY_WIDTH, CRABBY_HEIGHT, CRABBY);
-        initHitbox(22, 19);
+    public SwordDoggo(float x, float y) {
+        super(x, y, CalculateDoggoWidth(SWORD), DOGGO_HEIGHT, SWORD);
+        initHitbox(32, 30);
         initAttackBox();
     }
 
     private void initAttackBox() {
-        attackBox = new Rectangle2D.Float(x,y,(int)(82 * SCALE), (int) (19 * SCALE));
-        attackBoxOffsetX = (int) (30* SCALE);
+        attackBox = new Rectangle2D.Float(x,y,(int)(48 * SCALE), (int) (48 * SCALE));
+        attackBoxOffsetX = (int) (15 * SCALE);
     }
 
     public void update(int[][] lvlData, Player player) {
@@ -33,7 +33,6 @@ public class Crabby extends Enemy{
     }
     
     private void updateBehaviour(int[][] lvlData, Player player) {
-
         if (firstUpdate) {
             firstUpdateCheck(lvlData);
         }
@@ -44,7 +43,6 @@ public class Crabby extends Enemy{
                 case IDLE:
                     updateState(RUNNING);
                     break;
-
                 case RUNNING:
                     if (canSeePlayer(lvlData, player)) {
                         turnTowardPlayer(player);
@@ -55,7 +53,6 @@ public class Crabby extends Enemy{
                     
                     move(lvlData);
                     break;
-
                 case ATTACK:
                     if (aniIndex == 0) {
                         attackChecked = false;
@@ -63,7 +60,6 @@ public class Crabby extends Enemy{
                     if (aniIndex == 2 && !attackChecked) {
                         checkPlayerHit(attackBox, player);
                     }    
-
                     break;
                 case HIT:
             }
@@ -72,17 +68,17 @@ public class Crabby extends Enemy{
 
     public int flipX() {
         if (walkDir == RIGHT) {
-            return width;
-        } else {
             return 0;
+        } else {
+            return width;
         }
     }
 
     public int flipW() {
         if (walkDir == RIGHT) {
-            return -1;
-        } else {
             return 1;
+        } else {
+            return -1;
         }
     }
 

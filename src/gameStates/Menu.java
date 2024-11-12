@@ -11,7 +11,7 @@ import main.Game;
 import ui.MenuButton;
 import utils.LoadSave;
 
-public class Menu extends State implements StateMethods{
+public class Menu extends State {
 
     private MenuButton[] buttons = new MenuButton[3];
     private BufferedImage menu_background, background_menu;
@@ -38,15 +38,13 @@ public class Menu extends State implements StateMethods{
        buttons[1] = new MenuButton(GAME_WIDTH / 2, (int) (220 * Game.SCALE), 1, GameState.OPTIONS);
        buttons[2] = new MenuButton(GAME_WIDTH / 2, (int) (290 * Game.SCALE), 2, GameState.QUIT);
     }
-
-    @Override
+  
     public void update() {
         for (MenuButton mb: buttons) {
             mb.update();
         }
     }
 
-    @Override
     public void draw(Graphics g) {
         g.drawImage(background_menu, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
         g.drawImage(menu_background, menuX, menuY, menuWidth, menuHeight, null);
@@ -54,13 +52,11 @@ public class Menu extends State implements StateMethods{
             mb.draw(g);
         }
     }
-
-    @Override
+ 
     public void mouseClicked(MouseEvent e) {
         
     }
-
-    @Override
+     
     public void mousePressed(MouseEvent e) {
         for (MenuButton mb: buttons) {
             if (isIn(e, mb)) {
@@ -69,8 +65,7 @@ public class Menu extends State implements StateMethods{
             }
         }
     }
-
-    @Override
+     
     public void mouseReleased(MouseEvent e) {
         for (MenuButton mb: buttons) {
             if (isIn(e, mb)) {
@@ -86,7 +81,7 @@ public class Menu extends State implements StateMethods{
         }
     }
 
-    @Override
+     
     public void mouseMoved(MouseEvent e) {
         for (MenuButton mb: buttons) {
             mb.resetBooleans();
@@ -99,19 +94,18 @@ public class Menu extends State implements StateMethods{
         }
     }
 
-    @Override
+     
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             GameState.state = GameState.PLAYING;
         }
     }
 
-    @Override
+     
     public void keyReleased(KeyEvent e) {
      
     }
 
-    @Override
     public void keyTyped(KeyEvent e) {
     
     }

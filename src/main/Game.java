@@ -93,9 +93,6 @@ public class Game implements Runnable {
         long lastFrame = System.nanoTime();
         long now = System.nanoTime();
         long previusTime = System.nanoTime();
-        int frames = 0;
-        int updates = 0;
-        long lastCheck = System.currentTimeMillis();
         double deltaU = 0;
 
         while (true) {
@@ -106,19 +103,11 @@ public class Game implements Runnable {
 
             if (deltaU >= 1) {
                 update();
-                updates++;
                 deltaU--;
             }
             if (now - lastFrame >= timePerFrame) {
                 gamePanel.repaint();
                 lastFrame = now;
-                frames++;
-            }
-            if (System.currentTimeMillis() - lastCheck >= 1000) {
-                lastCheck = System.currentTimeMillis();
-                System.out.println("FPS: " + frames + "| UPS: " + updates);
-                frames = 0;
-                updates = 0;
             }
         }
     }
