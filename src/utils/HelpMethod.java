@@ -131,4 +131,19 @@ public class HelpMethod {
         }
         return false;
     }
+
+    public static boolean IsWater(Rectangle2D.Float hitbox, int[][] lvlData) {    
+        int xIndexLeft = (int) (hitbox.x / Game.TILES_SIZE);
+        int xIndexRight = (int) ((hitbox.x + hitbox.width) / Game.TILES_SIZE);
+        int yIndex = (int) ((hitbox.y + hitbox.height + 1) / Game.TILES_SIZE);
+
+        int valueLeft = lvlData[yIndex][xIndexLeft];
+        int valueRight = lvlData[yIndex][xIndexRight];
+        if ((valueLeft >= 48 && valueLeft <= 50) || (valueLeft >= 60 && valueLeft <= 62)) {
+            if ((valueRight >= 48 && valueRight <= 50) || (valueRight >= 60 && valueRight <= 62)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }   

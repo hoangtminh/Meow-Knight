@@ -23,6 +23,7 @@ public class Player extends Entity {
     private float playerSpeed = 1.5f;
     private boolean attacking = false;
     private boolean hit = false;
+    private boolean dodge = false;
     
     public int[][] lvlData;
     private float xDrawOffset = 20 * SCALE * 1.5f;
@@ -218,6 +219,7 @@ public class Player extends Entity {
                 attacking = false;
                 attackChecked = false;
                 hit = false;
+                dodge = false;
             }
             aniTick = 0;
         }
@@ -234,6 +236,11 @@ public class Player extends Entity {
 
         if (hit) {
             state = HIT;
+        }
+
+        if (dodge) {
+            state = DODGE;
+            return;
         }
 
         if (attacking) {
@@ -273,8 +280,10 @@ public class Player extends Entity {
 
         if (!inAir) {
             if (!powerAttackActive) {    
-                if ((!left && !right) || (left && right)) {
-                    return;
+                if (!dodge) {
+                    if ((!left && !right) || (left && right)) {
+                        return;
+                    }
                 }
             }
         }
@@ -305,7 +314,16 @@ public class Player extends Entity {
             xSpeed *= 3;
         }
 
-        if (inAir && !powerAttackActive) {   
+        if (dodge) {
+            if (flipW == -1) {
+                xSpeed = -playerSpeed;
+            } else {
+                xSpeed = playerSpeed;
+            }
+            xSpeed *= 1;
+        }
+
+        if (inAir) {   
             if (canMoveHere(hitbox.x, hitbox.y + airSpeed, hitbox.width, hitbox.height, lvlData)) {
                 hitbox.y += airSpeed;
                 airSpeed += GRAVITY;
@@ -319,7 +337,6 @@ public class Player extends Entity {
                 }
                 updateXPos(xSpeed);
             }
-
         } else {
             updateXPos(xSpeed);
         }
@@ -336,12 +353,22 @@ public class Player extends Entity {
     }
 
     public void powerAttack() {
-        if (powerAttackActive) {
+        if (powerAttackActive || inAir || dodge || attacking) {
             return;
         }
         if (powerValue >= 60) {
             powerAttackActive = true;
             changePower(-60);
+        }
+    }
+
+    public void dodging() {
+        if (dodge || powerAttackActive || inAir || attacking) {
+            return;
+        }
+        if (powerValue >= 30) {
+            dodge = true;
+            changePower(-30);
         }
     }
 
@@ -353,6 +380,9 @@ public class Player extends Entity {
     private void updateXPos(float xSpeed) {
         if (canMoveHere(hitbox.x+xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
             hitbox.x += xSpeed;
+            if (IsWater(hitbox, lvlData)) {
+                kill();
+            }
         } else {
             hitbox.x = getEntityXPosNextToWall(hitbox, xSpeed);
             if (powerAttackActive) {
@@ -363,6 +393,9 @@ public class Player extends Entity {
     }
 
     public void changeHealth(int value) {
+        if (dodge) {
+            return;
+        }
         currHealth += value;
 
         if (value < 0) {
@@ -424,6 +457,7 @@ public class Player extends Entity {
         attacking = false;
         moving = false;
         hit = false;
+        dodge = false;
         currHealth = maxHealth;
 
         state = IDLE;
@@ -464,5 +498,9 @@ public class Player extends Entity {
 
     public int getTileY() {
         return tileY;
+    }
+
+    public boolean getDodge() {
+        return dodge;
     }
 }

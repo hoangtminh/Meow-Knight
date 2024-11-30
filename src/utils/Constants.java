@@ -97,7 +97,7 @@ public class Constants {
                 case ATTACK_1:
                     return 4;
                 case DODGE: 
-                    return 8;
+                    return 6;
                 case DEAD:
                     return 6;
                 default:
@@ -167,11 +167,11 @@ public class Constants {
         public static int getMaxHealth(int enemyType) {
             switch (enemyType) {
                 case ARCHER:
-                    return 10;
+                    return 8;
                 case BOXING, AXE:
-                    return 30;
+                    return 24;
                 case SWORD:
-                    return 20;
+                    return 15;
                 default:
                     return 1;
             }

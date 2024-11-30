@@ -60,7 +60,7 @@ public class ArcherDoggo extends Enemy{
                     if (aniIndex == 0) {
                         attackChecked = false;
                     }
-                    if (aniIndex == 2 && !attackChecked) {
+                    if (aniIndex == 7 && !attackChecked) {
                         checkPlayerHit(attackBox, player);
                     }    
 

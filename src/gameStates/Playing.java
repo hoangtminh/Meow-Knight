@@ -56,7 +56,7 @@ public class Playing extends State {
         backImage = LoadSave.GetSpriteAtLas(LoadSave.PLAYING_BG_IMG);
         bigCloud = LoadSave.GetSpriteAtLas(LoadSave.BIG_CLOUD);
         smallCloud = LoadSave.GetSpriteAtLas(LoadSave.SMALL_CLOUD);
-        smallCloudPos = new int[8];
+        smallCloudPos = new int[10];
         for (int i = 0; i < smallCloudPos.length; i++) {
             smallCloudPos[i] = (int) (90*Game.SCALE) + rand.nextInt((int) (100* Game.SCALE));
         }
@@ -132,7 +132,7 @@ public class Playing extends State {
 
     public void draw(Graphics g) {
         g.drawImage(backImage, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
-        // drawCloud(g);
+        drawCloud(g);
         
         levelsManager.draw(g, xLvlOffset);
         enemyManager.draw(g, xLvlOffset);
@@ -151,9 +151,9 @@ public class Playing extends State {
     }
 
     private void drawCloud(Graphics g) {
-        for (int i = 0; i < 3; i++) {
-            g.drawImage(bigCloud,(int) (0 + i*BIG_CLOUD_WIDTH - xLvlOffset*0.3), (int) (204 * Game.SCALE), BIG_CLOUD_WIDTH, BIG_CLOUD_HEIGHT, null);
-        }
+        // for (int i = 0; i < 3; i++) {
+        //     g.drawImage(bigCloud,(int) (0 + i*BIG_CLOUD_WIDTH - xLvlOffset*0.3), (int) (204 * Game.SCALE), BIG_CLOUD_WIDTH, BIG_CLOUD_HEIGHT, null);
+        // }
         for (int i = 0; i < smallCloudPos.length; i++) {
             g.drawImage(smallCloud, SMALL_CLOUD_WIDTH * 4*i - (int) (xLvlOffset*0.7), smallCloudPos[i], SMALL_CLOUD_WIDTH, SMALL_CLOUD_HEIGHT, null);
         }
@@ -187,11 +187,7 @@ public class Playing extends State {
     
     public void mouseClicked(MouseEvent e) {
         if (!gameOver) {
-            if (e.getButton() == MouseEvent.BUTTON1) {
-                player.setAttacking(true);
-            } else if (e.getButton() == MouseEvent.BUTTON3) {
-                player.powerAttack();
-            }
+            
         }
     }
 
@@ -247,13 +243,24 @@ public class Playing extends State {
                 case KeyEvent.VK_A:
                     player.setLeft(true);
                     break;
-                    case KeyEvent.VK_S:
+                case KeyEvent.VK_S:
+                    player.dodging();
                     break;
                 case KeyEvent.VK_D:
                     player.setRight(true);
                     break;
                 case KeyEvent.VK_SPACE:
+                    // player.setJump(true);
+                    break;
+                case KeyEvent.VK_J:
+                    player.setAttacking(true);
+                    break;
+                case KeyEvent.VK_K:
                     player.setJump(true);
+                    // player.powerAttack();
+                    break;
+                case KeyEvent.VK_U:
+                    player.powerAttack();
                     break;
                 case KeyEvent.VK_BACK_SPACE:
                     pause = true;
@@ -277,7 +284,10 @@ public class Playing extends State {
                 case KeyEvent.VK_D:
                     player.setRight(false);
                     break;
-                    case KeyEvent.VK_SPACE:
+                case KeyEvent.VK_SPACE:
+                    // player.setJump(false);
+                    break;
+                case KeyEvent.VK_K:
                     player.setJump(false);
                     break;
                 default:
