@@ -3,7 +3,7 @@ package ui;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import utils.LoadSave;
+import utils.StoreImage;
 import static utils.Constants.UI.PauseButton.*;
 
 public class SoundButton extends PauseButton {
@@ -18,7 +18,7 @@ public class SoundButton extends PauseButton {
     }
 
     private void loadSoundImgs() {
-        BufferedImage tmp = LoadSave.GetSpriteAtLas(LoadSave.SOUND_BUTTON);
+        BufferedImage tmp = StoreImage.GetSpriteAtLas(StoreImage.SOUND_BUTTON);
         soundImgs = new BufferedImage[2][3];
         for (int  j = 0; j < soundImgs.length; j++) {
             for (int i = 0; i < soundImgs[j].length; i++) {

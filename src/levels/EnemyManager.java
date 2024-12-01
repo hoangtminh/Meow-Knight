@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import entities.*;
 import gameStates.Playing;
-import utils.LoadSave;
+import utils.StoreImage;
 
 public class EnemyManager {
 
@@ -169,7 +169,7 @@ public class EnemyManager {
     }
 
     private void loadEnemyImgs() {
-        BufferedImage tmp = LoadSave.GetSpriteAtLas(LoadSave.ARCHER_SPRITE);
+        BufferedImage tmp = StoreImage.GetSpriteAtLas(StoreImage.ARCHER_SPRITE);
 
         archerArr = new BufferedImage[5][10];
         for (int i = 0; i < archerArr.length; i++ ){
@@ -178,7 +178,7 @@ public class EnemyManager {
             }
         }
 
-        tmp = LoadSave.GetSpriteAtLas(LoadSave.SWORD_SPRITE);
+        tmp = StoreImage.GetSpriteAtLas(StoreImage.SWORD_SPRITE);
         swordArr = new BufferedImage[5][10];
         for (int i = 0; i < swordArr.length; i++ ){
             for (int j = 0; j < swordArr[i].length; j++) {
@@ -186,7 +186,7 @@ public class EnemyManager {
             }
         }
 
-        tmp = LoadSave.GetSpriteAtLas(LoadSave.BOXING_SPRITE);
+        tmp = StoreImage.GetSpriteAtLas(StoreImage.BOXING_SPRITE);
         boxingArr = new BufferedImage[5][11];
         for (int i = 0; i < boxingArr.length; i++ ){
             for (int j = 0; j < boxingArr[i].length; j++) {
@@ -194,7 +194,7 @@ public class EnemyManager {
             }
         }
 
-        tmp = LoadSave.GetSpriteAtLas(LoadSave.AXE_SPRITE);
+        tmp = StoreImage.GetSpriteAtLas(StoreImage.AXE_SPRITE);
         axeArr = new BufferedImage[5][10];
         for (int i = 0; i < axeArr.length; i++ ){
             for (int j = 0; j < axeArr[i].length; j++) {

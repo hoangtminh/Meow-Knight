@@ -8,7 +8,7 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
-public class LoadSave {
+public class StoreImage {
 
     public static final String PLAYER_ATLAS = "Meow_Knight.png";
     public static final String LEVEL_ATLAS = "tileset.png";
@@ -24,6 +24,7 @@ public class LoadSave {
     public static final String PLAYING_BG_IMG = "background.png";
     public static final String OPTIONS_BACKGROUND = "options_background.png";
     public static final String DEATH_SCREEN = "death_screen.png";
+    public static final String LOADING = "loading.png";
 
     public static final String STATUS_BAR = "health_power_bar.png";
     public static final String LEVEL_COMPLETE = "completed_sprite.png";
@@ -32,8 +33,11 @@ public class LoadSave {
     public static final String TRAP_SPRITE = "trap_atlas.png";
     public static final String ARROW_LEFT = "arrowLeft.png";
     public static final String ARROW_RIGHT = "arrowRight.png";
-    public static final String BIG_CLOUD = "big_clouds.png";
     public static final String SMALL_CLOUD = "small_clouds.png";
+    public static final String STAR = "star.png";
+
+    public static final String COIN = "coin.png";
+    public static final String RUNE = "rune.png";
 
     public static final String BOXING_SPRITE = "boxing_doggo.png";
     public static final String SWORD_SPRITE = "sword_doggo.png";
@@ -42,7 +46,7 @@ public class LoadSave {
 
     public static BufferedImage GetSpriteAtLas(String fileName) {
         BufferedImage img = null;
-        InputStream is = LoadSave.class.getResourceAsStream("/" + fileName);
+        InputStream is = StoreImage.class.getResourceAsStream("/" + fileName);
         
         try {
             img = ImageIO.read(is);
@@ -60,7 +64,7 @@ public class LoadSave {
 
     public static BufferedImage[] getAllLevels() {
         BufferedImage[] imgs;
-        URL url = LoadSave.class.getResource("/lvls");
+        URL url = StoreImage.class.getResource("/lvls");
         File file = null;
 
         try {

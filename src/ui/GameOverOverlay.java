@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import gameStates.GameState;
 import gameStates.Playing;
 import main.Game;
-import utils.LoadSave;
+import utils.StoreImage;
 
 import static utils.Constants.UI.URMButtons.URM_SIZE;
 
@@ -35,7 +35,7 @@ public class GameOverOverlay {
     }
 
     private void createImg() {
-        img = LoadSave.GetSpriteAtLas(LoadSave.DEATH_SCREEN);
+        img = StoreImage.GetSpriteAtLas(StoreImage.DEATH_SCREEN);
         imgW = (int) (img.getWidth() * Game.SCALE);
         imgH = (int) (img.getHeight() * Game.SCALE);
         imgX = (int) (Game.GAME_WIDTH/2 - imgW/2);

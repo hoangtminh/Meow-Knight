@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -7,7 +8,7 @@ import java.awt.image.BufferedImage;
 import gameStates.GameState;
 import gameStates.Playing;
 import main.Game;
-import utils.LoadSave;
+import utils.StoreImage;
 
 import static utils.Constants.UI.URMButtons.*;
 
@@ -34,7 +35,7 @@ public class LevelCompleteOverlay {
     }
 
     private void initImg() {
-        img = LoadSave.GetSpriteAtLas(LoadSave.LEVEL_COMPLETE);
+        img = StoreImage.GetSpriteAtLas(StoreImage.LEVEL_COMPLETE);
         bgW = (int) (img.getWidth() * Game.SCALE);
         bgH = (int) (img.getHeight() * Game.SCALE);
         bgX = (int) (Game.GAME_WIDTH/2 - bgW/2);
@@ -42,6 +43,8 @@ public class LevelCompleteOverlay {
     }
 
     public void draw(Graphics g) {
+        g.setColor(new Color(0, 0, 0, 100));
+        g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
         g.drawImage(img, bgX, bgY, bgW, bgH, null);
         next.draw(g);
         menu.draw(g);
@@ -76,8 +79,8 @@ public class LevelCompleteOverlay {
         }
         if (isIn(next, e)) {
             if (next.isMousePressed()) {
-                playing.loadNextLevel();
-                playing.getGame().getAudioPlayer().setLevelSong(playing.getLevelManager().getLvlIndex());
+                playing.setLoading(true);
+                playing.getLoadingOverlay().setNextState(GameState.PLAYING);
             }
         }
 

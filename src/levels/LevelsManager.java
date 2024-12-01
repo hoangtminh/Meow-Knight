@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import gameStates.GameState;
 import main.Game;
-import utils.LoadSave;
+import utils.StoreImage;
 
 public class LevelsManager {
 
@@ -23,14 +23,14 @@ public class LevelsManager {
     }
 
     private void buildAllLevels() {
-        BufferedImage[] allLevels = LoadSave.getAllLevels();
+        BufferedImage[] allLevels = StoreImage.getAllLevels();
         for (BufferedImage img : allLevels) {
             levels.add(new Levels(img));
         }
     }
 
     public void importOutsideSprite() {
-        BufferedImage img = LoadSave.GetSpriteAtLas(LoadSave.LEVEL_ATLAS);
+        BufferedImage img = StoreImage.GetSpriteAtLas(StoreImage.LEVEL_ATLAS);
         levelSprite = new BufferedImage[72];
         for (int j = 0; j < 6; j++ ) {
             for (int i = 0; i < 12; i++) {

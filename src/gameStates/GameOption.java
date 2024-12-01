@@ -11,7 +11,7 @@ import main.Game;
 import ui.AudioOptions;
 import ui.PauseButton;
 import ui.URMButtons;
-import utils.LoadSave;
+import utils.StoreImage;
 
 public class GameOption extends State {
 
@@ -35,8 +35,8 @@ public class GameOption extends State {
     }
 
     private void loadImgs() {
-        backgroundImg = LoadSave.GetSpriteAtLas(LoadSave.BACKGROUND_MENU);
-        optionBackgroundImg = LoadSave.GetSpriteAtLas(LoadSave.OPTIONS_BACKGROUND);
+        backgroundImg = StoreImage.GetSpriteAtLas(StoreImage.BACKGROUND_MENU);
+        optionBackgroundImg = StoreImage.GetSpriteAtLas(StoreImage.OPTIONS_BACKGROUND);
 
         bgW = (int) (optionBackgroundImg.getWidth() * Game.SCALE);
         bgH = (int) (optionBackgroundImg.getHeight() * Game.SCALE);

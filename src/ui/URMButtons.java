@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import static utils.Constants.UI.URMButtons.*;
 
-import utils.LoadSave;
+import utils.StoreImage;
 
 public class URMButtons extends PauseButton {
 
@@ -19,7 +19,7 @@ public class URMButtons extends PauseButton {
     }
     
     private void loadImgs() {
-        BufferedImage tmp = LoadSave.GetSpriteAtLas(LoadSave.URM_BUTTONS);
+        BufferedImage tmp = StoreImage.GetSpriteAtLas(StoreImage.URM_BUTTONS);
         img = new BufferedImage[3];
         for (int i = 0; i < img.length; i++) {
             img[i] = tmp.getSubimage(i * URM_DEFAULT_SIZE, rowIndex * URM_DEFAULT_SIZE, URM_DEFAULT_SIZE, URM_DEFAULT_SIZE);

@@ -5,7 +5,7 @@ import static utils.Constants.UI.VolumeButtons.*;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import utils.LoadSave;
+import utils.StoreImage;
 
 public class VolumeButton extends PauseButton {
 
@@ -28,7 +28,7 @@ public class VolumeButton extends PauseButton {
     }
     
     private void loadImgs() {
-        BufferedImage tmp = LoadSave.GetSpriteAtLas(LoadSave.VOLUME_BUTTONS);
+        BufferedImage tmp = StoreImage.GetSpriteAtLas(StoreImage.VOLUME_BUTTONS);
         imgs = new BufferedImage[3];
         for (int i = 0; i < imgs.length; i++) {
             imgs[i] = tmp.getSubimage(i*VOLUME_DEFAULT_WIDTH, 0, VOLUME_DEFAULT_WIDTH, VOLUME_DEFAULT_HEIGHT);

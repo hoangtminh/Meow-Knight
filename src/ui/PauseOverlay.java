@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import gameStates.GameState;
 import gameStates.Playing;
 import main.Game;
-import utils.LoadSave;
+import utils.StoreImage;
 
 public class PauseOverlay {
 
@@ -38,7 +38,7 @@ public class PauseOverlay {
     }
     
     private void loadBackground() {
-        background = LoadSave.GetSpriteAtLas(LoadSave.PAUSE_BACKGROUND);
+        background = StoreImage.GetSpriteAtLas(StoreImage.PAUSE_BACKGROUND);
         bgWidth = (int) (background.getWidth() * Game.SCALE);
         bgHeight = (int) (background.getHeight() * Game.SCALE);
         bgX = Game.GAME_WIDTH / 2 - bgWidth / 2;
@@ -95,14 +95,16 @@ public class PauseOverlay {
     public void mouseReleased(MouseEvent e) {
         if (isIn(e, menuB)) {
             if (menuB.isMousePressed()) {
-                playing.resetAllPlaying();
-                playing.setGameState(GameState.MENU);
+                playing.setLoading(true);
+                playing.getLoadingOverlay().setNextState(GameState.MENU);
                 playing.unPauseGame(); 
             }
         } else if (isIn(e, replayB)) {
             if (replayB.isMousePressed()) {
                 playing.resetAllPlaying();
                 playing.unPauseGame();
+                playing.setLoading(true);
+                playing.getLoadingOverlay().setNextState(GameState.PLAYING);
             }
         } else if (isIn(e, unpauseB)) {
             if (unpauseB.isMousePressed()) {

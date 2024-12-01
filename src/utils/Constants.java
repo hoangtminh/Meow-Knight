@@ -19,13 +19,13 @@ public class Constants {
     }
 
     public static class UI {
+        public static class Loading {
+            public static final int LOADING_WIDTH_DEFAULT = 86;
+            public static final int LOADING_HEIGHT_DEFAULT = 32;
+            public static final int LOADING_WIDTH = (int) (LOADING_WIDTH_DEFAULT * Game.SCALE);
+            public static final int LOADING_HEIGHT = (int) (LOADING_HEIGHT_DEFAULT * Game.SCALE);
+        }
         public static class Environment {
-            public static final int BIG_CLOUD_WIDTH_DEFAULT = 448;
-            public static final int BIG_CLOUD_HEIGHT_DEFAULT = 101;
-            
-            public static final int BIG_CLOUD_WIDTH = (int) (BIG_CLOUD_WIDTH_DEFAULT * Game.SCALE);
-            public static final int BIG_CLOUD_HEIGHT = (int) (BIG_CLOUD_HEIGHT_DEFAULT * Game.SCALE );
-
             public static final int SMALL_CLOUD_WIDTH_DEFAULT = 74;
             public static final int SMALL_CLOUD_HEIGHT_DEFAULT = 24;
             

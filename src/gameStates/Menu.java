@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 import main.Game;
 import ui.MenuButton;
-import utils.LoadSave;
+import utils.StoreImage;
 
 public class Menu extends State {
 
@@ -24,13 +24,13 @@ public class Menu extends State {
     }
 
     private void loadBackground() {
-        menu_background = LoadSave.GetSpriteAtLas(LoadSave.MENU_BACKGROUND);
+        menu_background = StoreImage.GetSpriteAtLas(StoreImage.MENU_BACKGROUND);
         menuWidth = (int) (menu_background.getWidth() * Game.SCALE);
         menuHeight = (int) (menu_background.getHeight() * Game.SCALE);
         menuX = Game.GAME_WIDTH / 2 - menuWidth / 2;
         menuY = (int) (35 * Game.SCALE);
 
-        background_menu = LoadSave.GetSpriteAtLas(LoadSave.BACKGROUND_MENU);
+        background_menu = StoreImage.GetSpriteAtLas(StoreImage.BACKGROUND_MENU);
     }
 
     private void loadButtons() {
@@ -76,7 +76,8 @@ public class Menu extends State {
                     mb.applyGameState();
                 }
                 if (mb.getState() == GameState.PLAYING) {
-                    game.getAudioPlayer().setLevelSong(game.getPlaying().getLevelManager().getLvlIndex());
+                    game.getPlaying().setLoading(true);
+                    game.getPlaying().getLoadingOverlay().setNextState(GameState.PLAYING);
                 }
                 break;
             }

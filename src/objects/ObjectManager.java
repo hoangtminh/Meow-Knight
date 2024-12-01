@@ -13,7 +13,7 @@ import entities.ArcherDoggo;
 import entities.Player;
 import gameStates.Playing;
 import levels.Levels;
-import utils.LoadSave;
+import utils.StoreImage;
 
 public class ObjectManager {
 
@@ -98,7 +98,7 @@ public class ObjectManager {
         }
     
         private void loadImgs() {
-            BufferedImage potionSprite = LoadSave.GetSpriteAtLas(LoadSave.POTIONS_SPRITE);
+            BufferedImage potionSprite = StoreImage.GetSpriteAtLas(StoreImage.POTIONS_SPRITE);
             potionsImgs = new BufferedImage[2][7];
     
             for (int i = 0; i < potionsImgs.length; i++) {
@@ -107,7 +107,7 @@ public class ObjectManager {
                 }
             }
     
-            BufferedImage containerSprite = LoadSave.GetSpriteAtLas(LoadSave.OBJECT_SPRITE);
+            BufferedImage containerSprite = StoreImage.GetSpriteAtLas(StoreImage.OBJECT_SPRITE);
             containerImgs = new BufferedImage[2][8];
     
             for (int i = 0; i < containerImgs.length; i++) {
@@ -116,10 +116,10 @@ public class ObjectManager {
                 }
             }
     
-            spikeImg = LoadSave.GetSpriteAtLas(LoadSave.TRAP_SPRITE);
+            spikeImg = StoreImage.GetSpriteAtLas(StoreImage.TRAP_SPRITE);
             
-            projectileLeftImg = LoadSave.GetSpriteAtLas(LoadSave.ARROW_LEFT);
-            projectileRightImg = LoadSave.GetSpriteAtLas(LoadSave.ARROW_RIGHT);
+            projectileLeftImg = StoreImage.GetSpriteAtLas(StoreImage.ARROW_LEFT);
+            projectileRightImg = StoreImage.GetSpriteAtLas(StoreImage.ARROW_RIGHT);
         }
     
         public void update(int[][] lvlData, Player player) {

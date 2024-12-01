@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 import audio.AudioPlayer;
 import gameStates.Playing;
 import main.Game;
-import utils.LoadSave;
+import utils.StoreImage;
 
 public class Player extends Entity {
     private BufferedImage animations[][];
@@ -426,7 +426,7 @@ public class Player extends Entity {
 
     private void loadAnimation() {
 
-        BufferedImage img = LoadSave.GetSpriteAtLas(LoadSave.PLAYER_ATLAS);
+        BufferedImage img = StoreImage.GetSpriteAtLas(StoreImage.PLAYER_ATLAS);
 
         animations = new BufferedImage[9][8];
         for (int j = 0; j < animations.length; j++) {
@@ -435,7 +435,7 @@ public class Player extends Entity {
             }
         }
 
-        statusBar = LoadSave.GetSpriteAtLas(LoadSave.STATUS_BAR);
+        statusBar = StoreImage.GetSpriteAtLas(StoreImage.STATUS_BAR);
     }
 
     public void loadLvlData(int[][] lvlData) {
