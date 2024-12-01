@@ -69,6 +69,9 @@ public class Menu extends State {
     public void mouseReleased(MouseEvent e) {
         for (MenuButton mb: buttons) {
             if (isIn(e, mb)) {
+                if (mb.getState() == GameState.QUIT) {
+                    System.exit(1);
+                }
                 if (mb.isMousePress()) {
                     mb.applyGameState();
                 }
