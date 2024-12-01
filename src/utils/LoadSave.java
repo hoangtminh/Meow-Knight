@@ -30,8 +30,8 @@ public class LoadSave {
     public static final String POTIONS_SPRITE = "potions_sprites.png";
     public static final String OBJECT_SPRITE = "objects_sprites.png";
     public static final String TRAP_SPRITE = "trap_atlas.png";
-    public static final String CANNON_SPRITE = "cannon_atlas.png";
-    public static final String CANNON_BALL = "ball.png";
+    public static final String ARROW_LEFT = "arrowLeft.png";
+    public static final String ARROW_RIGHT = "arrowRight.png";
     public static final String BIG_CLOUD = "big_clouds.png";
     public static final String SMALL_CLOUD = "small_clouds.png";
 

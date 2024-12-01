@@ -156,11 +156,17 @@ public abstract class Enemy extends Entity {
 
     protected boolean isPlayerInRange(Player player) {
         int absValue = (int) Math.abs(player.hitbox.x - hitbox.x);
+        if (enemyType == ARCHER) {
+            return absValue <= attackDistance * 9;
+        }
         return absValue <= attackDistance * 5;
     }
 
     protected boolean isPlayerCloseForAttack(Player player) {
         int absValue = (int) Math.abs(player.hitbox.x - hitbox.x);
+        if (enemyType == ARCHER) {
+            return absValue <= attackDistance * 7;
+        }
         return absValue <= attackDistance;
     }
 

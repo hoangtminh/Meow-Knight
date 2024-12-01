@@ -14,13 +14,13 @@ public class Projectile {
 
     public Projectile(int x, int y, int direction) {
         int xOffset = (int) (-3 * Game.SCALE);
-        int yOffset = (int) (5 * Game.SCALE);
+        int yOffset = (int) (7 * Game.SCALE);
 
         if (dir == 1) {
             xOffset = (int) (29 * Game.SCALE);
         }
 
-        hitbox = new Rectangle2D.Float(x + xOffset, y + yOffset, CANNON_BALL_WIDTH, CANNON_BALL_HEIGHT);
+        hitbox = new Rectangle2D.Float(x + xOffset, y + yOffset, ARROW_WIDTH, ARROW_HEIGHT);
         this.dir = direction;
     }
 
@@ -43,5 +43,9 @@ public class Projectile {
 
     public Rectangle2D.Float getHitbox() {
         return hitbox;
+    }
+
+    public int getDir() {
+        return dir;
     }
 }

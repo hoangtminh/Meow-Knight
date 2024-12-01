@@ -27,7 +27,6 @@ public class Levels {
     private ArrayList<Potion> potions = new ArrayList<Potion>();
     private ArrayList<GameContainer> gameContainers = new ArrayList<GameContainer>();
     private ArrayList<Spike> spikes = new ArrayList<Spike>();
-    private ArrayList<Cannon> cannons = new ArrayList<Cannon>();
 
     private int lvlTileWide;
     private int maxTileOffset;
@@ -87,9 +86,6 @@ public class Levels {
 
     private void loadObject(int value, int x, int y) {
         switch (value) {
-            case CANNON_LEFT, CANNON_RIGHT:
-                cannons.add(new Cannon(x * Game.TILES_SIZE, y * Game.TILES_SIZE, value));
-                break;
             case RED_POTION, BLUE_POTION:
                 potions.add(new Potion(x * Game.TILES_SIZE, y * Game.TILES_SIZE, value));
                 break;
@@ -135,10 +131,6 @@ public class Levels {
 
     public ArrayList<Spike> getSpikes() {
         return spikes;
-    }
-
-    public ArrayList<Cannon> getCannons() {
-        return cannons;
     }
     
     public ArrayList<SwordDoggo> getSwords() {

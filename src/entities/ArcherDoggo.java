@@ -3,12 +3,16 @@ package entities;
 import static main.Game.SCALE;
 import static utils.Constants.Direction.RIGHT;
 import static utils.Constants.EnemyConstant.*;
+import static objects.ObjectManager.shootArcher;
 
 import java.awt.geom.Rectangle2D;
 
 public class ArcherDoggo extends Enemy{
 
     private int attackBoxOffsetX;
+    private int cooldownMax = 80;
+    private int cooldown = cooldownMax;
+    private boolean shooting = false;
 
     public ArcherDoggo(float x, float y) {
         super(x, y, CalculateDoggoWidth(ARCHER), DOGGO_HEIGHT, ARCHER);
@@ -33,7 +37,7 @@ public class ArcherDoggo extends Enemy{
     }
     
     private void updateBehaviour(int[][] lvlData, Player player) {
-
+        cooldown--;
         if (firstUpdate) {
             firstUpdateCheck(lvlData);
         }
@@ -49,21 +53,29 @@ public class ArcherDoggo extends Enemy{
                     if (canSeePlayer(lvlData, player)) {
                         turnTowardPlayer(player);
                         if (isPlayerCloseForAttack(player)) {
-                            updateState(ATTACK);
+                            if (cooldown <= 0) {
+                                updateState(ATTACK);
+                                shooting = true;
+                            }
+                        } else {
+                            shooting = false;
                         }
+                    } else {
+                        shooting = false;
                     }
-                    
-                    move(lvlData);
+                    if (!shooting) {
+                        move(lvlData);
+                    }
                     break;
 
                 case ATTACK:
                     if (aniIndex == 0) {
                         attackChecked = false;
                     }
-                    if (aniIndex == 7 && !attackChecked) {
-                        checkPlayerHit(attackBox, player);
-                    }    
-
+                    if (aniIndex == 5 && !attackChecked && cooldown <= 0) {
+                        shootArcher(this, walkDir);
+                        cooldown = cooldownMax;
+                    }
                     break;
                 case HIT:
             }
