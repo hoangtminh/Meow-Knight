@@ -53,6 +53,7 @@ public class LoadingOverlay {
                 if (playing.getlvlComplete()) {
                     playing.loadNextLevel();
                 }
+                playing.resetAllPlaying();
                 playing.getGame().getAudioPlayer().setLevelSong(playing.getLevelManager().getLvlIndex());
                 break;
             case MENU:

@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import utils.StoreImage;
 import static utils.Constants.UI.PauseButton.*;
 
-public class SoundButton extends PauseButton {
+public class SoundButton extends Buttons {
     private BufferedImage[][] soundImgs;
     private boolean mouseHover, mousePress;
     private boolean muted;

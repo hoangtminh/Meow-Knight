@@ -60,6 +60,10 @@ public class GameOverOverlay {
             case KeyEvent.VK_ESCAPE:
                 playing.setGameState(GameState.MENU);
                 break;
+            case KeyEvent.VK_R:
+                playing.resetAllPlaying();
+                playing.getGame().getAudioPlayer().setLevelSong(playing.getLevelManager().getLvlIndex());
+                break;
             default:
                 break;
         }

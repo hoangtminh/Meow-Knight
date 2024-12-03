@@ -20,149 +20,180 @@ public class ObjectManager {
     private Playing playing;
     private BufferedImage[][] potionsImgs, containerImgs;
     private BufferedImage spikeImg, projectileLeftImg, projectileRightImg;
+    private BufferedImage[] coinsImgs;
 
     private ArrayList<Potion> potions;
     private ArrayList<GameContainer> containers;
     private ArrayList<Spike> spikes;
     private static ArrayList<Projectile> projectiles = new ArrayList<>();
+    private ArrayList<Coin> coins;
         
-        public ObjectManager(Playing playing) {
-            this.playing = playing;
-            loadImgs();
-            potions = new ArrayList<>();
-            containers = new ArrayList<>();
-        }
+    public ObjectManager(Playing playing) {
+        this.playing = playing;
+        loadImgs();
+        potions = new ArrayList<>();
+        containers = new ArrayList<>();
+        coins = new ArrayList<>();
+    }
     
-        public void checkSpikesTouched(Player player) {
-            for (Spike spike: spikes) {
-                if (spike.getHitbox().intersects(player.getHitbox())) {
-                    player.kill();
-                }
+    public void loadObject(Levels newLevel) {
+        potions = new ArrayList<>(newLevel.getPotions());
+        coins = new ArrayList<>(newLevel.getCoins());
+        containers = new ArrayList<>(newLevel.getGameContainers());
+        spikes = newLevel.getSpikes();
+        projectiles.clear();
+    }
+    
+    private void loadImgs() {
+        BufferedImage potionSprite = StoreImage.GetSpriteAtLas(StoreImage.POTIONS_SPRITE);
+        potionsImgs = new BufferedImage[2][7];
+    
+        for (int i = 0; i < potionsImgs.length; i++) {
+            for (int j = 0; j < potionsImgs[i].length; j++) {
+                potionsImgs[i][j] = potionSprite.getSubimage(12 * j, 16 * i, 12, 16);
             }
         }
     
-        public void checkObjectTouched(Rectangle2D.Float hitbox) {
-            for (Potion p: potions) {
-                if (p.isActive()) {
-                    if (hitbox.intersects(p.getHitbox())) {
-                        p.setActive(false);
-                        applyEffectToPlayer(p);
+        BufferedImage containerSprite = StoreImage.GetSpriteAtLas(StoreImage.OBJECT_SPRITE);
+        containerImgs = new BufferedImage[2][8];
+    
+        for (int i = 0; i < containerImgs.length; i++) {
+            for (int j = 0; j < containerImgs[i].length; j++) {
+                containerImgs[i][j] = containerSprite.getSubimage(40 * j, 30 * i, 40, 30);
+            }
+        }
+    
+        spikeImg = StoreImage.GetSpriteAtLas(StoreImage.TRAP_SPRITE);
+        
+        projectileLeftImg = StoreImage.GetSpriteAtLas(StoreImage.ARROW_LEFT);
+        projectileRightImg = StoreImage.GetSpriteAtLas(StoreImage.ARROW_RIGHT);
+
+        BufferedImage coinSprite = StoreImage.GetSpriteAtLas(StoreImage.COIN);
+        coinsImgs = new BufferedImage[4];
+        for (int i = 0; i < coinsImgs.length; i++) {
+            coinsImgs[i] = coinSprite.getSubimage(i * COIN_WIDTH_DEFAULT, 0, COIN_WIDTH_DEFAULT, COIN_WIDTH_DEFAULT);
+        }
+    }
+
+    public void update(int[][] lvlData, Player player) {
+        for (Potion p : potions) {
+            if (p.isActive()) {
+                p.update();
+            }
+        }
+    
+        for (GameContainer gc : containers) {
+            if (gc.isActive()) {
+                gc.update();
+            }
+        }
+
+        for (Coin c : coins) {
+            if (c.isActive()) {
+                c.update();
+            }
+        }
+        updateProjectiles(lvlData, player);
+    }
+        
+    private void updateProjectiles(int[][] lvlData, Player player) {
+        for (Projectile p: projectiles) {
+            if (p.isActive()) {
+                p.updatePos();
+                if (p.getHitbox().intersects(player.getHitbox()) && !player.getDodge()) {
+                    player.changeHealth(-20);
+                    p.setActive(false);
+                } else if (IsProjectileHitThings(p, lvlData)) {
+                    p.setActive(false);
+                }
+            }
+        }
+    }
+        
+    public void checkSpikesTouched(Player player) {
+        for (Spike spike: spikes) {
+            if (spike.getHitbox().intersects(player.getHitbox())) {
+                player.kill();
+            }
+        }
+    }
+
+    public void checkCoinTouched(Player player) {
+        for (Coin c : coins) {
+            if (c.isActive()) {
+                if (player.getHitbox().intersects(c.getHitbox())) {
+                    c.setActive(false);
+                }
+            }
+        }
+    }
+    
+    public void checkObjectTouched(Player player) {
+        for (Potion p: potions) {
+            if (p.isActive()) {
+                if (player.getHitbox().intersects(p.getHitbox())) {
+                    p.setActive(false);
+                    applyEffectToPlayer(p);
+                }
+            }
+        }
+    }
+    
+    public void applyEffectToPlayer(Potion p) {
+    if (p.getObjType() == RED_POTION) {
+            playing.getPlayer().changeHealth(RED_POTION_VALUE);
+        } else {
+            playing.getPlayer().changePower(BLUE_POTION_VALUE);
+        }
+    }
+
+    public void checkObjectHit(Rectangle2D.Float attackbox) {
+        for (GameContainer gc: containers) {
+            if (gc.isActive() && !gc.doAnimation) {
+                if (gc.getHitbox().intersects(attackbox)) {
+                    gc.setDoAnimation(true);
+                    
+                    int type = 0;
+                    if (gc.objType == BARREL) {
+                        type = 1;
                     }
+                    potions.add(new Potion((int) (gc.getHitbox().x + gc.getHitbox().width/2), 
+                    (int) (gc.getHitbox().y),
+                    type));
                 }
             }
         }
-    
-        public void applyEffectToPlayer(Potion p) {
-            if (p.getObjType() == RED_POTION) {
-                playing.getPlayer().changeHealth(RED_POTION_VALUE);
-            } else {
-                playing.getPlayer().changePower(BLUE_POTION_VALUE);
-            }
+    }
+
+    public void resetAllObjects() {
+
+        loadObject(playing.getLevelManager().getCurrLevels());
+
+        for (Potion p: potions) {
+            p.resetObject();
         }
-    
-        public void checkObjectHit(Rectangle2D.Float attackbox) {
-            for (GameContainer gc: containers) {
-                if (gc.isActive() && !gc.doAnimation) {
-                    if (gc.getHitbox().intersects(attackbox)) {
-                        gc.setDoAnimation(true);
-                        
-                        int type = 0;
-                        if (gc.objType == BARREL) {
-                            type = 1;
-                        }
-                        potions.add(new Potion((int) (gc.getHitbox().x + gc.getHitbox().width/2), 
-                        (int) (gc.getHitbox().y),
-                        type));
-                    }
-                }
-            }
+        for (GameContainer gc: containers) {
+            gc.resetObject();
         }
-    
-        public void resetAllObjects() {
-    
-            loadObject(playing.getLevelManager().getCurrLevels());
-    
-            for (Potion p: potions) {
-                p.resetObject();
-            }
-            for (GameContainer gc: containers) {
-                gc.resetObject();
-            }
+
+        for (Coin c: coins) {
+            c.resetObject();
         }
-    
-        public void loadObject(Levels newLevel) {
-            potions = new ArrayList<>(newLevel.getPotions());
-            containers = new ArrayList<>(newLevel.getGameContainers());
-            spikes = newLevel.getSpikes();
-            projectiles.clear();
+    }
+
+    public static void shootArcher(ArcherDoggo a, int walkDir) {
+        int dir = -1;
+        if (walkDir == 2) {
+            dir = 1;
         }
-    
-        private void loadImgs() {
-            BufferedImage potionSprite = StoreImage.GetSpriteAtLas(StoreImage.POTIONS_SPRITE);
-            potionsImgs = new BufferedImage[2][7];
-    
-            for (int i = 0; i < potionsImgs.length; i++) {
-                for (int j = 0; j < potionsImgs[i].length; j++) {
-                    potionsImgs[i][j] = potionSprite.getSubimage(12 * j, 16 * i, 12, 16);
-                }
-            }
-    
-            BufferedImage containerSprite = StoreImage.GetSpriteAtLas(StoreImage.OBJECT_SPRITE);
-            containerImgs = new BufferedImage[2][8];
-    
-            for (int i = 0; i < containerImgs.length; i++) {
-                for (int j = 0; j < containerImgs[i].length; j++) {
-                    containerImgs[i][j] = containerSprite.getSubimage(40 * j, 30 * i, 40, 30);
-                }
-            }
-    
-            spikeImg = StoreImage.GetSpriteAtLas(StoreImage.TRAP_SPRITE);
-            
-            projectileLeftImg = StoreImage.GetSpriteAtLas(StoreImage.ARROW_LEFT);
-            projectileRightImg = StoreImage.GetSpriteAtLas(StoreImage.ARROW_RIGHT);
-        }
-    
-        public void update(int[][] lvlData, Player player) {
-            for (Potion p : potions) {
-                if (p.isActive()) {
-                    p.update();
-                }
-            }
-    
-            for (GameContainer gc : containers) {
-                if (gc.isActive()) {
-                    gc.update();
-                }
-            }
-            updateProjectiles(lvlData, player);
-        }
-    
-        private void updateProjectiles(int[][] lvlData, Player player) {
-            for (Projectile p: projectiles) {
-                if (p.isActive()) {
-                    p.updatePos();
-                    if (p.getHitbox().intersects(player.getHitbox()) && !player.getDodge()) {
-                        player.changeHealth(-20);
-                        p.setActive(false);
-                    } else if (IsProjectileHitThings(p, lvlData)) {
-                        p.setActive(false);
-                    }
-                }
-            }
-        }
-    
-        public static void shootArcher(ArcherDoggo a, int walkDir) {
-            int dir = -1;
-            if (walkDir == 2) {
-                dir = 1;
-            }
-            projectiles.add(new Projectile((int) a.getHitbox().x, (int) a.getHitbox().y, dir));
+        projectiles.add(new Projectile((int) a.getHitbox().x, (int) a.getHitbox().y, dir));
     }
 
     public void draw(Graphics g, int lvlOffset) {
         drawPotion(g, lvlOffset);
         drawContainer(g, lvlOffset);
         drawTraps(g, lvlOffset);
+        drawCoins(g, lvlOffset);
         drawProjectile(g, lvlOffset);
     }
 
@@ -234,4 +265,16 @@ public class ObjectManager {
         }
     }
     
+    private void drawCoins(Graphics g, int lvlOffset) {
+        for (Coin c : coins) {
+            if (c.isActive()) {
+                g.drawImage(coinsImgs[c.getAniIndex()], 
+                (int) (c.getHitbox().x- lvlOffset), 
+                (int) (c.getHitbox().y - c.getyDrawOffset()), 
+                COIN_WIDTH, 
+                COIN_WIDTH, 
+                null);
+            }
+        }
+    }
 }

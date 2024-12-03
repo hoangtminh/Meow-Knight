@@ -79,4 +79,8 @@ public class LevelsManager {
     public int getLvlIndex() {
         return lvlIndex;
     }
+
+    public void setLvlIndex(int lvlIndex) {
+        this.lvlIndex = lvlIndex;
+    }
 }

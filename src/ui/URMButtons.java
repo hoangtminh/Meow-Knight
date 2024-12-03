@@ -6,7 +6,7 @@ import static utils.Constants.UI.URMButtons.*;
 
 import utils.StoreImage;
 
-public class URMButtons extends PauseButton {
+public class URMButtons extends Buttons {
 
     private BufferedImage[] img;
     private int rowIndex, index;

@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 import main.Game;
 import ui.AudioOptions;
-import ui.PauseButton;
+import ui.Buttons;
 import ui.URMButtons;
 import utils.StoreImage;
 
@@ -107,7 +107,7 @@ public class GameOption extends State {
     
     }
     
-    private boolean isIn(MouseEvent e, PauseButton b) {
+    private boolean isIn(MouseEvent e, Buttons b) {
         if (b.getBounds().contains(e.getX(), e.getY())) {
             return true;
         }

@@ -119,7 +119,7 @@ public class PauseOverlay {
         unpauseB.resetBooleans();
     }
 
-    private boolean isIn(MouseEvent e, PauseButton b) {
+    private boolean isIn(MouseEvent e, Buttons b) {
         if (b.getBounds().contains(e.getX(), e.getY())) {
             return true;
         }

@@ -17,6 +17,7 @@ public class StoreImage {
     public static final String SOUND_BUTTON = "sound_button.png";
     public static final String URM_BUTTONS = "urm_buttons.png";
     public static final String VOLUME_BUTTONS = "volume_buttons.png";
+    public static final String SELECT_BUTTONS = "select_btn.png";
 
     public static final String MENU_BACKGROUND = "menu_background.png";
     public static final String BACKGROUND_MENU = "background_menu.png";
@@ -25,6 +26,7 @@ public class StoreImage {
     public static final String OPTIONS_BACKGROUND = "options_background.png";
     public static final String DEATH_SCREEN = "death_screen.png";
     public static final String LOADING = "loading.png";
+    public static final String LEVEL_SELECT = "level_select.png";
 
     public static final String STATUS_BAR = "health_power_bar.png";
     public static final String LEVEL_COMPLETE = "completed_sprite.png";

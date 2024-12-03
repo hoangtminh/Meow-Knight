@@ -2,11 +2,11 @@ package ui;
 
 import java.awt.Rectangle;
 
-public class PauseButton {
+public class Buttons {
     protected int x, y, width, height;
     protected Rectangle bounds;
 
-    public PauseButton(int x, int y, int width, int height) {
+    public Buttons(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
         this.width = width;

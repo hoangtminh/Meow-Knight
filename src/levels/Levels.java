@@ -27,6 +27,7 @@ public class Levels {
     private ArrayList<Potion> potions = new ArrayList<Potion>();
     private ArrayList<GameContainer> gameContainers = new ArrayList<GameContainer>();
     private ArrayList<Spike> spikes = new ArrayList<Spike>();
+    private ArrayList<Coin> coins = new ArrayList<Coin>();
 
     private int lvlTileWide;
     private int maxTileOffset;
@@ -94,6 +95,10 @@ public class Levels {
                 break;
             case SPIKE:
                 spikes.add(new Spike(x * Game.TILES_SIZE, y * Game.TILES_SIZE, SPIKE));
+                break;
+            case COIN:
+                coins.add(new Coin(x * Game.TILES_SIZE, y * Game.TILES_SIZE, value));
+                break;
             default:
                 break;
         }
@@ -144,9 +149,13 @@ public class Levels {
     public ArrayList<AxeDoggo> getAxes() {
         return axes;
     }
+
+    
+    public ArrayList<Coin> getCoins() {
+        return coins;
+    }
     
     public Point getPlayerSpawn() {
         return playerSpawn;
     }
-
 }

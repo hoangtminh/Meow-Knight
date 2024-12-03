@@ -86,9 +86,11 @@ public class Playing extends State {
         enemyManager = new EnemyManager(this);
         levelsManager = new LevelsManager(game);
         objectManager = new ObjectManager(this);
+
         player = new Player(200, 200, (int) (64 * Game.SCALE), (int) (40 * Game.SCALE), this);
         player.loadLvlData(levelsManager.getCurrLevels().getLevelData());
         player.setSpawn(levelsManager.getCurrLevels().getPlayerSpawn());
+        
         pauseOverlay = new PauseOverlay(this);
         gameOverOverlay = new GameOverOverlay(this);
         levelCompleteOverlay = new LevelCompleteOverlay(this);
@@ -178,8 +180,12 @@ public class Playing extends State {
         enemyManager.checkEnemyHit(attackBox);
     }
 
-    public void checkPotionTouched(Rectangle2D.Float hitbox) {
-        objectManager.checkObjectTouched(hitbox);
+    public void checkPotionTouched(Player player) {
+        objectManager.checkObjectTouched(player);
+    }
+
+    public void checkCoinTouched(Player player) {
+        objectManager.checkCoinTouched(player);
     }
     
     public void checkSpikesTouched(Player player) {

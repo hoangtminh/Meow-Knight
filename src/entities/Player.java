@@ -126,6 +126,7 @@ public class Player extends Entity {
 
         if (moving) {
             checkPotionTouched();
+            checkCoinTouched();
             checkSpikesTouched();
             tileY = (int) (hitbox.y / Game.TILES_SIZE);
         }
@@ -146,8 +147,12 @@ public class Player extends Entity {
         playing.checkSpikesTouched(this);
     }
 
+    private void checkCoinTouched() {
+        playing.checkCoinTouched(this);
+    }
+
     private void checkPotionTouched() {
-        playing.checkPotionTouched(hitbox);
+        playing.checkPotionTouched(this);
     }
 
     private void checkAttack() {

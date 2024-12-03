@@ -58,7 +58,14 @@ public class Constants {
             public static final int VOLUME_HEIGHT = (int) (VOLUME_DEFAULT_HEIGHT * Game.SCALE);
             public static final int VOLUME_WIDTH = (int) (VOLUME_DEFAULT_WIDTH * Game.SCALE);
             public static final int SLIDER_WIDTH = (int) (SLIDER_DEFAULT_WIDTH * Game.SCALE);
+        }
 
+        public static class SelectButtons {
+            public static final int SELECT_DEFAULT_WIDTH = 50;
+            public static final int SELECT_DEFAULT_HEIGHT = 56;
+
+            public static final int SELECT_WIDTH = (int) (SELECT_DEFAULT_WIDTH * Game.SCALE);
+            public static final int SELECT_HEIGHT = (int) (SELECT_DEFAULT_HEIGHT * Game.SCALE);
         }
     }
 
@@ -197,6 +204,11 @@ public class Constants {
         public static final int BARREL = 2;
         public static final int BOX = 3;
         public static final int SPIKE = 4;
+        public static final int COIN = 5;
+
+        public static final int COIN_WIDTH_DEFAULT = 10;
+        public static final int COIN_WIDTH = (int) (COIN_WIDTH_DEFAULT * SCALE * 2);
+
 
         public static final int RED_POTION_VALUE = 15;
         public static final int BLUE_POTION_VALUE = 10;
