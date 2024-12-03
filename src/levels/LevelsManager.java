@@ -51,6 +51,7 @@ public class LevelsManager {
 
     public void nextLevel() {
         lvlIndex++;
+        game.getMenu().getSelectLevel().setButtonActive(lvlIndex);
         if (lvlIndex >= levels.size()) {
             lvlIndex = 0;
             System.out.println("Completed Game");

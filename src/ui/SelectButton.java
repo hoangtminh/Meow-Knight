@@ -1,6 +1,5 @@
 package ui;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -15,15 +14,13 @@ import utils.StoreImage;
 public class SelectButton extends Buttons {
     private BufferedImage[] btnImg;
     private boolean mouseHover, mousePress;
-    private boolean muted;
-    private int index;
-    private int level;
-    private int textOffset = 0;
+    private int index, level, textOffset = 0;
+    private boolean active = false;
 
     public SelectButton(int x, int y, int width, int height, int level) {
         super(x, y, width, height);
         initImgs();
-        this.level = level-1;
+        this.level = level - 1;
     }
     
     private void initImgs() {
@@ -73,15 +70,15 @@ public class SelectButton extends Buttons {
         this.mousePress = mousePress;
     }
 
-    public boolean isMuted() {
-        return muted;
-    }
-
-    public void setMuted(boolean muted) {
-        this.muted = muted;
-    }
-
     public int getLevel() {
         return level;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

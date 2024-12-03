@@ -157,4 +157,8 @@ public class Menu extends State {
             return false;
         }
     }
+
+    public SelectLevel getSelectLevel() {
+        return selectLevel;
+    }
 }

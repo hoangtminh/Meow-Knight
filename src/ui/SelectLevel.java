@@ -22,6 +22,7 @@ public class SelectLevel {
         this.playing = playing;
         initImgs();
         initButtons();
+        btnLevel[0].setActive(true);
     }
 
     private void initImgs() {
@@ -39,7 +40,7 @@ public class SelectLevel {
                 btnLevel[i * 2 + j] = new SelectButton(
                 (int) (bgX + bgWidth/2 -25*Game.SCALE + (SELECT_WIDTH + 45) * (i-1)), 
                 (int) (bgY + bgHeight/2 + 40*Game.SCALE + (SELECT_HEIGHT + 40) * (j-1)), 
-                SELECT_WIDTH, SELECT_HEIGHT, i * 2 + j);
+                SELECT_WIDTH, SELECT_HEIGHT, i * 2 + j + 1);
             }
         }
     }
@@ -53,7 +54,9 @@ public class SelectLevel {
     public void draw(Graphics g) {
         g.drawImage(bgImg, bgX, bgY, bgWidth, bgHeight, null);
         for (SelectButton b : btnLevel) {
-            b.draw(g);
+            if (b.isActive()) {
+                b.draw(g);
+            }
         }
     }
 
@@ -82,7 +85,7 @@ public class SelectLevel {
         for (SelectButton b: btnLevel) {
             if (isIn(e, b)) {
                 active = false;
-                playing.getLevelManager().setLvlIndex(b.getLevel());
+                playing.getLevelManager().setLvlIndex(b.getLevel() - 1);
                 playing.getLevelManager().nextLevel();
                 break;
             }
@@ -103,5 +106,9 @@ public class SelectLevel {
 
     public boolean isActive() {
         return active;
+    }
+
+    public void setButtonActive(int index) {
+        btnLevel[index].setActive(true);
     }
 }
