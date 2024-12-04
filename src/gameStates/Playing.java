@@ -144,14 +144,13 @@ public class Playing extends State {
         g.drawImage(backImage, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
         drawCloud(g);
         
-        levelsManager.draw(g, xLvlOffset);
         if (levelsManager.getOpening().isActive()) {
-
+            levelsManager.draw(g, xLvlOffset);
         } else {
             enemyManager.draw(g, xLvlOffset);
             player.render(g, xLvlOffset);
             objectManager.draw(g, xLvlOffset);
-            
+            levelsManager.draw(g, xLvlOffset);
         }
         if (pause && !loading) {
             g.setColor(new Color(0,0,0,100));

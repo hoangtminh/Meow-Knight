@@ -128,6 +128,7 @@ public class EnemyManager {
                 if (a.getCurrentHealth() > 0) {
                     if (attackBox.intersects(a.getHitbox())) {
                         a.hurt(8);
+                        playing.getGame().getAudioPlayer().playEnemiesHitSound();
                         return;
                     }
                 }
@@ -139,6 +140,7 @@ public class EnemyManager {
                 if (ax.getCurrentHealth() > 0) {
                     if (attackBox.intersects(ax.getHitbox())) {
                         ax.hurt(8);
+                        playing.getGame().getAudioPlayer().playEnemiesHitSound();
                         return;
                     }
                 }
@@ -150,6 +152,7 @@ public class EnemyManager {
                 if (b.getCurrentHealth() > 0) {
                     if (attackBox.intersects(b.getHitbox())) {
                         b.hurt(8);
+                        playing.getGame().getAudioPlayer().playEnemiesHitSound();
                         return;
                     }
                 }
@@ -161,6 +164,7 @@ public class EnemyManager {
                 if (s.getCurrentHealth() > 0) {
                     if (attackBox.intersects(s.getHitbox())) {
                         s.hurt(8);
+                        playing.getGame().getAudioPlayer().playEnemiesHitSound();
                         return;
                     }
                 }

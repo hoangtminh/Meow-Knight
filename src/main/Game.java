@@ -15,6 +15,7 @@ public class Game implements Runnable {
     private final int FPS_set = 120;
     private final int UPS_set = 200;
 
+    private MainHall mainHall;
     private Playing playing;
     private Menu menu;
     private AudioOptions audioOptions;
@@ -41,6 +42,7 @@ public class Game implements Runnable {
     }
 
     private void initClasses() {
+        mainHall = new MainHall(this);
         audioOptions = new AudioOptions(this);
         audioPlayer = new AudioPlayer();
         gameOption = new GameOption(this);
@@ -50,6 +52,9 @@ public class Game implements Runnable {
 
     public void update() {
         switch (GameState.state) {
+            case MAIN_HALL:
+                mainHall.update();
+                break;
             case MENU:
                 menu.update();
                 break;
@@ -66,6 +71,9 @@ public class Game implements Runnable {
 
     public void render(Graphics g) {
         switch (GameState.state) {
+            case MAIN_HALL:
+                mainHall.draw(g);
+                break;
             case MENU:
                 menu.draw(g);
                 break;
@@ -124,6 +132,10 @@ public class Game implements Runnable {
 
     public Menu getMenu() {
         return menu;
+    }
+
+    public MainHall getMainHall() {
+        return mainHall;
     }
 
     public AudioOptions getAudioOptions() {

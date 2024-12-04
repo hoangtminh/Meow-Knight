@@ -387,6 +387,7 @@ public class Player extends Entity {
             hitbox.x += xSpeed;
             if (IsWater(hitbox, lvlData)) {
                 kill();
+                hitbox.y += Game.TILES_SIZE /3;
             }
         } else {
             hitbox.x = getEntityXPosNextToWall(hitbox, xSpeed);
@@ -406,6 +407,7 @@ public class Player extends Entity {
         if (value < 0) {
             hit = true;
             playing.getGame().getAudioPlayer().playHit();
+            playing.getGame().getAudioPlayer().playEnemiesAttackSound();
         }
 
         if (currHealth <= 0) {

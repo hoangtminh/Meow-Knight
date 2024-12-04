@@ -47,7 +47,7 @@ public class Menu extends State {
     private void loadButtons() {
        buttons[0] = new MenuButton((int) (GAME_WIDTH / 2 - 90 * Game.SCALE), (int) (170 * Game.SCALE), 0, GameState.PLAYING);
        buttons[1] = new MenuButton((int) (GAME_WIDTH / 2 + 90 * Game.SCALE), (int) (170 * Game.SCALE), 1, GameState.OPTIONS);
-       buttons[2] = new MenuButton((int) (GAME_WIDTH / 2 + 90 * Game.SCALE), (int) (270 * Game.SCALE), 2, GameState.QUIT);
+       buttons[2] = new MenuButton((int) (GAME_WIDTH / 2 + 90 * Game.SCALE), (int) (270 * Game.SCALE), 2, GameState.MAIN_HALL);
        buttons[3] = new MenuButton((int) (GAME_WIDTH / 2 - 90 * Game.SCALE), (int) (270 * Game.SCALE), 3, GameState.MENU);
     }
 
@@ -109,9 +109,6 @@ public class Menu extends State {
         } else {
             for (MenuButton mb: buttons) {
                 if (isIn(e, mb)) {
-                    if (mb.getState() == GameState.QUIT) {
-                        System.exit(1);
-                    }
                     if (mb.isMousePress()) {
                         mb.applyGameState();
                     }
