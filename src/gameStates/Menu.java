@@ -11,13 +11,16 @@ import main.Game;
 import ui.MenuButton;
 import ui.SelectLevel;
 import utils.StoreImage;
+import static utils.Constants.ANI_SPEED;
 
 public class Menu extends State {
 
     private MenuButton[] buttons = new MenuButton[4];
-    private BufferedImage menu_background, background_menu;
+    private BufferedImage menu_box, background_menu;
     private int menuHeight, menuWidth, menuX, menuY;
     private SelectLevel selectLevel;
+    private BufferedImage[] menuGif;
+    private int aniIndex, aniTick;
 
     public Menu(Game game) {
         super(game);
@@ -27,13 +30,18 @@ public class Menu extends State {
     }
 
     private void loadBackground() {
-        menu_background = StoreImage.GetSpriteAtLas(StoreImage.MENU_BACKGROUND);
-        menuWidth = (int) (menu_background.getWidth() * Game.SCALE);
-        menuHeight = (int) (menu_background.getHeight() * Game.SCALE);
+        menu_box = StoreImage.GetSpriteAtLas(StoreImage.MENU_BACKGROUND);
+        menuWidth = (int) (menu_box.getWidth() * Game.SCALE);
+        menuHeight = (int) (menu_box.getHeight() * Game.SCALE);
         menuX = Game.GAME_WIDTH / 2 - menuWidth / 2;
         menuY = (int) (35 * Game.SCALE);
 
         background_menu = StoreImage.GetSpriteAtLas(StoreImage.BACKGROUND_MENU);
+        BufferedImage tmp = StoreImage.GetSpriteAtLas(StoreImage.MENU_GIF);
+        menuGif = new BufferedImage[6];
+        for (int i = 0; i < menuGif.length; i++) {
+            menuGif[i] = tmp.getSubimage(i * 1575, 0, 1575, 1250);
+        }
     }
 
     private void loadButtons() {
@@ -51,7 +59,18 @@ public class Menu extends State {
                 mb.update();
             }
         }
+        updateAnimationTick();
+    }
 
+    private void updateAnimationTick() {
+        aniTick++;
+        if (aniTick >= ANI_SPEED) {
+            aniIndex++;
+            if (aniIndex >= 6) {
+                aniIndex = 0;
+            }
+            aniTick = 0;
+        }
     }
 
     public void draw(Graphics g) {
@@ -59,7 +78,7 @@ public class Menu extends State {
         if (selectLevel.isActive()) {
             selectLevel.draw(g);
         } else {
-            g.drawImage(menu_background, menuX, menuY, menuWidth, menuHeight, null);
+            g.drawImage(menu_box, menuX, menuY, menuWidth, menuHeight, null);
             for (MenuButton mb: buttons) {
                 mb.draw(g);
             }

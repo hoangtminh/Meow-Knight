@@ -19,7 +19,7 @@ public class StoreImage {
     public static final String VOLUME_BUTTONS = "volume_buttons.png";
     public static final String SELECT_BUTTONS = "select_btn.png";
 
-    public static final String MENU_BACKGROUND = "menu_background.png";
+    public static final String MENU_BACKGROUND = "menu_box.png";
     public static final String BACKGROUND_MENU = "background_menu.png";
     public static final String PAUSE_BACKGROUND = "pause_menu.png";
     public static final String PLAYING_BG_IMG = "background.png";
@@ -27,6 +27,7 @@ public class StoreImage {
     public static final String DEATH_SCREEN = "death_screen.png";
     public static final String LOADING = "loading.png";
     public static final String LEVEL_SELECT = "level_select.png";
+    public static final String MENU_GIF = "ending.png";
 
     public static final String STATUS_BAR = "health_power_bar.png";
     public static final String LEVEL_COMPLETE = "completed_sprite.png";
@@ -45,6 +46,14 @@ public class StoreImage {
     public static final String SWORD_SPRITE = "sword_doggo.png";
     public static final String ARCHER_SPRITE = "archer_doggo.png";
     public static final String AXE_SPRITE = "axe_doggo.png";
+
+    public static final String OPENING_BACKGROUND_1 ="vilage1.png";
+    public static final String OPENING_BACKGROUND_2 ="vilage11.png";
+    public static final String OPENING_BACKGROUND_3 ="vilage2.png";
+    public static final String OPENING_BACKGROUND_4 ="vilage22.png";
+    public static final String OPENING_BACKGROUND_5 ="vilage3.png";
+    public static final String OPENING_BACKGROUND_6 ="vilage33.png";
+    public static final String BUTTON_NEXT = "button_next.png";
 
     public static BufferedImage GetSpriteAtLas(String fileName) {
         BufferedImage img = null;

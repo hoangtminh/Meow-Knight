@@ -55,16 +55,16 @@ public class Playing extends State {
     public Playing(Game game) {
         super(game);
         initClasses();
-
+        
         backImage = StoreImage.GetSpriteAtLas(StoreImage.PLAYING_BG_IMG);
         smallCloud = StoreImage.GetSpriteAtLas(StoreImage.SMALL_CLOUD);
         smallCloudPos = new int[10];
         for (int i = 0; i < smallCloudPos.length; i++) {
             smallCloudPos[i] = (int) (90*Game.SCALE) + rand.nextInt((int) (100* Game.SCALE));
         }
-
-        calculateLevelOffset();
+        
         loadStartLevel();
+        calculateLevelOffset();
     }
 
     public void loadNextLevel() {
@@ -74,6 +74,7 @@ public class Playing extends State {
     }
 
     private void loadStartLevel() {
+        levelsManager.getOpening().setActive(true);
         enemyManager.loadEnemies(levelsManager.getCurrLevels());
         objectManager.loadObject(levelsManager.getCurrLevels());
     }
@@ -142,10 +143,14 @@ public class Playing extends State {
         drawCloud(g);
         
         levelsManager.draw(g, xLvlOffset);
-        enemyManager.draw(g, xLvlOffset);
-        player.render(g, xLvlOffset);
-        objectManager.draw(g, xLvlOffset);
-        
+        if (levelsManager.getOpening().isActive()) {
+
+        } else {
+            enemyManager.draw(g, xLvlOffset);
+            player.render(g, xLvlOffset);
+            objectManager.draw(g, xLvlOffset);
+            
+        }
         if (pause && !loading) {
             g.setColor(new Color(0,0,0,100));
             g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
@@ -208,6 +213,8 @@ public class Playing extends State {
                 pauseOverlay.mousePressed(e);
             } else if (lvlComplete) {
                 levelCompleteOverlay.mousePressed(e);
+            } else if (levelsManager.getOpening().isActive()) {
+                levelsManager.getOpening().mousePressed(e);
             }
         } else {
             gameOverOverlay.mousePressed(e);
@@ -219,8 +226,10 @@ public class Playing extends State {
             pauseOverlay.mouseReleased(e);
         } else if (lvlComplete) {
             levelCompleteOverlay.mouseReleased(e);
-        } else {
+        } else if (gameOver) {
             gameOverOverlay.mouseReleased(e);
+        } else if (levelsManager.getOpening().isActive()) {
+            levelsManager.getOpening().mouseReleased(e);
         }
     }
     
@@ -230,6 +239,8 @@ public class Playing extends State {
                 pauseOverlay.mouseMoved(e);
             } else if (lvlComplete) {
                 levelCompleteOverlay.mouseMoved(e);
+            } else if (levelsManager.getOpening().isActive()) {
+                levelsManager.getOpening().mouseMoved(e);
             }
         } else {
             gameOverOverlay.mouseMoved(e);

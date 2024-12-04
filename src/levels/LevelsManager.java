@@ -14,12 +14,14 @@ public class LevelsManager {
     private BufferedImage[] levelSprite;
     private ArrayList<Levels> levels;
     private int lvlIndex = 0;
+    private Opening opening;
     
     public LevelsManager(Game game) {
         this.game = game;
         importOutsideSprite();
         levels = new ArrayList<>();
         buildAllLevels();
+        opening = new Opening();
     }
 
     private void buildAllLevels() {
@@ -41,23 +43,29 @@ public class LevelsManager {
     }
 
     public void draw(Graphics g, int lvlOffset) {
-        for (int  j = 0; j < Game.TILES_IN_HEIGHT; j++) {
-            for (int i = 0; i < levels.get(lvlIndex).getLevelData()[0].length; i++) {
-                int index = levels.get(lvlIndex).getSpriteIndex(i, j);
-                g.drawImage(levelSprite[index], i*Game.TILES_SIZE - lvlOffset, j*Game.TILES_SIZE , Game.TILES_SIZE, Game.TILES_SIZE, null);
+        if (opening.isActive()) {
+            opening.draw(g);
+        } else {
+            for (int  j = 0; j < Game.TILES_IN_HEIGHT; j++) {
+                for (int i = 0; i < levels.get(lvlIndex).getLevelData()[0].length; i++) {
+                    int index = levels.get(lvlIndex).getSpriteIndex(i, j);
+                    g.drawImage(levelSprite[index], i*Game.TILES_SIZE - lvlOffset, j*Game.TILES_SIZE , Game.TILES_SIZE, Game.TILES_SIZE, null);
+                }
             }
         }
     }
 
     public void nextLevel() {
         lvlIndex++;
+        if (lvlIndex == 0) {
+            opening.setActive(true);
+        }
         game.getMenu().getSelectLevel().setButtonActive(lvlIndex);
         if (lvlIndex >= levels.size()) {
             lvlIndex = 0;
             System.out.println("Completed Game");
             GameState.state = GameState.MENU;
         }
-
         Levels newLevel = levels.get(lvlIndex);
         game.getPlaying().getEnemyManager().loadEnemies(newLevel);
         game.getPlaying().getPlayer().loadLvlData(newLevel.getLevelData());
@@ -66,7 +74,9 @@ public class LevelsManager {
     }
 
     public void update() {
-
+        if (opening.isActive()) {
+            opening.update();
+        }
     }
 
     public Levels getCurrLevels() {
@@ -83,5 +93,9 @@ public class LevelsManager {
 
     public void setLvlIndex(int lvlIndex) {
         this.lvlIndex = lvlIndex;
+    }
+
+    public Opening getOpening() {
+        return opening;
     }
 }

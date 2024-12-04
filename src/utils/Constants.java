@@ -22,8 +22,8 @@ public class Constants {
         public static class Loading {
             public static final int LOADING_WIDTH_DEFAULT = 86;
             public static final int LOADING_HEIGHT_DEFAULT = 32;
-            public static final int LOADING_WIDTH = (int) (LOADING_WIDTH_DEFAULT * Game.SCALE);
-            public static final int LOADING_HEIGHT = (int) (LOADING_HEIGHT_DEFAULT * Game.SCALE);
+            public static final int LOADING_WIDTH = (int) (LOADING_WIDTH_DEFAULT * Game.SCALE *2.5);
+            public static final int LOADING_HEIGHT = (int) (LOADING_HEIGHT_DEFAULT * Game.SCALE * 2.5);
         }
         public static class Environment {
             public static final int SMALL_CLOUD_WIDTH_DEFAULT = 74;

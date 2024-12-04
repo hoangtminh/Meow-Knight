@@ -8,15 +8,14 @@ import gameStates.GameState;
 import gameStates.Playing;
 import main.Game;
 
-import static utils.Constants.ANI_SPEED;
 import static utils.Constants.UI.Loading.*;
 import utils.StoreImage;
 
 public class LoadingOverlay {
 
     private Playing playing;
-    private BufferedImage[] loadingImgs;
-    private int aniTick, aniIndex;
+    private BufferedImage[] loadingImgs, background;
+    private int aniTick, aniIndex, bgIndex;
     private GameState nextState;
     
     public LoadingOverlay(Playing playing) {
@@ -27,7 +26,10 @@ public class LoadingOverlay {
     public void draw(Graphics g) {
         g.setColor(new Color(0, 0, 0));
         g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
-        g.drawImage(loadingImgs[aniIndex], (int) (Game.GAME_WIDTH/2 - LOADING_WIDTH/2), LOADING_HEIGHT + 150, LOADING_WIDTH, LOADING_HEIGHT, null);
+        g.drawImage(background[bgIndex], 0, -200, 
+        (int) (Game.GAME_WIDTH), 
+        (int) (background[bgIndex].getHeight() * Game.GAME_WIDTH / background[bgIndex].getWidth()), null);
+        g.drawImage(loadingImgs[aniIndex], (int) (Game.GAME_WIDTH/2 - LOADING_WIDTH/2), (int) (50 * Game.SCALE), LOADING_WIDTH, LOADING_HEIGHT, null);
     }
 
     public void update() {
@@ -36,9 +38,13 @@ public class LoadingOverlay {
 
     protected void updateAnimationTick() {
         aniTick++;
-        if (aniTick >= ANI_SPEED) {
+        if (aniTick >= 30) {
             aniIndex++;
-            if (aniIndex >= 14) {
+            bgIndex++;
+            if (bgIndex >= 6) {
+                bgIndex = 0;
+            }
+            if (aniIndex >= 9) {
                 aniIndex = 0;
                 playing.setLoading(false);
                 applyGameState(nextState);
@@ -52,6 +58,9 @@ public class LoadingOverlay {
             case PLAYING:
                 if (playing.getlvlComplete()) {
                     playing.loadNextLevel();
+                }
+                if (playing.getLevelManager().getLvlIndex() == 0 && GameState.state != state) {
+                    playing.getLevelManager().getOpening().setActive(true);
                 }
                 playing.resetAllPlaying();
                 playing.getGame().getAudioPlayer().setLevelSong(playing.getLevelManager().getLvlIndex());
@@ -67,9 +76,15 @@ public class LoadingOverlay {
     private void initImgs() {
         BufferedImage tmp = StoreImage.GetSpriteAtLas(StoreImage.LOADING);
 
-        loadingImgs = new BufferedImage[14];
+        loadingImgs = new BufferedImage[9];
         for (int i = 0; i < loadingImgs.length; i++) {
             loadingImgs[i] = tmp.getSubimage(i * LOADING_WIDTH_DEFAULT, 0, LOADING_WIDTH_DEFAULT, LOADING_HEIGHT_DEFAULT);
+        }
+
+        tmp = StoreImage.GetSpriteAtLas(StoreImage.MENU_GIF);
+        background = new BufferedImage[6];
+        for (int i = 0; i < background.length; i++) {
+            background[i] = tmp.getSubimage(i * 1575, 0, 1575, 1250);
         }
     }
     public void setNextState(GameState state) {
