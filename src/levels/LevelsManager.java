@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import gameStates.GameState;
 import main.Game;
 import utils.StoreImage;
 
@@ -13,8 +12,9 @@ public class LevelsManager {
     private Game game;
     private BufferedImage[] levelSprite;
     private ArrayList<Levels> levels;
-    private int lvlIndex = 1;
+    private int lvlIndex = 5;
     private Opening opening;
+    private Ending ending;
     
     public LevelsManager(Game game) {
         this.game = game;
@@ -22,6 +22,7 @@ public class LevelsManager {
         levels = new ArrayList<>();
         buildAllLevels();
         opening = new Opening();
+        ending = new Ending();
     }
 
     private void buildAllLevels() {
@@ -45,6 +46,8 @@ public class LevelsManager {
     public void draw(Graphics g, int lvlOffset) {
         if (opening.isActive()) {
             opening.draw(g);
+        } else if (ending.isActive()) {
+            ending.draw(g);
         } else {
             for (int  j = 0; j < Game.TILES_IN_HEIGHT; j++) {
                 for (int i = 0; i < levels.get(lvlIndex).getLevelData()[0].length; i++) {
@@ -62,8 +65,7 @@ public class LevelsManager {
         }
         if (lvlIndex >= levels.size()) {
             lvlIndex = 0;
-            System.out.println("Completed Game");
-            GameState.state = GameState.MENU;
+            ending.setActive(true);
             return;
         }
         game.getMenu().getSelectLevel().setButtonActive(lvlIndex);
@@ -77,6 +79,8 @@ public class LevelsManager {
     public void update() {
         if (opening.isActive()) {
             opening.update();
+        } else if (ending.isActive()) {
+            ending.update();
         }
     }
 
@@ -98,5 +102,9 @@ public class LevelsManager {
 
     public Opening getOpening() {
         return opening;
+    }
+
+    public Ending getEnding () {
+        return ending;
     }
 }

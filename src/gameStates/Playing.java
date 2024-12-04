@@ -113,7 +113,7 @@ public class Playing extends State {
             player.update();
         } else if (!gameOver && !loading) {
             levelsManager.update();
-            if (!levelsManager.getOpening().isActive()) {
+            if (!levelsManager.getOpening().isActive() || !levelsManager.getEnding().isActive()) {
                 enemyManager.update(levelsManager.getCurrLevels().getLevelData(), player);
                 objectManager.update(levelsManager.getCurrLevels().getLevelData(), player);
                 player.update();
@@ -144,7 +144,7 @@ public class Playing extends State {
         g.drawImage(backImage, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
         drawCloud(g);
         
-        if (levelsManager.getOpening().isActive()) {
+        if (levelsManager.getOpening().isActive() || levelsManager.getEnding().isActive()) {
             levelsManager.draw(g, xLvlOffset);
         } else {
             enemyManager.draw(g, xLvlOffset);
@@ -216,6 +216,8 @@ public class Playing extends State {
                 levelCompleteOverlay.mousePressed(e);
             } else if (levelsManager.getOpening().isActive()) {
                 levelsManager.getOpening().mousePressed(e);
+            } else if (levelsManager.getEnding().isActive()) {
+                levelsManager.getEnding().mousePressed(e);
             }
         } else {
             gameOverOverlay.mousePressed(e);
@@ -231,6 +233,8 @@ public class Playing extends State {
             gameOverOverlay.mouseReleased(e);
         } else if (levelsManager.getOpening().isActive()) {
             levelsManager.getOpening().mouseReleased(e);
+        } else if (levelsManager.getEnding().isActive()) {
+            levelsManager.getEnding().mouseReleased(e);
         }
     }
     
@@ -242,6 +246,8 @@ public class Playing extends State {
                 levelCompleteOverlay.mouseMoved(e);
             } else if (levelsManager.getOpening().isActive()) {
                 levelsManager.getOpening().mouseMoved(e);
+            } else if (levelsManager.getEnding().isActive()) {
+                levelsManager.getEnding().mouseMoved(e);
             }
         } else {
             gameOverOverlay.mouseMoved(e);

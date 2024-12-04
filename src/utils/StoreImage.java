@@ -27,7 +27,7 @@ public class StoreImage {
     public static final String DEATH_SCREEN = "death_screen.png";
     public static final String LOADING = "loading.png";
     public static final String LEVEL_SELECT = "level_select.png";
-    public static final String MENU_GIF = "ending.png";
+    public static final String MENU_GIF = "main_gif.png";
 
     public static final String STATUS_BAR = "health_power_bar.png";
     public static final String LEVEL_COMPLETE = "completed_sprite.png";
@@ -53,6 +53,13 @@ public class StoreImage {
     public static final String OPENING_BACKGROUND_4 ="vilage22.png";
     public static final String OPENING_BACKGROUND_5 ="vilage3.png";
     public static final String OPENING_BACKGROUND_6 ="vilage33.png";
+
+    public static final String ENDING_BACKGROUND_1 = "ending0.png";
+    public static final String ENDING_BACKGROUND_2 = "ending00.png";
+    public static final String ENDING_BACKGROUND_3 = "ending1.png";
+    public static final String ENDING_BACKGROUND_4 = "ending11.png";
+    public static final String ENDING_BACKGROUND_5 = "ending2.png";
+    public static final String ENDING_BACKGROUND_6 = "ending22.png";
 
     public static BufferedImage GetSpriteAtLas(String fileName) {
         BufferedImage img = null;
