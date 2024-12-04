@@ -108,7 +108,9 @@ public abstract class Enemy extends Entity {
         if (currHealth <= 0) {
             updateState(DEAD);
         } else {
-            updateState(HIT);
+            if (state != ATTACK) {
+                updateState(HIT);
+            }
         }
     }
 

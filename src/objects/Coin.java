@@ -9,10 +9,10 @@ public class Coin extends GameObjects {
     public Coin(int x, int y, int objType) {
         super(x, y, objType);
         doAnimation = true;
-        initHitbox(17, 18);
+        initHitbox(18, 18);
         xDrawOffset = (int) (-8 * Game.SCALE);
         yDrawOffset = (int) (2 * Game.SCALE);
-        maxHoverOffset = (int) (5 * Game.SCALE);
+        maxHoverOffset = (int) (10 * Game.SCALE);
         hitbox.x -= xDrawOffset;
     }
     
@@ -22,7 +22,7 @@ public class Coin extends GameObjects {
     }
 
     private void updateHover() {
-        hoverOffset += (0.075f * Game.SCALE * hoverDir);
+        hoverOffset += (0.065f * Game.SCALE * hoverDir);
         if (hoverOffset >= maxHoverOffset) {
             hoverDir = -1;
         } else if (hoverOffset <= 0) {

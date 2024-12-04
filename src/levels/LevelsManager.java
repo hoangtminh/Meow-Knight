@@ -13,7 +13,7 @@ public class LevelsManager {
     private Game game;
     private BufferedImage[] levelSprite;
     private ArrayList<Levels> levels;
-    private int lvlIndex = 0;
+    private int lvlIndex = 1;
     private Opening opening;
     
     public LevelsManager(Game game) {
@@ -60,12 +60,13 @@ public class LevelsManager {
         if (lvlIndex == 0) {
             opening.setActive(true);
         }
-        game.getMenu().getSelectLevel().setButtonActive(lvlIndex);
         if (lvlIndex >= levels.size()) {
             lvlIndex = 0;
             System.out.println("Completed Game");
             GameState.state = GameState.MENU;
+            return;
         }
+        game.getMenu().getSelectLevel().setButtonActive(lvlIndex);
         Levels newLevel = levels.get(lvlIndex);
         game.getPlaying().getEnemyManager().loadEnemies(newLevel);
         game.getPlaying().getPlayer().loadLvlData(newLevel.getLevelData());

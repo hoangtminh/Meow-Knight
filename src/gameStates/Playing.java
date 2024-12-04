@@ -113,10 +113,12 @@ public class Playing extends State {
             player.update();
         } else if (!gameOver && !loading) {
             levelsManager.update();
-            enemyManager.update(levelsManager.getCurrLevels().getLevelData(), player);
-            objectManager.update(levelsManager.getCurrLevels().getLevelData(), player);
-            player.update();
-            checkCloseToBorder();
+            if (!levelsManager.getOpening().isActive()) {
+                enemyManager.update(levelsManager.getCurrLevels().getLevelData(), player);
+                objectManager.update(levelsManager.getCurrLevels().getLevelData(), player);
+                player.update();
+                checkCloseToBorder();
+            }
         } else if (loading) {
             loadingOverlay.update();
         }

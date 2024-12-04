@@ -4,6 +4,7 @@ import static utils.Constants.ObjectsConstants.*;
 import static utils.Constants.Projectiles.*;
 import static utils.HelpMethod.IsProjectileHitThings;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -18,12 +19,12 @@ import utils.StoreImage;
 public class ObjectManager {
 
     private Playing playing;
-    private BufferedImage[][] potionsImgs, containerImgs;
+    private BufferedImage[] healsImgs, chestImgs;
     private BufferedImage spikeImg, projectileLeftImg, projectileRightImg;
     private BufferedImage[] coinsImgs;
 
-    private ArrayList<Potion> potions;
-    private ArrayList<GameContainer> containers;
+    private ArrayList<Heal> heals;
+    private ArrayList<Chest> chests;
     private ArrayList<Spike> spikes;
     private static ArrayList<Projectile> projectiles = new ArrayList<>();
     private ArrayList<Coin> coins;
@@ -31,36 +32,32 @@ public class ObjectManager {
     public ObjectManager(Playing playing) {
         this.playing = playing;
         loadImgs();
-        potions = new ArrayList<>();
-        containers = new ArrayList<>();
+        heals = new ArrayList<>();
+        chests = new ArrayList<>();
         coins = new ArrayList<>();
     }
     
     public void loadObject(Levels newLevel) {
-        potions = new ArrayList<>(newLevel.getPotions());
+        heals = new ArrayList<>(newLevel.getHeals());
         coins = new ArrayList<>(newLevel.getCoins());
-        containers = new ArrayList<>(newLevel.getGameContainers());
+        chests = new ArrayList<>(newLevel.getChests());
         spikes = newLevel.getSpikes();
         projectiles.clear();
     }
     
     private void loadImgs() {
-        BufferedImage potionSprite = StoreImage.GetSpriteAtLas(StoreImage.POTIONS_SPRITE);
-        potionsImgs = new BufferedImage[2][7];
+        BufferedImage healsprite = StoreImage.GetSpriteAtLas(StoreImage.HEAL_SPRITE);
+        healsImgs = new BufferedImage[4];
     
-        for (int i = 0; i < potionsImgs.length; i++) {
-            for (int j = 0; j < potionsImgs[i].length; j++) {
-                potionsImgs[i][j] = potionSprite.getSubimage(12 * j, 16 * i, 12, 16);
-            }
+        for (int i = 0; i < healsImgs.length; i++) {
+            healsImgs[i] = healsprite.getSubimage(HEAL_WIDTH_DEFAULT * i, 0, HEAL_WIDTH_DEFAULT, HEAL_WIDTH_DEFAULT);
         }
     
-        BufferedImage containerSprite = StoreImage.GetSpriteAtLas(StoreImage.OBJECT_SPRITE);
-        containerImgs = new BufferedImage[2][8];
+        BufferedImage chestSprite = StoreImage.GetSpriteAtLas(StoreImage.CHEST_SPRITE);
+        chestImgs = new BufferedImage[4];
     
-        for (int i = 0; i < containerImgs.length; i++) {
-            for (int j = 0; j < containerImgs[i].length; j++) {
-                containerImgs[i][j] = containerSprite.getSubimage(40 * j, 30 * i, 40, 30);
-            }
+        for (int i = 0; i < chestImgs.length; i++) {
+            chestImgs[i] = chestSprite.getSubimage(CHEST_WIDTH_DEFAULT * i, 0, CHEST_WIDTH_DEFAULT, CHEST_WIDTH_DEFAULT);
         }
     
         spikeImg = StoreImage.GetSpriteAtLas(StoreImage.TRAP_SPRITE);
@@ -68,7 +65,7 @@ public class ObjectManager {
         projectileLeftImg = StoreImage.GetSpriteAtLas(StoreImage.ARROW_LEFT);
         projectileRightImg = StoreImage.GetSpriteAtLas(StoreImage.ARROW_RIGHT);
 
-        BufferedImage coinSprite = StoreImage.GetSpriteAtLas(StoreImage.COIN);
+        BufferedImage coinSprite = StoreImage.GetSpriteAtLas(StoreImage.COIN_SPRITE);
         coinsImgs = new BufferedImage[4];
         for (int i = 0; i < coinsImgs.length; i++) {
             coinsImgs[i] = coinSprite.getSubimage(i * COIN_WIDTH_DEFAULT, 0, COIN_WIDTH_DEFAULT, COIN_WIDTH_DEFAULT);
@@ -76,15 +73,15 @@ public class ObjectManager {
     }
 
     public void update(int[][] lvlData, Player player) {
-        for (Potion p : potions) {
+        for (Heal p : heals) {
             if (p.isActive()) {
                 p.update();
             }
         }
     
-        for (GameContainer gc : containers) {
-            if (gc.isActive()) {
-                gc.update();
+        for (Chest c : chests) {
+            if (c.isActive()) {
+                c.update();
             }
         }
 
@@ -129,7 +126,7 @@ public class ObjectManager {
     }
     
     public void checkObjectTouched(Player player) {
-        for (Potion p: potions) {
+        for (Heal p: heals) {
             if (p.isActive()) {
                 if (player.getHitbox().intersects(p.getHitbox())) {
                     p.setActive(false);
@@ -139,27 +136,16 @@ public class ObjectManager {
         }
     }
     
-    public void applyEffectToPlayer(Potion p) {
-    if (p.getObjType() == RED_POTION) {
-            playing.getPlayer().changeHealth(RED_POTION_VALUE);
-        } else {
-            playing.getPlayer().changePower(BLUE_POTION_VALUE);
-        }
+    public void applyEffectToPlayer(Heal p) {
+        playing.getPlayer().changeHealth(HEAL_VALUE);
     }
 
     public void checkObjectHit(Rectangle2D.Float attackbox) {
-        for (GameContainer gc: containers) {
-            if (gc.isActive() && !gc.doAnimation) {
-                if (gc.getHitbox().intersects(attackbox)) {
-                    gc.setDoAnimation(true);
-                    
-                    int type = 0;
-                    if (gc.objType == BARREL) {
-                        type = 1;
-                    }
-                    potions.add(new Potion((int) (gc.getHitbox().x + gc.getHitbox().width/2), 
-                    (int) (gc.getHitbox().y),
-                    type));
+        for (Chest c: chests) {
+            if (c.isActive() && !c.doAnimation) {
+                if (c.getHitbox().intersects(attackbox)) {
+                    c.setDoAnimation(true);
+                    heals.add(new Heal((int) (c.getHitbox().x + c.getHitbox().width/3), (int) (c.getHitbox().y), HEAL));
                 }
             }
         }
@@ -169,11 +155,11 @@ public class ObjectManager {
 
         loadObject(playing.getLevelManager().getCurrLevels());
 
-        for (Potion p: potions) {
+        for (Heal p: heals) {
             p.resetObject();
         }
-        for (GameContainer gc: containers) {
-            gc.resetObject();
+        for (Chest c: chests) {
+            c.resetObject();
         }
 
         for (Coin c: coins) {
@@ -190,8 +176,8 @@ public class ObjectManager {
     }
 
     public void draw(Graphics g, int lvlOffset) {
-        drawPotion(g, lvlOffset);
-        drawContainer(g, lvlOffset);
+        drawHeals(g, lvlOffset);
+        drawChests(g, lvlOffset);
         drawTraps(g, lvlOffset);
         drawCoins(g, lvlOffset);
         drawProjectile(g, lvlOffset);
@@ -229,38 +215,32 @@ public class ObjectManager {
         }
     }
 
-    private void drawContainer(Graphics g, int lvlOffset) {
-        for (GameContainer gc : containers) {
-            int type = 0;
-            if (gc.isActive()) {
-
-                if (gc.objType == BARREL) {
-                    type = 1;
-                }
-
-                g.drawImage(containerImgs[type][gc.getAniIndex()], 
-                (int) (gc.getHitbox().x - gc.getxDrawOffset() - lvlOffset), 
-                (int) (gc.getHitbox().y - gc.getyDrawOffset()),
-                CONTAINER_WIDTH,
-                CONTAINER_HEIGHT,
+    private void drawChests(Graphics g, int lvlOffset) {
+        for (Chest c : chests) {
+            if (c.isActive()) {
+                g.drawImage(chestImgs[c.getAniIndex()], 
+                (int) (c.getHitbox().x - c.getxDrawOffset() - lvlOffset), 
+                (int) (c.getHitbox().y - c.getyDrawOffset()),
+                CHEST_WIDTH * 2,
+                CHEST_WIDTH * 2,
                  null);
+                g.setColor(Color.red);
+                g.drawRect((int) c.getHitbox().x, (int) c.getHitbox().y, (int) c.getHitbox().width, (int)c.getHitbox().height);
             }
         }
     }
 
-    private void drawPotion(Graphics g, int lvlOffset) {
-        for (Potion p : potions) {
+    private void drawHeals(Graphics g, int lvlOffset) {
+        for (Heal p : heals) {
             if (p.isActive()) {
-                int type = 0;
-                if (p.getObjType() == RED_POTION) {
-                    type = 1;
-                }
-                g.drawImage(potionsImgs[type][p.getAniIndex()], 
+                g.drawImage(healsImgs[p.getAniIndex()], 
                 (int) (p.getHitbox().x - p.getxDrawOffset() - lvlOffset), 
                 (int) (p.getHitbox().y - p.getyDrawOffset()),
-                POTION_WIDTH,
-                POTION_HEIGHT,
+                HEAL_WIDTH, HEAL_WIDTH,
                  null);
+                 g.setColor(Color.red);
+                g.drawRect((int) p.getHitbox().x, (int) p.getHitbox().y, (int) p.getHitbox().width, (int)p.getHitbox().height);
+            
             }
         }
     }

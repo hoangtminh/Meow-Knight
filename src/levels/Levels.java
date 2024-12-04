@@ -24,8 +24,8 @@ public class Levels {
     private ArrayList<BoxingDoggo> boxings = new ArrayList<BoxingDoggo>();
     private ArrayList<AxeDoggo> axes = new ArrayList<AxeDoggo>();
 
-    private ArrayList<Potion> potions = new ArrayList<Potion>();
-    private ArrayList<GameContainer> gameContainers = new ArrayList<GameContainer>();
+    private ArrayList<Heal> heals = new ArrayList<Heal>();
+    private ArrayList<Chest> chests = new ArrayList<Chest>();
     private ArrayList<Spike> spikes = new ArrayList<Spike>();
     private ArrayList<Coin> coins = new ArrayList<Coin>();
 
@@ -87,17 +87,17 @@ public class Levels {
 
     private void loadObject(int value, int x, int y) {
         switch (value) {
-            case RED_POTION, BLUE_POTION:
-                potions.add(new Potion(x * Game.TILES_SIZE, y * Game.TILES_SIZE, value));
+            case HEAL:
+                heals.add(new Heal(x * Game.TILES_SIZE, y * Game.TILES_SIZE, HEAL));
                 break;
-            case BOX, BARREL:
-                gameContainers.add(new GameContainer(x * Game.TILES_SIZE, y * Game.TILES_SIZE, value));
+            case CHEST:
+                chests.add(new Chest(x * Game.TILES_SIZE, y * Game.TILES_SIZE, CHEST));
                 break;
             case SPIKE:
                 spikes.add(new Spike(x * Game.TILES_SIZE, y * Game.TILES_SIZE, SPIKE));
                 break;
             case COIN:
-                coins.add(new Coin(x * Game.TILES_SIZE, y * Game.TILES_SIZE, value));
+                coins.add(new Coin(x * Game.TILES_SIZE, y * Game.TILES_SIZE, COIN));
                 break;
             default:
                 break;
@@ -122,12 +122,12 @@ public class Levels {
         return maxLvlOffset;
     }
 
-    public ArrayList<Potion> getPotions() {
-        return potions;
+    public ArrayList<Heal> getHeals() {
+        return heals;
     }
 
-    public ArrayList<GameContainer> getGameContainers() {
-        return gameContainers;
+    public ArrayList<Chest> getChests() {
+        return chests;
     }
 
     public ArrayList<ArcherDoggo> getArchers() {
@@ -149,7 +149,6 @@ public class Levels {
     public ArrayList<AxeDoggo> getAxes() {
         return axes;
     }
-
     
     public ArrayList<Coin> getCoins() {
         return coins;

@@ -38,9 +38,9 @@ public class StoreImage {
     public static final String ARROW_RIGHT = "arrowRight.png";
     public static final String SMALL_CLOUD = "small_clouds.png";
     public static final String STAR = "star.png";
-
-    public static final String COIN = "coin.png";
-    public static final String RUNE = "rune.png";
+    public static final String HEAL_SPRITE = "heal.png";
+    public static final String CHEST_SPRITE = "chest.png";
+    public static final String COIN_SPRITE = "coin.png";
 
     public static final String BOXING_SPRITE = "boxing_doggo.png";
     public static final String SWORD_SPRITE = "sword_doggo.png";
@@ -53,7 +53,6 @@ public class StoreImage {
     public static final String OPENING_BACKGROUND_4 ="vilage22.png";
     public static final String OPENING_BACKGROUND_5 ="vilage3.png";
     public static final String OPENING_BACKGROUND_6 ="vilage33.png";
-    public static final String BUTTON_NEXT = "button_next.png";
 
     public static BufferedImage GetSpriteAtLas(String fileName) {
         BufferedImage img = null;

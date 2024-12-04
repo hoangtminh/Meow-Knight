@@ -8,6 +8,7 @@ public class Constants {
     
     public static final float GRAVITY = 0.04f * Game.SCALE;
     public static final int ANI_SPEED = 20;
+    public static final int OBJECT_ANI_SPEED = 30;
 
     public static class Projectiles {
         public static final int ARROW_DEFAULT_WIDTH = 15;
@@ -174,11 +175,11 @@ public class Constants {
         public static int getMaxHealth(int enemyType) {
             switch (enemyType) {
                 case ARCHER:
-                    return 8;
+                    return 9;
                 case BOXING, AXE:
                     return 24;
                 case SWORD:
-                    return 15;
+                    return 16;
                 default:
                     return 1;
             }
@@ -187,7 +188,7 @@ public class Constants {
         public static int getEnemyDamage(int enemyType) {
             switch (enemyType) {
                 case ARCHER, SWORD:
-                    return 15;
+                    return 20;
                 case BOXING:
                     return 10;
                 case AXE:
@@ -199,29 +200,21 @@ public class Constants {
     }
 
     public static class ObjectsConstants {
-        public static final int RED_POTION = 0;
-        public static final int BLUE_POTION = 1;
-        public static final int BARREL = 2;
-        public static final int BOX = 3;
+        public static final int HEAL = 0;
+        public static final int CHEST = 1;
         public static final int SPIKE = 4;
         public static final int COIN = 5;
 
         public static final int COIN_WIDTH_DEFAULT = 10;
         public static final int COIN_WIDTH = (int) (COIN_WIDTH_DEFAULT * SCALE * 2);
 
+        public static final int HEAL_VALUE = 15;
 
-        public static final int RED_POTION_VALUE = 15;
-        public static final int BLUE_POTION_VALUE = 10;
+        public static final int HEAL_WIDTH_DEFAULT = 16;
+        public static final int HEAL_WIDTH = (int) (HEAL_WIDTH_DEFAULT * Game.SCALE);
 
-        public static final int CONTAINER_WIDTH_DEFAULT = 40;
-        public static final int CONTAINER_HEIGHT_DEFAULT = 30;
-        public static final int CONTAINER_WIDTH = (int) (CONTAINER_WIDTH_DEFAULT * SCALE);
-        public static final int CONTAINER_HEIGHT = (int) (CONTAINER_HEIGHT_DEFAULT * SCALE);
-        
-        public static final int POTION_WIDTH_DEFAULT = 12;
-        public static final int POTION_HEIGHT_DEFAULT = 16;
-        public static final int POTION_WIDTH = (int) (POTION_WIDTH_DEFAULT * SCALE);
-        public static final int POTION_HEIGHT = (int) (POTION_HEIGHT_DEFAULT * SCALE);
+        public static final int CHEST_WIDTH_DEFAULT = 32;
+        public static final int CHEST_WIDTH = (int) (HEAL_WIDTH_DEFAULT * Game.SCALE);
 
         public static final int SPIKE_WIDTH_DEFAULT = 32;
         public static final int SPIKE_HEIGHT_DEFAULT = 32;
@@ -230,10 +223,8 @@ public class Constants {
 
         public static int GetSpriteAmount(int objType) {
             switch (objType) {
-                case RED_POTION,BLUE_POTION:
-                    return 7;
-                case BARREL, BOX:
-                    return 8;          
+                case HEAL, CHEST:
+                    return 4;          
                 default:
                     return 0;
             }

@@ -2,17 +2,15 @@ package objects;
 
 import main.Game;
 
-public class Potion extends GameObjects {
+public class Heal extends GameObjects {
 
     private int maxHoverOffset, hoverDir = 1;
     private float hoverOffset;
 
-    public Potion(int x, int y, int objType) {
+    public Heal(int x, int y, int objType) {
         super(x, y, objType);
         doAnimation = true;
-        initHitbox(7, 14);
-        xDrawOffset = (int) (3 * Game.SCALE);
-        yDrawOffset = (int) (2 * Game.SCALE);
+        initHitbox(16, 16);
         maxHoverOffset = (int) (10 * Game.SCALE);
     }
     
@@ -22,7 +20,7 @@ public class Potion extends GameObjects {
     }
 
     private void updateHover() {
-        hoverOffset += (0.075f * Game.SCALE * hoverDir);
+        hoverOffset += (0.065f * Game.SCALE * hoverDir);
         if (hoverOffset >= maxHoverOffset) {
             hoverDir = -1;
         } else if (hoverOffset <= 0) {

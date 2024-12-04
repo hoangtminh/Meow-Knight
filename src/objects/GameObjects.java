@@ -1,6 +1,7 @@
 package objects;
 
 import static utils.Constants.ANI_SPEED;
+import static utils.Constants.OBJECT_ANI_SPEED;
 import static utils.Constants.ObjectsConstants.*;
 
 import java.awt.Color;
@@ -29,11 +30,11 @@ public class GameObjects {
 
     protected void updateAnimationTick() {
         aniTick++;
-        if (aniTick >= ANI_SPEED) {
+        if (aniTick >= OBJECT_ANI_SPEED) {
             aniIndex++;
             if (aniIndex >= GetSpriteAmount(objType)) {
                 aniIndex = 0;
-                if (objType == BARREL || objType == BOX) {
+                if (objType == CHEST) {
                     doAnimation = false;
                     active = false;
                 }
@@ -48,7 +49,7 @@ public class GameObjects {
         active = true;
 
         doAnimation = true;
-        if (objType == BARREL || objType == BOX) {
+        if (objType == CHEST) {
             doAnimation = false;
         } else {
             doAnimation = true;

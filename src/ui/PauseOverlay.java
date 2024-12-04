@@ -103,8 +103,8 @@ public class PauseOverlay {
             if (replayB.isMousePressed()) {
                 playing.resetAllPlaying();
                 playing.unPauseGame();
-                playing.setLoading(true);
-                playing.getLoadingOverlay().setNextState(GameState.PLAYING);
+                // playing.setLoading(true);
+                // playing.getLoadingOverlay().setNextState(GameState.PLAYING);
             }
         } else if (isIn(e, unpauseB)) {
             if (unpauseB.isMousePressed()) {

@@ -59,7 +59,7 @@ public class LoadingOverlay {
                 if (playing.getlvlComplete()) {
                     playing.loadNextLevel();
                 }
-                if (playing.getLevelManager().getLvlIndex() == 0 && GameState.state != state) {
+                if (playing.getLevelManager().getLvlIndex() == 0) {
                     playing.getLevelManager().getOpening().setActive(true);
                 }
                 playing.resetAllPlaying();
