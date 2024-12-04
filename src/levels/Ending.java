@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+
+import gameStates.GameState;
 import main.Game;
 import ui.MenuButton;
 import static utils.Constants.UI.Buttons.*;
@@ -27,7 +29,7 @@ public class Ending {
     private String text23 = "Những con tró bị bóc lột không thương tiếc, lao động ngày và đêm để nhanh chóng xây sửa lại ngôi làng.";
     private String text31 = "Thời gian trôi qua, ngôi làng đã được khôi phục hoàn toàn, thậm chí còn giàu hơn trước. Những ngôi nhà";
     private String text32 = "được xây mới, khu vườn lại rực rỡ màu vàng, thoảng hương mùi tiền, và tiếng cười của tộc mèo vang vọng.";
-    private String text33 = "Mặc dù đã bị tàn phá ác liệt,nhưng tộc mèo giờ đây sống trong hạnh phúc với mấy con tró bị bóc lột.";
+    private String text33 = "Mặc dù đã bị tàn phá ác liệt, nhưng tộc mèo giờ đây sống trong hạnh phúc với mấy con tró bị bóc lột.";
 
     private String[][] text = new String[][] { { text11, text12, text13 },
             { text21, text22, text23 },
@@ -125,6 +127,7 @@ public class Ending {
         if (bgIndex >= background.length) {
             active = false;
             bgIndex = 0;
+            GameState.state = GameState.MAIN_HALL;
         }
     }
 
