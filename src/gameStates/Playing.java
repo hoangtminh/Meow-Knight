@@ -71,6 +71,7 @@ public class Playing extends State {
         levelsManager.nextLevel();
         player.setSpawn(levelsManager.getCurrLevels().getPlayerSpawn());
         resetAllPlaying();
+        game.getAudioPlayer().playEnemiesEffect(AudioPlayer.E_HÚ);
     }
 
     private void loadStartLevel() {

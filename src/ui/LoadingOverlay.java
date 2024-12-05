@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import audio.AudioPlayer;
 import gameStates.GameState;
 import gameStates.Playing;
 import main.Game;
@@ -64,6 +65,7 @@ public class LoadingOverlay {
                 }
                 playing.resetAllPlaying();
                 playing.getGame().getAudioPlayer().setLevelSong(playing.getLevelManager().getLvlIndex());
+                playing.getGame().getAudioPlayer().playEnemiesEffect(AudioPlayer.E_HÚ);
                 break;
             case MENU:
             default:

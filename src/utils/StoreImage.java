@@ -47,6 +47,8 @@ public class StoreImage {
     public static final String ARCHER_SPRITE = "archer_doggo.png";
     public static final String AXE_SPRITE = "axe_doggo.png";
 
+    public static final String LOGO ="logo.png";
+
     public static final String OPENING_BACKGROUND_1 ="vilage1.png";
     public static final String OPENING_BACKGROUND_2 ="vilage11.png";
     public static final String OPENING_BACKGROUND_3 ="vilage2.png";

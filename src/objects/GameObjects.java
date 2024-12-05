@@ -1,6 +1,5 @@
 package objects;
 
-import static utils.Constants.ANI_SPEED;
 import static utils.Constants.OBJECT_ANI_SPEED;
 import static utils.Constants.ObjectsConstants.*;
 

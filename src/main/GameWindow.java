@@ -2,8 +2,11 @@ package main;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
+
+import utils.StoreImage;
 
 public class GameWindow {
     private JFrame jframe;
@@ -16,8 +19,11 @@ public class GameWindow {
         jframe.setLocation(0,0);
         jframe.setResizable(false);
         jframe.pack();
+        // jframe.setTitle("Meow Knight");
+        // BufferedImage logo = StoreImage.GetSpriteAtLas(StoreImage.LOGO);
+        // jframe.setIconImage(logo);
 
-        jframe.setVisible(true);
+        // jframe.setIconImage(null);
 
         jframe.addWindowFocusListener(new WindowFocusListener() {
 

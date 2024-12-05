@@ -24,12 +24,12 @@ public class Opening {
     private String text11 = "Một gia tộc mèo sống giữa khung cảnh thanh bình, được bao quanh bởi thiên nhiên tràn đầy sức sống";
     private String text12 = "Những chú mèo nhỏ chạy nhảy tung tăng, trong khi mèo trưởng thành ngồi thư thái bên ánh nắng vàng";
     private String text13 = "Tất cả ánh mắt đều toát lên niềm vui, hòa hợp như một gia đình đoàn kết và tràn đầy yêu thương";
-    private String text21 = "Bầu trời đột ngột chuyển sang màu xám, mây đen cuộn trào báo hiệu tai họa. Gia tộc chó hung dữ, với";
+    private String text21 = "Bầu trời đột ngột chuyển sang màu xám, mây đen cuộn trào báo hiệu tai họa. Mấy con chó hung dữ, với";
     private String text22 = "ánh mắt đỏ rực và răng nanh sắc nhọn, lao vào tấn công. Tiếng gầm rú và hỗn loạn vang lên khắp nơi.";
     private String text23 = "Những chiến binh mèo chống trả. Ngọn lửa bùng cháy, xóa nhòa những giấc mơ hạnh phúc của gia tộc mèo.";
-    private String text31 = "Giữa đống tàn tích và tro tàn, một chú mèo đứng lên với ánh mắt sắc lạnh và đôi tai dựng thẳng đầy";
-    private String text32 = "kiên định. Nó nhìn về phía đường chân trời, nơi kẻ thù đã khuất bóng. Chú mèo dường như muốn tuyên thệ:";
-    private String text33 = "''Tôi sẽ đứng lên, vì gia tộc, vì công lý. Món nợ này tôi phải trả bằng bất cứ giá nào!!!!!''";
+    private String text31 = "Giữa đống tàn tích, một chú mèo đứng lên với ánh mắt sắc lạnh và đôi tai dựng thẳng đầy kiên định. ";
+    private String text32 = "Nó căm hận nhìn về phía đường chân trời, nơi kẻ thù đã khuất bóng. Chú mèo dường như muốn tuyên thệ:";
+    private String text33 = "''*** **! Ta hận các ngươi, ta sẽ tìm đến các ngươi. Món nợ này ta phải đòi cả gốc lẫn lãi!!!!!''";
 
     private String[][] text = new String[][] { { text11, text12, text13 },
             { text21, text22, text23 },

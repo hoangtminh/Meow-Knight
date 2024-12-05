@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
+import audio.AudioPlayer;
 import gameStates.GameState;
 import gameStates.Playing;
 import main.Game;
@@ -103,6 +104,7 @@ public class PauseOverlay {
             if (replayB.isMousePressed()) {
                 playing.resetAllPlaying();
                 playing.unPauseGame();
+                playing.getGame().getAudioPlayer().playEnemiesEffect(AudioPlayer.E_HÚ);
                 // playing.setLoading(true);
                 // playing.getLoadingOverlay().setNextState(GameState.PLAYING);
             }
