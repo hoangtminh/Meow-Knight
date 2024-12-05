@@ -19,11 +19,12 @@ public class GameWindow {
         jframe.setLocation(0,0);
         jframe.setResizable(false);
         jframe.pack();
-        // jframe.setTitle("Meow Knight");
-        // BufferedImage logo = StoreImage.GetSpriteAtLas(StoreImage.LOGO);
-        // jframe.setIconImage(logo);
+        jframe.setVisible(true);
+        jframe.setTitle("Meow Knight");
+        BufferedImage logo = StoreImage.GetSpriteAtLas(StoreImage.LOGO);
+        jframe.setIconImage(logo);
 
-        // jframe.setIconImage(null);
+        jframe.setIconImage(logo);
 
         jframe.addWindowFocusListener(new WindowFocusListener() {
 

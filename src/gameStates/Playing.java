@@ -61,7 +61,7 @@ public class Playing extends State {
         smallCloudPos = new int[10];
         for (int i = 0; i < smallCloudPos.length; i++) {
             smallCloudPos[i] = (int) (90*Game.SCALE) + rand.nextInt((int) (100* Game.SCALE));
-        }
+        } 
         
         loadStartLevel();
         calculateLevelOffset();
