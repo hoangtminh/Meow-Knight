@@ -9,7 +9,8 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 
 public class StoreImage {
-
+    
+    public static final String LOGO ="logo.png";
     public static final String PLAYER_ATLAS = "Meow_Knight.png";
     public static final String LEVEL_ATLAS = "tileset.png";
 
@@ -27,12 +28,12 @@ public class StoreImage {
     public static final String DEATH_SCREEN = "death_screen.png";
     public static final String LOADING = "loading.png";
     public static final String LEVEL_SELECT = "level_select.png";
+    public static final String LOADING_BACKGROUND = "loading_background.png";
     public static final String MENU_GIF = "main_gif.png";
+    public static final String MAIN_BOARD = "main_board.png";
 
     public static final String STATUS_BAR = "health_power_bar.png";
     public static final String LEVEL_COMPLETE = "completed_sprite.png";
-    public static final String POTIONS_SPRITE = "potions_sprites.png";
-    public static final String OBJECT_SPRITE = "objects_sprites.png";
     public static final String TRAP_SPRITE = "trap_atlas.png";
     public static final String ARROW_LEFT = "arrowLeft.png";
     public static final String ARROW_RIGHT = "arrowRight.png";
@@ -47,8 +48,6 @@ public class StoreImage {
     public static final String ARCHER_SPRITE = "archer_doggo.png";
     public static final String AXE_SPRITE = "axe_doggo.png";
 
-    public static final String LOGO ="logo.png";
-
     public static final String OPENING_BACKGROUND_1 ="vilage1.png";
     public static final String OPENING_BACKGROUND_2 ="vilage11.png";
     public static final String OPENING_BACKGROUND_3 ="vilage2.png";
@@ -62,6 +61,15 @@ public class StoreImage {
     public static final String ENDING_BACKGROUND_4 = "ending11.png";
     public static final String ENDING_BACKGROUND_5 = "ending2.png";
     public static final String ENDING_BACKGROUND_6 = "ending22.png";
+
+    public static final String COIN_IMAGE0 = "Coin0.png";
+    public static final String COIN_IMAGE1 = "Coin1.png";
+    public static final String COIN_IMAGE2 = "Coin2.png";
+    public static final String COIN_IMAGE3 = "Coin3.png";
+    public static final String COIN_EFFECT = "coinspin.png";
+
+    public static final String TURORIAL_0 = "tutorial.png";
+    public static final String TURORIAL_1 = "tutorial1.png";
 
     public static BufferedImage GetSpriteAtLas(String fileName) {
         BufferedImage img = null;

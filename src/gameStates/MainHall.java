@@ -15,7 +15,8 @@ import utils.StoreImage;
 public class MainHall extends State{
 
     private MenuButton[] buttons = new MenuButton[2];
-    private BufferedImage[] menuGif;
+    private BufferedImage[] mainGif;
+    private BufferedImage mainBoard;
     private SelectLevel selectLevel;
     private int aniIndex, aniTick;
 
@@ -27,16 +28,18 @@ public class MainHall extends State{
     }
 
     private void loadBackground() {
+        mainBoard = StoreImage.GetSpriteAtLas(StoreImage.MAIN_BOARD);
+
         BufferedImage tmp = StoreImage.GetSpriteAtLas(StoreImage.MENU_GIF);
-        menuGif = new BufferedImage[6];
-        for (int i = 0; i < menuGif.length; i++) {
-            menuGif[i] = tmp.getSubimage(i * 1575, 0, 1575, 1250);
+        mainGif = new BufferedImage[6];
+        for (int i = 0; i < mainGif.length; i++) {
+            mainGif[i] = tmp.getSubimage(i * 1575, 0, 1575, 1250);
         }
     }
 
     private void loadButtons() {
-       buttons[0] = new MenuButton((int) (Game.GAME_WIDTH / 2), (int) (270 * Game.SCALE), 0, GameState.MENU);
-       buttons[1] = new MenuButton((int) (Game.GAME_WIDTH / 2), (int) (330 * Game.SCALE), 2, GameState.QUIT);
+       buttons[0] = new MenuButton((int) (Game.GAME_WIDTH / 2), (int) (290 * Game.SCALE), 0, GameState.MENU);
+       buttons[1] = new MenuButton((int) (Game.GAME_WIDTH / 2), (int) (355 * Game.SCALE), 2, GameState.QUIT);
     }
 
     public void update() {
@@ -58,7 +61,18 @@ public class MainHall extends State{
     }
 
     public void draw(Graphics g) {
-        g.drawImage(menuGif[aniIndex], 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+        g.drawImage(mainGif[aniIndex], 0, (int) (-120 * Game.SCALE), 
+        Game.GAME_WIDTH, 
+        (int) (mainGif[0].getHeight() * Game.GAME_WIDTH / mainGif[0].getWidth()) , 
+        null);
+
+        g.drawImage(mainBoard, 
+        (int) (Game.GAME_WIDTH/2 - mainBoard.getWidth() * Game.SCALE /2), 
+        (int) (275 * Game.SCALE), 
+        (int) (mainBoard.getWidth() * Game.SCALE), 
+        (int) (mainBoard.getHeight() * Game.SCALE),  
+        null);
+
         for (MenuButton mb: buttons) {
             mb.draw(g);
         }      

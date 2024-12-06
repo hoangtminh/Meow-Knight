@@ -85,4 +85,8 @@ public class MenuButton {
     public GameState getState() {
         return state;
     }
+    
+    public int getRowIndex() {
+        return rowIndex;
+    }
 }

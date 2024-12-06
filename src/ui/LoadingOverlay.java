@@ -83,7 +83,7 @@ public class LoadingOverlay {
             loadingImgs[i] = tmp.getSubimage(i * LOADING_WIDTH_DEFAULT, 0, LOADING_WIDTH_DEFAULT, LOADING_HEIGHT_DEFAULT);
         }
 
-        tmp = StoreImage.GetSpriteAtLas(StoreImage.MENU_GIF);
+        tmp = StoreImage.GetSpriteAtLas(StoreImage.LOADING_BACKGROUND);
         background = new BufferedImage[6];
         for (int i = 0; i < background.length; i++) {
             background[i] = tmp.getSubimage(i * 1575, 0, 1575, 1250);
@@ -92,5 +92,4 @@ public class LoadingOverlay {
     public void setNextState(GameState state) {
         this.nextState = state;
     }
-    
 }

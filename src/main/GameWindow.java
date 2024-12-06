@@ -24,8 +24,6 @@ public class GameWindow {
         BufferedImage logo = StoreImage.GetSpriteAtLas(StoreImage.LOGO);
         jframe.setIconImage(logo);
 
-        jframe.setIconImage(logo);
-
         jframe.addWindowFocusListener(new WindowFocusListener() {
 
             @Override

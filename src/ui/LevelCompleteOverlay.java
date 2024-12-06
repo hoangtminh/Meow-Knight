@@ -1,16 +1,14 @@
 package ui;
 
+import gameStates.GameState;
+import gameStates.Playing;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-
-import gameStates.GameState;
-import gameStates.Playing;
 import main.Game;
-import utils.StoreImage;
-
 import static utils.Constants.UI.URMButtons.*;
+import utils.StoreImage;
 
 public class LevelCompleteOverlay {
 
@@ -19,16 +17,22 @@ public class LevelCompleteOverlay {
     private BufferedImage img;
     private int bgX, bgY, bgW, bgH;
 
+    // coin
+    private int coinX;
+    private int coinY;
+    private BufferedImage[] coinImg = new BufferedImage[4];
+
     public LevelCompleteOverlay(Playing playing) {
         this.playing = playing;
         initImg();
         initButtons();
+        initCoin();
     }
 
     private void initButtons() {
-        int menuX = (int) (345 * Game.SCALE);
-        int nextX = (int) (430 * Game.SCALE);
-        int y = (int) (195 * Game.SCALE);
+        int menuX = (int) (330 * Game.SCALE);
+        int nextX = (int) (445 * Game.SCALE);
+        int y = (int) (280 * Game.SCALE);
 
         next = new URMButtons(nextX, y, URM_SIZE, URM_SIZE, 0);
         menu = new URMButtons(menuX, y, URM_SIZE, URM_SIZE, 2);
@@ -38,8 +42,17 @@ public class LevelCompleteOverlay {
         img = StoreImage.GetSpriteAtLas(StoreImage.LEVEL_COMPLETE);
         bgW = (int) (img.getWidth() * Game.SCALE);
         bgH = (int) (img.getHeight() * Game.SCALE);
-        bgX = (int) (Game.GAME_WIDTH/2 - bgW/2);
-        bgY = (int) (75*Game.SCALE);
+        bgX = (int) (Game.GAME_WIDTH / 2 - bgW / 2);
+        bgY = (int) (75 * Game.SCALE);
+    }
+
+    private void initCoin() {
+        coinImg[0] = StoreImage.GetSpriteAtLas(StoreImage.COIN_IMAGE0);
+        coinImg[1] = StoreImage.GetSpriteAtLas(StoreImage.COIN_IMAGE1);
+        coinImg[2] = StoreImage.GetSpriteAtLas(StoreImage.COIN_IMAGE2);
+        coinImg[3] = StoreImage.GetSpriteAtLas(StoreImage.COIN_IMAGE3);
+        coinY = (int) (190 * Game.SCALE);
+        coinX = (int) (Game.GAME_WIDTH/2 - coinImg[3].getWidth() * Game.SCALE / 2);
     }
 
     public void draw(Graphics g) {
@@ -48,6 +61,12 @@ public class LevelCompleteOverlay {
         g.drawImage(img, bgX, bgY, bgW, bgH, null);
         next.draw(g);
         menu.draw(g);
+
+        int coinNum = playing.getObjectManager().getCoinNum();
+        g.drawImage(coinImg[3], coinX, coinY, 
+        (int) (coinImg[3].getWidth() * Game.SCALE),
+        (int) (coinImg[3].getHeight() * Game.SCALE),
+        null);
     }
 
     public void update() {

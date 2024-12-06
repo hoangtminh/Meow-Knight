@@ -3,8 +3,8 @@ package levels;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
 import main.Game;
+import objects.ObjectManager;
 import utils.StoreImage;
 
 public class LevelsManager {
@@ -43,6 +43,7 @@ public class LevelsManager {
         }
     }
 
+    //
     public void draw(Graphics g, int lvlOffset) {
         if (opening.isActive()) {
             opening.draw(g);
@@ -56,6 +57,10 @@ public class LevelsManager {
                 }
             }
         }
+
+        // draw coin touch effect
+        ObjectManager ob = game.getPlaying().getObjectManager();
+        ob.drawEffect(g);
     }
 
     public void nextLevel() {
