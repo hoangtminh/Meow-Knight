@@ -17,7 +17,6 @@ public class LevelCompleteOverlay {
     private BufferedImage img;
     private int bgX, bgY, bgW, bgH;
 
-    // coin
     private int coinX;
     private int coinY;
     private BufferedImage[] coinImg = new BufferedImage[4];
@@ -63,9 +62,9 @@ public class LevelCompleteOverlay {
         menu.draw(g);
 
         int coinNum = playing.getObjectManager().getCoinNum();
-        g.drawImage(coinImg[3], coinX, coinY, 
-        (int) (coinImg[3].getWidth() * Game.SCALE),
-        (int) (coinImg[3].getHeight() * Game.SCALE),
+        g.drawImage(coinImg[coinNum], coinX, coinY, 
+        (int) (coinImg[coinNum].getWidth() * Game.SCALE),
+        (int) (coinImg[coinNum].getHeight() * Game.SCALE),
         null);
     }
 

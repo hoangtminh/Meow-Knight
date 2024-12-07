@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import main.Game;
-import objects.ObjectManager;
 import utils.StoreImage;
 
 public class LevelsManager {
@@ -12,9 +11,10 @@ public class LevelsManager {
     private Game game;
     private BufferedImage[] levelSprite;
     private ArrayList<Levels> levels;
-    private int lvlIndex = 5;
+    private int lvlIndex = 0;
     private Opening opening;
     private Ending ending;
+    private int coinNum[] = new int[6];
     
     public LevelsManager(Game game) {
         this.game = game;
@@ -23,6 +23,7 @@ public class LevelsManager {
         buildAllLevels();
         opening = new Opening();
         ending = new Ending();
+        coinNum[0] = 0;
     }
 
     private void buildAllLevels() {
@@ -43,7 +44,6 @@ public class LevelsManager {
         }
     }
 
-    //
     public void draw(Graphics g, int lvlOffset) {
         if (opening.isActive()) {
             opening.draw(g);
@@ -57,10 +57,6 @@ public class LevelsManager {
                 }
             }
         }
-
-        // draw coin touch effect
-        ObjectManager ob = game.getPlaying().getObjectManager();
-        ob.drawEffect(g);
     }
 
     public void nextLevel() {
@@ -73,7 +69,6 @@ public class LevelsManager {
             ending.setActive(true);
             return;
         }
-        game.getMenu().getSelectLevel().setButtonActive(lvlIndex);
         Levels newLevel = levels.get(lvlIndex);
         game.getPlaying().getEnemyManager().loadEnemies(newLevel);
         game.getPlaying().getPlayer().loadLvlData(newLevel.getLevelData());
@@ -86,6 +81,15 @@ public class LevelsManager {
             opening.update();
         } else if (ending.isActive()) {
             ending.update();
+        }
+    }
+
+    public void updateCoinNum(int lvlIndex) {
+        if (coinNum[lvlIndex] < game.getPlaying().getObjectManager().getCoinNum()) {
+            coinNum[lvlIndex] = game.getPlaying().getObjectManager().getCoinNum();
+        } 
+        if (lvlIndex < 5) {
+            game.getMenu().getSelectLevel().setButtonActive(lvlIndex + 1);
         }
     }
 
@@ -111,5 +115,9 @@ public class LevelsManager {
 
     public Ending getEnding () {
         return ending;
+    }
+
+    public int getCoinNum(int index) {
+        return coinNum[index];
     }
 }

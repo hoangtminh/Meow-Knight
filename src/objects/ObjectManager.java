@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import levels.Levels;
 import main.Game;
+
+import static utils.Constants.ANI_SPEED;
 import static utils.Constants.ObjectsConstants.*;
 import static utils.Constants.Projectiles.*;
 import static utils.HelpMethod.IsProjectileHitThings;
@@ -25,8 +27,7 @@ public class ObjectManager {
 
     private BufferedImage[] coinTouchEffect;
     private int xPos, yPos, effectW, effectH;
-    private int aniStick = 0;
-    private int aniSpeed = 30;
+    private int aniTick, aniIndex = 0;
     private boolean checkTouch = false;
 
     private ArrayList<Heal> heals;
@@ -35,12 +36,13 @@ public class ObjectManager {
     private static ArrayList<Projectile> projectiles = new ArrayList<>();
     private ArrayList<Coin> coins;
 
-    // đếm coin
     private int coinNum = 0;
+    private int sizeText = 40;
 
     public ObjectManager(Playing playing) {
         this.playing = playing;
         loadImgs();
+        loadEffects();
         heals = new ArrayList<>();
         chests = new ArrayList<>();
         coins = new ArrayList<>();
@@ -52,6 +54,16 @@ public class ObjectManager {
         chests = new ArrayList<>(newLevel.getChests());
         spikes = newLevel.getSpikes();
         projectiles.clear();
+        coinNum = 0;
+        aniIndex = 0;
+        aniTick = 0;
+    }
+
+    private void loadEffects() {
+        xPos = Game.GAME_WIDTH/2 - coinTouchEffect[0].getWidth();
+        yPos = Game.GAME_HEIGHT/2 - coinTouchEffect[0].getHeight();
+        effectW = (int)  (coinTouchEffect[0].getWidth());
+        effectH = (int) (coinTouchEffect[0].getHeight());
     }
 
     private void loadImgs() {
@@ -201,6 +213,7 @@ public class ObjectManager {
         drawTraps(g, lvlOffset);
         drawCoins(g, lvlOffset);
         drawProjectile(g, lvlOffset);
+        drawEffect(g);
     }
 
     private void drawProjectile(Graphics g, int lvlOffset) {
@@ -280,36 +293,36 @@ public class ObjectManager {
         }
     }
 
-    // draw effect
     public void drawEffect (Graphics g) {
-            if (checkTouch) {
-                xPos = Game.GAME_WIDTH/2 - coinTouchEffect[0].getWidth();
-                yPos = Game.GAME_HEIGHT/2 - coinTouchEffect[0].getHeight();
-                effectW = (int)  (coinTouchEffect[0].getWidth());
-                effectH = (int) (coinTouchEffect[0].getHeight());
-                if (aniStick <=150) {
-                    aniStick ++;
-                    drawCoinRect(g, xPos, yPos, aniStick, 40);
-                } else {
-                    aniStick = 0;
-                    checkTouch = false;
-                }
+        if (checkTouch) {            
+            aniTick++;
+            if (aniTick >= ANI_SPEED) {
+                aniIndex++;
+                aniTick = 0;
             }
+            if (aniIndex >= 8) {
+                checkTouch = false;
+                aniIndex = 0;
+            }
+            drawCoinRect(g);
+        }
     }
 
-    public void drawCoinRect (Graphics g, int xPos, int yPos, int aniStick, int sizeText) {
+    public void drawCoinRect (Graphics g) {
         g.setColor(new Color(0, 0, 0, 60));
-        g.fillRect(xPos, yPos, effectW*2 + 10 , effectH + 10);
-        g.drawImage(coinTouchEffect[(aniStick/aniSpeed)%5],xPos +5, yPos+5, effectW, effectH, null);
+        g.fillRect(xPos, yPos, effectW * 2 + 10 , effectH + 10);
+
+        g.drawImage(coinTouchEffect[aniIndex % 5], xPos +5, yPos+5, effectW, effectH, null);
+
         g.setColor(Color.BLACK);
-        g.drawRect(xPos, yPos, effectW*2 + 10, effectH + 10);
+        g.drawRect(xPos, yPos, effectW * 2 + 10, effectH + 10);
+
         g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", Font.BOLD, sizeText));
-        g.drawString(" + " + String.valueOf(coinNum),xPos + effectW,yPos + 5 + effectH/2 + sizeText/4);
+        g.drawString(" + " + String.valueOf(coinNum),xPos + effectW, yPos + 5 + effectH/2 + sizeText/4);
     }
 
     public int getCoinNum() {
         return coinNum;
     }
-
 }

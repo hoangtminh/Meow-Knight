@@ -223,7 +223,7 @@ public class Constants {
 
         public static int GetSpriteAmount(int objType) {
             switch (objType) {
-                case HEAL, CHEST:
+                case HEAL, CHEST, COIN:
                     return 4;          
                 default:
                     return 0;
