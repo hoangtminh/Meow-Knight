@@ -11,7 +11,7 @@ public class LevelsManager {
     private Game game;
     private BufferedImage[] levelSprite;
     private ArrayList<Levels> levels;
-    private int lvlIndex = 0;
+    private int lvlIndex = 3;
     private Opening opening;
     private Ending ending;
     private int coinNum[] = new int[6];

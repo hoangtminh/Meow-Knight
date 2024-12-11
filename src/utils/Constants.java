@@ -175,7 +175,7 @@ public class Constants {
         public static int getMaxHealth(int enemyType) {
             switch (enemyType) {
                 case ARCHER:
-                    return 9;
+                    return 8;
                 case BOXING, AXE:
                     return 24;
                 case SWORD:
@@ -188,11 +188,11 @@ public class Constants {
         public static int getEnemyDamage(int enemyType) {
             switch (enemyType) {
                 case ARCHER, SWORD:
-                    return 20;
+                    return 15;
                 case BOXING:
                     return 10;
                 case AXE:
-                    return 25;
+                    return 20;
                 default:
                     return 0;
             }
@@ -208,7 +208,7 @@ public class Constants {
         public static final int COIN_WIDTH_DEFAULT = 10;
         public static final int COIN_WIDTH = (int) (COIN_WIDTH_DEFAULT * SCALE * 2);
 
-        public static final int HEAL_VALUE = 15;
+        public static final int HEAL_VALUE = 20;
 
         public static final int HEAL_WIDTH_DEFAULT = 16;
         public static final int HEAL_WIDTH = (int) (HEAL_WIDTH_DEFAULT * Game.SCALE);

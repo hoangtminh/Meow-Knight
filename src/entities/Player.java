@@ -88,7 +88,7 @@ public class Player extends Entity {
     }
 
     private void initAttackBox() {
-        attackBox = new Rectangle2D.Float(x, y, (int) (25 * SCALE), (int)(25 * SCALE));
+        attackBox = new Rectangle2D.Float(x, y, (int) (25 * SCALE), (int)(22 * SCALE));
     }
     
     public void update() {

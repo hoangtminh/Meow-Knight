@@ -147,11 +147,16 @@ public class Playing extends State {
         
         if (levelsManager.getOpening().isActive() || levelsManager.getEnding().isActive()) {
             levelsManager.draw(g, xLvlOffset);
+        } else if (player.getCurrentHealth() > 0) {
+            enemyManager.draw(g, xLvlOffset);
+            levelsManager.draw(g, xLvlOffset);
+            player.render(g, xLvlOffset);
+            objectManager.draw(g, xLvlOffset);
         } else {
             enemyManager.draw(g, xLvlOffset);
             player.render(g, xLvlOffset);
-            objectManager.draw(g, xLvlOffset);
             levelsManager.draw(g, xLvlOffset);
+            objectManager.draw(g, xLvlOffset);
         }
         if (pause && !loading) {
             g.setColor(new Color(0,0,0,100));
