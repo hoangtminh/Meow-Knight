@@ -285,14 +285,12 @@ public class Playing extends State {
                     player.setRight(true);
                     break;
                 case KeyEvent.VK_SPACE:
-                    // player.setJump(true);
                     break;
                 case KeyEvent.VK_J:
                     player.setAttacking(true);
                     break;
                 case KeyEvent.VK_K:
                     player.setJump(true);
-                    // player.powerAttack();
                     break;
                 case KeyEvent.VK_U:
                     player.powerAttack();

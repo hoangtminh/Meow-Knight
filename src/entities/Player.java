@@ -510,4 +510,8 @@ public class Player extends Entity {
     public boolean getDodge() {
         return dodge;
     }
+
+    public boolean getPowerAttack() {
+        return powerAttackActive;
+    }
 }

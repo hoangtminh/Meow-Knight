@@ -127,7 +127,11 @@ public class EnemyManager {
             if (a.isActive()) {
                 if (a.getCurrentHealth() > 0) {
                     if (attackBox.intersects(a.getHitbox())) {
-                        a.hurt(8);
+                        if (playing.getPlayer().getPowerAttack()) {
+                            a.hurt(1);
+                        } else {
+                            a.hurt(8);
+                        }
                         playing.getGame().getAudioPlayer().playEnemiesHitSound();
                         return;
                     }
@@ -139,7 +143,11 @@ public class EnemyManager {
             if (ax.isActive()) {
                 if (ax.getCurrentHealth() > 0) {
                     if (attackBox.intersects(ax.getHitbox())) {
-                        ax.hurt(8);
+                        if (playing.getPlayer().getPowerAttack()) {
+                            ax.hurt(1);
+                        } else {
+                            ax.hurt(8);
+                        }
                         playing.getGame().getAudioPlayer().playEnemiesHitSound();
                         return;
                     }
@@ -151,7 +159,11 @@ public class EnemyManager {
             if (b.isActive()) {
                 if (b.getCurrentHealth() > 0) {
                     if (attackBox.intersects(b.getHitbox())) {
-                        b.hurt(8);
+                        if (playing.getPlayer().getPowerAttack()) {
+                            b.hurt(1);
+                        } else {
+                            b.hurt(8);
+                        }
                         playing.getGame().getAudioPlayer().playEnemiesHitSound();
                         return;
                     }
@@ -163,7 +175,11 @@ public class EnemyManager {
             if (s.isActive()) {
                 if (s.getCurrentHealth() > 0) {
                     if (attackBox.intersects(s.getHitbox())) {
-                        s.hurt(8);
+                        if (playing.getPlayer().getPowerAttack()) {
+                            s.hurt(1);
+                        } else {
+                            s.hurt(8);
+                        }
                         playing.getGame().getAudioPlayer().playEnemiesHitSound();
                         return;
                     }
