@@ -11,7 +11,7 @@ public class LevelsManager {
     private Game game;
     private BufferedImage[] levelSprite;
     private ArrayList<Levels> levels;
-    private int lvlIndex = 0;
+    private int lvlIndex = 5;
     private Opening opening;
     private Ending ending;
     private int coinNum[] = new int[6];
@@ -65,8 +65,8 @@ public class LevelsManager {
             opening.setActive(true);
         }
         if (lvlIndex >= levels.size()) {
-            ending.setActive(true);
             lvlIndex = levels.size()-1;
+            ending.setActive(true);
         }
         Levels newLevel = levels.get(lvlIndex);
         game.getPlaying().getEnemyManager().loadEnemies(newLevel);

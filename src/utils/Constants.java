@@ -176,9 +176,9 @@ public class Constants {
             switch (enemyType) {
                 case ARCHER:
                     return 8;
-                case BOXING, AXE:
+                case AXE:
                     return 24;
-                case SWORD:
+                case SWORD, BOXING:
                     return 16;
                 default:
                     return 1;
@@ -188,11 +188,11 @@ public class Constants {
         public static int getEnemyDamage(int enemyType) {
             switch (enemyType) {
                 case ARCHER, SWORD:
-                    return 15;
+                    return 13;
                 case BOXING:
                     return 10;
                 case AXE:
-                    return 20;
+                    return 17;
                 default:
                     return 0;
             }

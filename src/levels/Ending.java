@@ -41,6 +41,25 @@ public class Ending {
 
     private BufferedImage[] background = new BufferedImage[9];
 
+    private String textCredit1 = "text1";
+    private String textCredit2 = "text2";
+    private String textCredit3 = "text3";
+    private String textCredit4 = "text4";
+    private String textCredit5 = "text5";
+    private String textCredit6 = "text6";
+    private String textCredit7 = "text7";
+    private String textCredit8 = "text8";
+    private String textCredit9 = "text9999999";
+    private String textCredit10 = "text100000000000000000000000";
+    private String[] textCredit = { textCredit1, textCredit2, textCredit3, textCredit4, textCredit5, textCredit6,
+            textCredit7, textCredit8, textCredit9, textCredit10 };
+    private float speed = 0.5f;
+    private int textSizeCredit = 25;
+    private int opacity = 0;
+    private int xPos;
+    private float yPos = Game.GAME_HEIGHT + 50;
+    private boolean creditActive = false;
+
     private MenuButton nextBtn;
     private int buttonXPos = Game.GAME_WIDTH - BUTTON_WIDTH/2;
     private int buttonYPos = Game.GAME_HEIGHT - BUTTON_HEIGHT;
@@ -68,24 +87,34 @@ public class Ending {
     
     public void update() {
         nextBtn.update();
+        updatePosCredit();
     }
 
     public void draw(Graphics g) {
-        g.drawImage(background[bgIndex], 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
-        nextBtn.draw(g);
-        g.setFont(new Font("Arial", Font.HANGING_BASELINE, textSize));
-        g.setColor(Color.BLACK);
+        if (!creditActive) {
+            g.drawImage(background[bgIndex], 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+            nextBtn.draw(g);
+            g.setFont(new Font("Arial", Font.HANGING_BASELINE, textSize));
+            g.setColor(Color.BLACK);
 
-        if ((bgIndex + 1) % 3 == 2) {
-            if (textIndex <= getLengthText(textNum)) {
-                drawSubText(g, textNum, textIndex);
-                textIndex += timeDelay;
-            } else {
+            if ((bgIndex + 1) % 3 == 2) {
+                if (textIndex <= getLengthText(textNum)) {
+                    drawSubText(g, textNum, textIndex);
+                    textIndex += timeDelay;
+                } else {
+                    drawFullText(g, textNum);
+                    bgIndex++;
+                }
+            } else if ((bgIndex + 1) % 3 == 0) {
                 drawFullText(g, textNum);
-                bgIndex++;
             }
-        } else if ((bgIndex + 1) % 3 == 0) {
+        } else {
+            g.drawImage(background[8], 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+            g.setFont(new Font("Arial", Font.HANGING_BASELINE, textSize));
+            g.setColor(Color.BLACK);
             drawFullText(g, textNum);
+            drawCredit(g, opacity);
+            nextBtn.draw(g);
         }
     }
 
@@ -124,10 +153,35 @@ public class Ending {
             textNum = (textNum + 1) % text.length;
             textIndex = 0;
         }
-        if (bgIndex >= background.length) {
+        if (bgIndex == 9) {
+            creditActive = true;
+        }
+        if (bgIndex >= background.length + 1) {
             active = false;
             bgIndex = 0;
             GameState.state = GameState.MAIN_HALL;
+        }
+    }
+
+    private void drawCredit(Graphics g, int opacity) {
+        // background
+        g.setColor(new Color(0, 0, 0, opacity / 3));
+        g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
+        // text
+        g.setFont(new Font("Arial", Font.BOLD, textSizeCredit));
+        g.setColor(Color.white);
+        for (int i = 0; i < textCredit.length; i++) {
+            xPos = (int) (Game.GAME_WIDTH / 2 - textCredit[i].length() / 4 * textSizeCredit);
+            g.drawString(textCredit[i], xPos, (int) (yPos + i * textSizeCredit * 3 / 2));
+        }
+    }
+
+    private void updatePosCredit() {
+        if (creditActive) {
+            yPos -= speed;
+            if (opacity < 200 * 3) {
+                opacity++;
+            }
         }
     }
 
