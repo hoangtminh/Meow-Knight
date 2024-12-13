@@ -16,7 +16,7 @@ public class Opening {
 
     private boolean active = false;
 
-    private static float timeDelay = 0.1f;
+    private static float timeDelay = 0.6f;
     private static float textIndex = 0;
     private static int bgIndex = 0;
 

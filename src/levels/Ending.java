@@ -16,7 +16,7 @@ public class Ending {
 
     private boolean active = false;
 
-    private static float timeDelay = 0.4f;
+    private static float timeDelay = 0.6f;
     private static float textIndex = 0;
     private static int bgIndex = 0;
 
@@ -41,20 +41,35 @@ public class Ending {
 
     private BufferedImage[] background = new BufferedImage[9];
 
-    private String textCredit1 = "text1";
-    private String textCredit2 = "text2";
-    private String textCredit3 = "text3";
-    private String textCredit4 = "text4";
-    private String textCredit5 = "text5";
-    private String textCredit6 = "text6";
-    private String textCredit7 = "text7";
-    private String textCredit8 = "text8";
-    private String textCredit9 = "text9999999";
-    private String textCredit10 = "text100000000000000000000000";
+    private String textCredit1 = "Học phần lập trình hướng đối tượng";
+    private String textCredit2 = "Thực hiện bởi nhóm 18";
+    private String textCredit3 = "Dự án này sẽ không thể hoàn thiện nếu thiếu sự hỗ trợ từ những con người tuyệt vời sau đây:";
+    private String textCredit4 = "Hoàng Tuấn Minh - 20235376";
+    private String textCredit5 = "Khương Việt Anh - 20235257";
+    private String textCredit6 = "Lê Yến Nhi - 20235183";
+    private String textCredit7 = "                                       -----------------------------------------";
+    private String textCredit8 = "Nhà phát triển chính: Nhóm 18";
+    private String textCredit9 = "Ý tưởng / kịch bản: Hoàng Tuấn Minh - Lê Yến Nhi";
+    private String textCredit10 = "Thiết kế đồ họa: Hoàng Tuấn Minh - Khương Việt Anh";
+    private String textCredit11 = "Lập trình: Hoàng Tuấn Minh - Khương Việt Anh - Lê Yến Nhi";
+    private String textCredit12 = "Âm thanh: Hoàng Tuấn Minh";
+    private String textCredit13 = "Biên kịch/Thiết kế cốt truyện: Khương Việt Anh";
+    private String textCredit14 = "Các nguồn tham khảo:";
+    private String textCredit15 = "Đồ họa: itch.io, tự thiết kế với Paint, Asesprite";
+    private String textCredit16 = "Âm thanh: Minecraft, Youtube";
+    private String textCredit17 = "Lập trình: Chat GPT, Youtube";
+    private String textCredit18 = "Map: Tự thiết kế với Paint";
+    private String textCredit19 = "                                       ----------------------------------------";
+    private String textCredit20 = "Cảm ơn các bạn đã chơi game của chúng tôi";
+    private String textCredit21 = "Cảm ơn giảng viên Trần Nhật Hóa đã hỗ trợ về mặt kiến thức";
+    private String textCredit22 = "Cảm ơn gia đình, bạn bè, và những người đã hỗ trợ tinh thần.";
+    private String textCredit23 = "Chúng tôi hy vọng bạn sẽ tận hưởng trò chơi và ủng hộ các sản phẩm tiếp theo từ chúng tôi!";
+
     private String[] textCredit = { textCredit1, textCredit2, textCredit3, textCredit4, textCredit5, textCredit6,
-            textCredit7, textCredit8, textCredit9, textCredit10 };
-    private float speed = 0.5f;
-    private int textSizeCredit = 25;
+            textCredit7, textCredit8, textCredit9, textCredit10, textCredit11, textCredit12, textCredit13, textCredit14,
+            textCredit15, textCredit16, textCredit17, textCredit18,textCredit19,textCredit20,textCredit21,textCredit22, textCredit23 };
+    private float speed = 0.3f;
+    private int textSizeCredit = 30;
     private int opacity = 0;
     private int xPos;
     private float yPos = Game.GAME_HEIGHT + 50;
@@ -159,6 +174,8 @@ public class Ending {
         if (bgIndex >= background.length + 1) {
             active = false;
             bgIndex = 0;
+            textNum = -1;
+            textIndex = 0;
             GameState.state = GameState.MAIN_HALL;
         }
     }
@@ -179,7 +196,7 @@ public class Ending {
     private void updatePosCredit() {
         if (creditActive) {
             yPos -= speed;
-            if (opacity < 200 * 3) {
+            if (opacity < 200 * 4) {
                 opacity++;
             }
         }
