@@ -25,6 +25,7 @@ public class SelectLevel {
         initImgs();
         initButtons();
         btnLevel[0].setActive(true);
+        btnLevel[1].setActive(true);
     }
 
     private void initImgs() {

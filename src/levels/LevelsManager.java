@@ -11,7 +11,7 @@ public class LevelsManager {
     private Game game;
     private BufferedImage[] levelSprite;
     private ArrayList<Levels> levels;
-    private int lvlIndex = 5;
+    private int lvlIndex = 0;
     private Opening opening;
     private Ending ending;
     private int coinNum[] = new int[6];
@@ -63,6 +63,8 @@ public class LevelsManager {
         lvlIndex++;
         if (lvlIndex == 0) {
             opening.setActive(true);
+        } else {
+            opening.setActive(false);
         }
         if (lvlIndex >= levels.size()) {
             lvlIndex = levels.size()-1;

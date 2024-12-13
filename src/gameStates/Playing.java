@@ -369,6 +369,7 @@ public class Playing extends State {
     public void setLevelComplete(boolean lvlComplete) {
         this.lvlComplete = lvlComplete;
         if (lvlComplete) {
+            game.getAudioPlayer().stopSong();
             game.getAudioPlayer().playEffect(AudioPlayer.LVL_COMPLETED);
             levelsManager.updateCoinNum(levelsManager.getLvlIndex());
         }

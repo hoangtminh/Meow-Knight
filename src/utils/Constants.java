@@ -208,7 +208,7 @@ public class Constants {
         public static final int COIN_WIDTH_DEFAULT = 10;
         public static final int COIN_WIDTH = (int) (COIN_WIDTH_DEFAULT * SCALE * 2);
 
-        public static final int HEAL_VALUE = 20;
+        public static final int HEAL_VALUE = 15;
 
         public static final int HEAL_WIDTH_DEFAULT = 16;
         public static final int HEAL_WIDTH = (int) (HEAL_WIDTH_DEFAULT * Game.SCALE);
