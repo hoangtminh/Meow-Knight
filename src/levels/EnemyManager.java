@@ -92,7 +92,7 @@ public class EnemyManager {
                 (int) (s.getHitbox().y - DOGGO_DRAWOFFSET_Y),
                 CalculateDoggoWidth(SWORD) * s.flipW(), DOGGO_HEIGHT, null);
                 // c.drawAttackBox(g, xLvlOffset);
-                s.drawHitbox(g, xLvlOffset);
+                // s.drawHitbox(g, xLvlOffset);
             }
         }
     }
@@ -104,7 +104,7 @@ public class EnemyManager {
                 (int) (b.getHitbox().y - DOGGO_DRAWOFFSET_Y),
                 CalculateDoggoWidth(BOXING) * b.flipW(), DOGGO_HEIGHT, null);
                 // c.drawAttackBox(g, xLvlOffset);
-                b.drawHitbox(g, xLvlOffset);
+                // b.drawHitbox(g, xLvlOffset);
             }
         }
     }
@@ -117,7 +117,7 @@ public class EnemyManager {
                 (int) (ax.getHitbox().y - DOGGO_DRAWOFFSET_Y),
                 CalculateDoggoWidth(AXE) * ax.flipW(), DOGGO_HEIGHT, null);
                 // c.drawAttackBox(g, xLvlOffset);
-                ax.drawHitbox(g, xLvlOffset);
+                // ax.drawHitbox(g, xLvlOffset);
             }
         }
     }

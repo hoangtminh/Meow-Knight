@@ -71,11 +71,9 @@ public class Playing extends State {
         levelsManager.nextLevel();
         player.setSpawn(levelsManager.getCurrLevels().getPlayerSpawn());
         resetAllPlaying();
-        game.getAudioPlayer().playEnemiesEffect(AudioPlayer.E_HÚ);
     }
 
     private void loadStartLevel() {
-        levelsManager.getOpening().setActive(true);
         enemyManager.loadEnemies(levelsManager.getCurrLevels());
         objectManager.loadObject(levelsManager.getCurrLevels());
     }
@@ -271,7 +269,7 @@ public class Playing extends State {
     public void keyPressed(KeyEvent e) {
         if (gameOver) {
             gameOverOverlay.keyPressed(e);
-        } else {
+        } else if (!levelsManager.getOpening().isActive() || !levelsManager.getEnding().isActive()) {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_W:
                     break;

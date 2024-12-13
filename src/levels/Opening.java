@@ -8,11 +8,14 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
+import audio.AudioPlayer;
 import main.Game;
 import ui.MenuButton;
 import utils.StoreImage;
 
 public class Opening {
+
+    private Game game;
 
     private boolean active = false;
 
@@ -45,7 +48,8 @@ public class Opening {
     private int buttonXPos = Game.GAME_WIDTH - BUTTON_WIDTH/2;
     private int buttonYPos = Game.GAME_HEIGHT - BUTTON_HEIGHT;
 
-    public Opening() {
+    public Opening(Game game) {
+        this.game = game;
         initBackground();
         initButton();
     }
@@ -128,6 +132,8 @@ public class Opening {
         if (bgIndex >= background.length) {
             active = false;
             bgIndex = 0;
+            game.getAudioPlayer().stopSong();
+            game.getAudioPlayer().setLevelSong(game.getPlaying().getLevelManager().getLvlIndex());  
         }
     }
 
@@ -160,6 +166,11 @@ public class Opening {
 
     public void setActive(boolean active) {
         this.active = active;
+        if (active == true) {
+            game.getAudioPlayer().stopEffect();
+            game.getAudioPlayer().stopEnemiesEffect();
+            game.getAudioPlayer().playSong(AudioPlayer.OPENING);
+        }
     }
 
     public boolean isActive() {

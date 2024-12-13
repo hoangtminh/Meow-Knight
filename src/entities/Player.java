@@ -202,7 +202,7 @@ public class Player extends Entity {
         // g.setColor(Color.red);
         // g.drawRect((int) (hitbox.x - lvlOffset), (int) (hitbox.y), (int) (width * 1.5), (int) (height * 1.5));
         // drawHitbox(g, lvlOffset);
-        drawAttackBox(g, lvlOffset);
+        // drawAttackBox(g, lvlOffset);
     }
 
     private void drawUI(Graphics g) {

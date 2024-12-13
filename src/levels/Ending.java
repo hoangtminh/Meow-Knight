@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
+import audio.AudioPlayer;
 import gameStates.GameState;
 import main.Game;
 import ui.MenuButton;
@@ -14,6 +15,7 @@ import utils.StoreImage;
 
 public class Ending {
 
+    private Game game;
     private boolean active = false;
 
     private static float timeDelay = 0.6f;
@@ -79,7 +81,8 @@ public class Ending {
     private int buttonXPos = Game.GAME_WIDTH - BUTTON_WIDTH/2;
     private int buttonYPos = Game.GAME_HEIGHT - BUTTON_HEIGHT;
 
-    public Ending() {
+    public Ending(Game game) {
+        this.game = game;
         initBackground();
         initButton();
     }
@@ -176,7 +179,9 @@ public class Ending {
             bgIndex = 0;
             textNum = -1;
             textIndex = 0;
+            game.getAudioPlayer().stopSong();
             GameState.state = GameState.MAIN_HALL;
+            game.getAudioPlayer().playSong(AudioPlayer.MENU);
         }
     }
 
@@ -196,7 +201,7 @@ public class Ending {
     private void updatePosCredit() {
         if (creditActive) {
             yPos -= speed;
-            if (opacity < 200 * 4) {
+            if (opacity < 200 * 3) {
                 opacity++;
             }
         }
@@ -231,6 +236,9 @@ public class Ending {
 
     public void setActive(boolean active) {
         this.active = active;
+        if (active == true) {
+            game.getAudioPlayer().playSong(AudioPlayer.ENDING);
+        }
     }
 
     public boolean isActive() {

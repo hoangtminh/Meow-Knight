@@ -17,6 +17,8 @@ public class AudioPlayer {
     public static int MENU = 0;
     public static int LEVEL_1 = 1;
     public static int LEVEL_2 = 2;
+    public static int OPENING = 3;
+    public static int ENDING = 4;
 
     public static int DIE = 0;
     public static int JUMP = 1;
@@ -54,7 +56,7 @@ public class AudioPlayer {
     }
 
     private void loadSong() {
-        String[] names = {"menu", "level1", "level2"};
+        String[] names = {"menu", "level1", "level2", "opening", "ending"};
         songs = new Clip[names.length];
         for (int i = 0; i < songs.length; i++) {
             songs[i] = getClip(names[i]);

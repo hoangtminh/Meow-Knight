@@ -62,10 +62,11 @@ public class LoadingOverlay {
                 }
                 if (playing.getLevelManager().getLvlIndex() == 0 && !playing.getLevelManager().getEnding().isActive()) {
                     playing.getLevelManager().getOpening().setActive(true);
+                } else if (!playing.getLevelManager().getEnding().isActive()) {
+                    playing.getGame().getAudioPlayer().playEnemiesEffect(AudioPlayer.E_HÚ);
+                    playing.getGame().getAudioPlayer().setLevelSong(playing.getLevelManager().getLvlIndex());
                 }
                 playing.resetAllPlaying();
-                playing.getGame().getAudioPlayer().setLevelSong(playing.getLevelManager().getLvlIndex());
-                playing.getGame().getAudioPlayer().playEnemiesEffect(AudioPlayer.E_HÚ);
                 break;
             case MENU:
             default:

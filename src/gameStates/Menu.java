@@ -11,7 +11,6 @@ import main.Game;
 import ui.MenuButton;
 import ui.SelectLevel;
 import utils.StoreImage;
-import static utils.Constants.ANI_SPEED;
 
 public class Menu extends State {
 
@@ -20,8 +19,6 @@ public class Menu extends State {
     private int menuHeight, menuWidth, menuX, menuY;
     private SelectLevel selectLevel;
     private Tutorial tutorial;
-    private BufferedImage[] menuGif;
-    private int aniIndex, aniTick;
 
     public Menu(Game game) {
         super(game);
@@ -39,11 +36,6 @@ public class Menu extends State {
         menuY = (int) (35 * Game.SCALE);
 
         background_menu = StoreImage.GetSpriteAtLas(StoreImage.BACKGROUND_MENU);
-        BufferedImage tmp = StoreImage.GetSpriteAtLas(StoreImage.MENU_GIF);
-        menuGif = new BufferedImage[6];
-        for (int i = 0; i < menuGif.length; i++) {
-            menuGif[i] = tmp.getSubimage(i * 1575, 0, 1575, 1250);
-        }
     }
 
     private void loadButtons() {
@@ -63,18 +55,6 @@ public class Menu extends State {
             for (MenuButton mb: buttons) {
                 mb.update();
             }
-        }
-        // updateAnimationTick();
-    }
-
-    private void updateAnimationTick() {
-        aniTick++;
-        if (aniTick >= ANI_SPEED) {
-            aniIndex++;
-            if (aniIndex >= 6) {
-                aniIndex = 0;
-            }
-            aniTick = 0;
         }
     }
 

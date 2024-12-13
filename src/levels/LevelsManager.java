@@ -3,6 +3,7 @@ package levels;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+
 import main.Game;
 import utils.StoreImage;
 
@@ -11,7 +12,7 @@ public class LevelsManager {
     private Game game;
     private BufferedImage[] levelSprite;
     private ArrayList<Levels> levels;
-    private int lvlIndex = 0;
+    private int lvlIndex = 5;
     private Opening opening;
     private Ending ending;
     private int coinNum[] = new int[6];
@@ -21,8 +22,8 @@ public class LevelsManager {
         importOutsideSprite();
         levels = new ArrayList<>();
         buildAllLevels();
-        opening = new Opening();
-        ending = new Ending();
+        opening = new Opening(game);
+        ending = new Ending(game);
         coinNum[0] = 0;
     }
 
@@ -61,14 +62,17 @@ public class LevelsManager {
 
     public void nextLevel() {
         lvlIndex++;
-        if (lvlIndex == 0) {
+        if (lvlIndex >= levels.size()) {
+            lvlIndex = levels.size() - 1;
+            game.getAudioPlayer().stopEffect();
+            game.getAudioPlayer().stopEnemiesEffect();
+            game.getAudioPlayer().stopSong();
+            ending.setActive(true);
+        } else if (lvlIndex == 0) {
             opening.setActive(true);
         } else {
             opening.setActive(false);
-        }
-        if (lvlIndex >= levels.size()) {
-            lvlIndex = levels.size()-1;
-            ending.setActive(true);
+            game.getAudioPlayer().setLevelSong(game.getPlaying().getLevelManager().getLvlIndex());
         }
         Levels newLevel = levels.get(lvlIndex);
         game.getPlaying().getEnemyManager().loadEnemies(newLevel);

@@ -257,9 +257,9 @@ public class ObjectManager {
                         CHEST_WIDTH * 2,
                         CHEST_WIDTH * 2,
                         null);
-                g.setColor(Color.red);
-                g.drawRect((int) c.getHitbox().x, (int) c.getHitbox().y, (int) c.getHitbox().width,
-                        (int) c.getHitbox().height);
+                // g.setColor(Color.red);
+                // g.drawRect((int) c.getHitbox().x, (int) c.getHitbox().y, (int) c.getHitbox().width,
+                //         (int) c.getHitbox().height);
             }
         }
     }
