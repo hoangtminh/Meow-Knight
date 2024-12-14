@@ -12,7 +12,7 @@ public class LevelsManager {
     private Game game;
     private BufferedImage[] levelSprite;
     private ArrayList<Levels> levels;
-    private int lvlIndex = 5;
+    private int lvlIndex = 0;
     private Opening opening;
     private Ending ending;
     private int coinNum[] = new int[6];
@@ -76,9 +76,9 @@ public class LevelsManager {
         }
         Levels newLevel = levels.get(lvlIndex);
         game.getPlaying().getEnemyManager().loadEnemies(newLevel);
-        game.getPlaying().getPlayer().loadLvlData(newLevel.getLevelData());
         game.getPlaying().setLevelOffset(newLevel.getLevelOffset());
         game.getPlaying().getObjectManager().loadObject(newLevel);
+        game.getPlaying().getPlayer().loadLvlData(newLevel.getLevelData());
     }
 
     public void update() {

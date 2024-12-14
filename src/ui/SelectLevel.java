@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.event.MouseEvent;
 
+import gameStates.GameState;
 import gameStates.Playing;
 import main.Game;
 import utils.StoreImage;
@@ -25,6 +26,7 @@ public class SelectLevel {
         initImgs();
         initButtons();
         btnLevel[0].setActive(true);
+        btnLevel[4].setActive(true);
     }
 
     private void initImgs() {
@@ -101,7 +103,8 @@ public class SelectLevel {
             if (isIn(e, b)) {
                 active = false;
                 playing.getLevelManager().setLvlIndex(b.getLevel() - 1);
-                playing.getLevelManager().nextLevel();
+                playing.loadNextLevel();
+                GameState.state = GameState.PLAYING;
                 break;
             }
             b.resetBooleans();
